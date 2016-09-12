@@ -20,7 +20,16 @@
     <meta property="og:url" content="/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">
     <meta property="og:image" content="/content/images/2016/09/Environment-1.png">
     <meta property="article:published_time" content="2016-08-25T11:35:00.000Z">
-    <meta property="article:modified_time" content="2016-09-12T15:25:17.000Z">
+    <meta property="article:modified_time" content="2016-09-12T20:34:28.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="VSC">
+    <meta property="article:tag" content="Gulp">
+    <meta property="article:tag" content="Toolchain">
+    <meta property="article:tag" content="Yeoman">
+    <meta property="article:tag" content="SPPull">
+    <meta property="article:tag" content="Git">
+    
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Preparing development machine for client-side SharePoint projects (Mac and PC)">
@@ -29,6 +38,8 @@
     <meta name="twitter:image" content="/content/images/2016/09/Environment-1.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, Node.js, VSC, Gulp, Toolchain, Yeoman, SPPull, Git">
     <meta name="twitter:creator" content="@AndrewKoltyakov">
     <meta property="og:image:width" content="1600">
     <meta property="og:image:height" content="583">
@@ -66,13 +77,14 @@
     "headline": "Preparing development machine for client-side SharePoint projects (Mac and PC)",
     "url": "/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/",
     "datePublished": "2016-08-25T11:35:00.000Z",
-    "dateModified": "2016-09-12T15:25:17.000Z",
+    "dateModified": "2016-09-12T20:34:28.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2016/09/Environment-1.png",
         "width": 1600,
         "height": 583
     },
+    "keywords": "SharePoint, Node.js, VSC, Gulp, Toolchain, Yeoman, SPPull, Git",
     "description": "This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -890,18 +902,18 @@
 <p>We need the following tools:</p>
 
 <ul>
-<li>Visual Studio Code – for ninja text editing</li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a> – for ninja text editing</li>
 <li>Chrome – if your developer position is in any way connected with the word “web” use this guy, there is nothing better than Chrome Dev Tools then you need to debug or tweak JS or CSS in browser</li>
-<li>Node.js – it’s an engine and a heart of development workflow automation</li>
+<li><a href="https://nodejs.org/en/about/">Node.js</a> – it’s an engine and a heart of development workflow automation</li>
 <li>Git client – for source control operations</li>
-<li>Cmder – splendid console emulator [for Windows] (Cmd could be used as well or Terminal on Mac OS)</li>
+<li><a href="http://cmder.net/">Cmder</a> – splendid console emulator [for Windows] (Cmd could be used as well or Terminal on Mac OS)</li>
 </ul>
 
 <h2 id="windows">Windows</h2>
 
 <h3 id="chocolatey">Chocolatey</h3>
 
-<p>On a PC we’ll get the sugar out of Chocolatey, it’s a package manager for windows.</p>
+<p>On a PC we’ll get the sugar out of <a href="https://chocolatey.org/">Chocolatey</a>, it’s a package manager for windows.</p>
 
 <p>Chocolatey installation is as easy as run one-line command in CMD (run as administrator for sure):</p>
 
@@ -921,7 +933,7 @@
 
 <h3 id="homebrew">Homebrew</h3>
 
-<p>In a Mac world, Homebrew is responsible for the same stuff, it extends App Store, as its authors say “missing package manager”.</p>
+<p>In a Mac world, <a href="http://brew.sh/">Homebrew</a> is responsible for the same stuff, it extends App Store, as its authors say “missing package manager”.</p>
 
 <p>One-line command again in Terminal:</p>
 
@@ -935,7 +947,7 @@
 <pre><code class="language-bash">brew install node git  
 </code></pre>
 
-<p>Unfortunately, there is no formula for Visual Studio Code or Chrome in Homebrew. Chrome could be installed via App Store. VSC has to be downloaded and installed manually, yet all of this won't take much time.</p>
+<p>Unfortunately, there is no formula for Visual Studio Code or Chrome in Homebrew. Chrome could be installed via App Store. VSC has to be downloaded and installed <a href="https://code.visualstudio.com/Download">manually</a>, yet all of this won't take much time.</p>
 
 <h2 id="nodeenvironment">Node environment</h2>
 
@@ -962,7 +974,7 @@
 
 <h3 id="nodemodules">Node modules</h3>
 
-<p>There is a variety of node modules. You can find thousands of them on NPM site.</p>
+<p>There is a variety of node modules. You can find thousands of them on <a href="https://www.npmjs.com/">NPM site</a>.</p>
 
 <p>Some of the modules could be good, some of them not. So always check the author and community behind the module. As Node application is capable of anything on your machine double check before trust forever.</p>
 
@@ -982,10 +994,10 @@
 <p>Modules that are better to install globally as they going to be used a lot in our projects are:</p>
 
 <ul>
-<li>gulp – will automate your developer’s routine</li>
-<li>bower – yet… oh, yet another package manager we need, this one delivers libraries which are used in a browser (such stuff as React, jQuery, Bootstrap, Knockout, well, all your favorite browser libraries)</li>
-<li>yeoman – is a scaffolding tool for creating projects start point</li>
-<li>eslint – is a brilliant static code analyzer for JS</li>
+<li><a href="http://gulpjs.com/">gulp</a> – will automate your developer’s routine</li>
+<li><a href="https://bower.io/">bower</a> – yet… oh, yet another package manager we need, this one delivers libraries which are used in a browser (such stuff as React, jQuery, Bootstrap, Knockout, well, all your favorite browser libraries)</li>
+<li><a href="http://yeoman.io/">yeoman</a> – is a scaffolding tool for creating projects start point</li>
+<li><a href="http://eslint.org/">eslint</a> – is a brilliant static code analyzer for JS</li>
 <li>… let’s stop on that right now, don’t install too many modules until there is clear understanding why a specific module is needed
 OK, so these can be installed with:</li>
 </ul>
@@ -1001,8 +1013,8 @@ OK, so these can be installed with:</li>
 
 <ul>
 <li>gulp – you might say “Stop it’s already installed globally”, but it also is needed locally (global installation allows to run “gulp [task]” in a console, but local installation makes it’s possible to use “require(‘gulp’)” in a code and define automation tasks)</li>
-<li>spsave or gulp-spsave – allow to publish files from local folders to SharePoint document libraries, so there is no need to deploy assets manually</li>
-<li>sppull – is responsible for downloading existing files from SharePoint programmatically to your project, so you can ensure easily if the project's assets files were changed somehow and have any differences with the Git HEAD using Git Diff algorithm </li>
+<li><a href="https://www.npmjs.com/package/spsave">spsave</a> or <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> – allow to publish files from local folders to SharePoint document libraries, so there is no need to deploy assets manually</li>
+<li><a href="https://www.npmjs.com/package/sppull">sppull</a> – is responsible for downloading existing files from SharePoint programmatically to your project, so you can ensure easily if the project's assets files were changed somehow and have any differences with the Git HEAD using Git Diff algorithm </li>
 <li>… any other modules depending on the tasks
 Before going next, a few words about local modules installation save options.</li>
 </ul>

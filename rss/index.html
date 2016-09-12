@@ -1,4 +1,4 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Mon, 12 Sep 2016 20:25:18 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>I've been eschewed PnP-JS-Core for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a]]&gt;</description><link>/sharepoint-pnp-javascript-core-components-deserve-more-attention/<guid ispermalink="false">1f49b68e-5af0-433f-8028-7096a9ff76bc</guid><creator></creator><pubdate>Fri, 09 Sep 2016 12:04:00 GMT</pubdate><content url="/content/images/2016/09/PnP-JS-Core_banner-2.png" medium="image"></content><encoded><p>I've been eschewed PnP-JS-Core for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a couple of times putting PnP-JS-Core aside from learning.</p>
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Mon, 12 Sep 2016 20:53:47 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a]]&gt;</description><link>/sharepoint-pnp-javascript-core-components-deserve-more-attention/<guid ispermalink="false">1f49b68e-5af0-433f-8028-7096a9ff76bc</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 09 Sep 2016 12:04:00 GMT</pubdate><content url="/content/images/2016/09/PnP-JS-Core_banner-2.png" medium="image"></content><encoded><p>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a couple of times putting PnP-JS-Core aside from learning.</p>
 
 <p>But there was an opportunity this week to dive into the library and estimate expediency of its usage on a next project. The first fresh glance at it created a new and rather a positive attitude. First of all, it is made with the toolchain I love, and there are so many familiar faces in its contributors group, I didn’t even know to be related to the project. That was a good sign so I started.</p>
 
@@ -12,11 +12,11 @@
 
 <p>Yes, it’s made with the use of all of that shiny technologies we use on the most modern web projects: JavaScript (TypeScript), Gulp, NPM, Typings, Git, Linting, Serve and cool automation. It’s easy to understand the project structure, logic and contribute.</p>
 
-<p>It is not necessary to investigate the source, but a lot of questions can be solved by checking the code and samples. In the end, PnP-JS-Core is not something complex to learn at all.</p>
+<p>It is not necessary to investigate the source, but a lot of questions can be solved by checking the code and <a href="http://github.com/OfficeDev/PnP/tree/dev/Samples/SharePoint.pnp-js-core">samples</a>. In the end, PnP-JS-Core is not something complex to learn at all.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p>PnP-JS-Core can be installed with use of NPM or Bower. The library can be used in TypeScript project or referenced as any other JS library and consumed on a page or browser console.</p>
+<p>PnP-JS-Core can be <a href="http://github.com/OfficeDev/PnP-JS-Core/wiki/Install-and-Use">installed</a> with the use of NPM or Bower. The library can be used in TypeScript project or referenced as any other JS library and consumed on a page or browser console.</p>
 
 <p>PnP-JS-Core uses fetch protocol and ES6 promises, that’s why to make it work in IE, polyfills got to be loaded first. It is important to note, otherwise, if this part in documentation was skipped, one would be wondering “What the heck, it doesn’t work in IE? What is that error message in the console, saying "'Headers' is undefined?"”. But keep calm, PnP works perfectly in IE and Edge with es-promise and fetch polyfills.</p>
 
@@ -40,7 +40,7 @@
 
 <p>IntelliSense helps during the process, so you can be even not aware of REST reference or at least have a bad memory and not necessarily remember the endpoints.</p>
 
-<p>Yet, I highly recommend to have a strong understanding of REST API reference and plan to receive all the fruits that PnP provide only after or use both during the learning curve of course.</p>
+<p>Yet, I highly recommend to have a strong understanding of <a href="http://msdn.microsoft.com/en-us/library/office/jj860569.aspx">REST API reference</a> and plan to receive all the fruits that PnP provide only after or use both during the learning curve of course.</p>
 
 <p>When a fluent call is described, <code>get</code> method should be placed to initiate a query to a server. <code>Get</code> method and some others return a promise, that should be chained with <code>then</code> and <code>catch</code> to treat the results.  </p>
 
@@ -90,13 +90,13 @@ batch.execute().then(function() {
 
 <h3 id="upd">UPD:</h3>
 
-<p>I've also tried PnP-JS-Core with sp-rest-proxy and it works! :)</p>
+<p>I've also tried PnP-JS-Core with <a href="http://github.com/koltyakov/sp-rest-proxy">sp-rest-proxy</a> and it works! :)</p>
 
 <p><img src="https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAj0AAAAJGVhN2VkMDlmLWY0NDItNDVjYS05MTk5LWE1NjFiZWRiOWZhNg.png" alt="SharePoint PnP JavaScript Core Components – deserve more attention"></p>
 
 <p>* This gonna work for GET calls only for now, due to the way sp-rest-proxy and pnp deal with Request Digest on a page.</p>]]&gt;</encoded></item><item><title></title><description>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.
 
-<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform</p>]]&gt;</description><link>/sharepoint-rest-api-proxy-for-local-serve-in-node-js/<guid ispermalink="false">734ab271-1b1e-450a-b1cf-5f4c31604dda</guid><creator></creator><pubdate>Sat, 03 Sep 2016 12:01:00 GMT</pubdate><content url="/content/images/2016/09/RestProxyExample-1.png" medium="image"></content><encoded><p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
+<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform</p>]]&gt;</description><link>/sharepoint-rest-api-proxy-for-local-serve-in-node-js/<guid ispermalink="false">734ab271-1b1e-450a-b1cf-5f4c31604dda</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Sat, 03 Sep 2016 12:01:00 GMT</pubdate><content url="/content/images/2016/09/RestProxyExample-1.png" medium="image"></content><encoded><p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
 
 <p>As for me this "dive" was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
 
@@ -120,21 +120,21 @@ batch.execute().then(function() {
 
 <p>Of course, such proxy is limited with REST API only. It can be a complicated task to 're-implement' JSOM, for instance. But as far we go, more and more REST significance we see in SharePoint infrastructure as a universal and language agnostic technology.</p>
 
-<p>The project I created is just a concept, you can check in on GitHub. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>]]&gt;</encoded></item><item><title></title><description>This article is a continuation of my previous one (Preparing development machine for client-side SharePoint projects).
+<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>]]&gt;</encoded></item><item><title></title><description>This article is a continuation of my previous one (<a href="/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">Preparing development machine for client-side SharePoint projects</a>).
 
 <p>I had stopped on a development machine with all necessary software installed and ready for coding.</p>
 
-<p>And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it</p>]]&gt;</description><link>/front-end-sharepoint-projects-synced-and-safe/<guid ispermalink="false">a5af3ee5-f89f-421f-9cfb-620964eefe2a</guid><creator></creator><pubdate>Tue, 30 Aug 2016 11:57:00 GMT</pubdate><content url="/content/images/2016/09/YoSppp-1.png" medium="image"></content><encoded><p>This article is a continuation of my previous one (Preparing development machine for client-side SharePoint projects).</p>
+<p>And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it</p>]]&gt;</description><link>/front-end-sharepoint-projects-synced-and-safe/<guid ispermalink="false">a5af3ee5-f89f-421f-9cfb-620964eefe2a</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Tue, 30 Aug 2016 11:57:00 GMT</pubdate><content url="/content/images/2016/09/YoSppp-1.png" medium="image"></content><encoded><p>This article is a continuation of my previous one (<a href="/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">Preparing development machine for client-side SharePoint projects</a>).</p>
 
 <p>I had stopped on a development machine with all necessary software installed and ready for coding.</p>
 
 <p>And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it for us.</p>
 
-<p>Have you heard about SharePoint Framework (aka SPFx)? What do they use for delivering project starting point? Yep, they use Yeoman generator. But some might say “It’s too complex for me at the point”, “I have On-Premises with no Apps configured”, “I want just edit few assets” or “My project task is MasterPage-styling-related and I can’t achieve anything from SPFx yet”.</p>
+<p>Have you heard about SharePoint Framework (aka SPFx)? What do they use for delivering project starting point? Yep, they use <a href="http://yeoman.io/">Yeoman generator</a>. But some might say “It’s too complex for me at the point”, “I have On-Premises with no Apps configured”, “I want just edit few assets” or “My project task is MasterPage-styling-related and I can’t achieve anything from SPFx yet”.</p>
 
 <p>That’s why for the period of transition from old-style to something brighter, somebody created an alternative for you. Which is simpler to use, which allows mastering Git, VSC (or any), Node.js, tasks right now in a very straightforward way for a very simple but tremendously useful thing.</p>
 
-<p>Here we are. We are going to use SP Pull-n-Push Yeoman Generator. This generator creates a scaffolding project with tasks for pulling files from SharePoint library and saving changed assets to SharePoint back.</p>
+<p>Here we are. We are going to use <a href="https://www.npmjs.com/package/generator-sppp">SP Pull-n-Push Yeoman Generator</a>. This generator creates a scaffolding project with tasks for pulling files from SharePoint library and saving changed assets to SharePoint back.</p>
 
 <p>Yeoman and some other libraries should have been installed if you followed my previous post. Otherwise, just in case, the command:</p>
 
@@ -147,7 +147,7 @@ batch.execute().then(function() {
 </code></pre>
 
 <blockquote>
-  <p>Note: SP Pull-n-Push is young, in case of issues or suggestions all the feedback is welcomed on GitHub.</p>
+  <p>Note: SP Pull-n-Push is young, in case of issues or suggestions all the feedback is welcomed on <a href="https://github.com/koltyakov/generator-sppp/issues">GitHub</a>.</p>
 </blockquote>
 
 <p>On new version release Yeoman generators should be updated by running <code>yo</code> command in a console and selecting “Update your generators”, so you will be using fresh version while scaffolding your next assets project.</p>
@@ -163,7 +163,7 @@ batch.execute().then(function() {
 
 <p>All of the parameters could be changed later on in the project.</p>
 
-<p>The wizard copyes files and installs NPM and Bower component if needed.</p>
+<p>The wizard copies files and installs NPM and Bower component if needed.</p>
 
 <p>In current version of this generator there are two tasks:</p>
 
@@ -171,29 +171,29 @@ batch.execute().then(function() {
 
 <p>This task can be useful in some cases. When we need to use existing assets as a start point and too lazy to copy them manually.</p>
 
-<p>The second case is more advanced and consumes Git’s capability of detecting the changes. Imagine that some of the assets were changed and this change have been done outside the Git. That’s oweful, but happends. And we need to have a tool to run a task, wait a bit and see if it’s ok or if there are some potential issues.</p>
+<p>The second case is more advanced and consumes Git’s capability of detecting the changes. Imagine that some of the assets were changed and this change have been done outside the Git. That’s awful but happens. And we need to have a tool to run a task, wait a bit and see if it’s ok or if there are some potential issues.</p>
 
-<p>For downloading all files from SharePoint sppull task is there.</p>
+<p>For downloading all files from SharePoint <a href="https://www.npmjs.com/package/sppull">sppull</a> task is there.</p>
 
 <pre><code class="language-bash">gulp sppull-all  
 </code></pre>
 
 <p>And, in a while, all the files from SharePoint target are delivered to a local directory for us.</p>
 
-<p>2. The second task is for more often usage. Actually it should be running everytime we are changing assets in local project and expecting the changes to be applied to SharePoint.</p>
+<p>2. The second task is for more often usage. Actually, it should be running everytime we are changing assets in a local project and expecting the changes to be applied to SharePoint.</p>
 
 <pre><code class="language-bash">gulp watch-assets  
 </code></pre>
 
-<p>This task starts watching ./src folder and on any change uploads corresponding files straight to destination. The task uses gulp-spsave module for Node.js integration with SharePoint.</p>
+<p>This task starts watching ./src folder and on any change uploads corresponding files straight to a destination. The task uses <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> module for Node.js integration with SharePoint.</p>
 
-<p>A project created with the use of sppp yeoman generator could be extended with any other NPM or Bower dependencies and it could be a first step in diving to new modern way of dealing with SharePoint and transition to SPFx.</p>]]&gt;</encoded></item><item><title></title><description>
+<p>A project created with the use of sppp yeoman generator could be extended with any other NPM or Bower dependencies and it could be the first step in diving to the new modern way of dealing with SharePoint and transition to SPFx.</p>]]&gt;</encoded></item><item><title></title><description>
   <p>This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets</p>
 
 
 <p>Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing.</p>
 
-<p>Initial installation is slightly</p>]]&gt;</description><link>/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/<guid ispermalink="false">75433f8a-d597-46b3-b08a-b1979c3ea491</guid><creator></creator><pubdate>Thu, 25 Aug 2016 11:35:00 GMT</pubdate><content url="/content/images/2016/09/Environment-1.png" medium="image"></content><encoded>
+<p>Initial installation is slightly</p>]]&gt;</description><link>/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/<guid ispermalink="false">75433f8a-d597-46b3-b08a-b1979c3ea491</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Thu, 25 Aug 2016 11:35:00 GMT</pubdate><content url="/content/images/2016/09/Environment-1.png" medium="image"></content><encoded>
   <img src="/content/images/2016/09/Environment-1.png" alt="Preparing development machine for client-side SharePoint projects (Mac and PC)"><p>This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets</p>
 
 
@@ -206,18 +206,18 @@ batch.execute().then(function() {
 <p>We need the following tools:</p>
 
 <ul>
-<li>Visual Studio Code – for ninja text editing</li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a> – for ninja text editing</li>
 <li>Chrome – if your developer position is in any way connected with the word “web” use this guy, there is nothing better than Chrome Dev Tools then you need to debug or tweak JS or CSS in browser</li>
-<li>Node.js – it’s an engine and a heart of development workflow automation</li>
+<li><a href="https://nodejs.org/en/about/">Node.js</a> – it’s an engine and a heart of development workflow automation</li>
 <li>Git client – for source control operations</li>
-<li>Cmder – splendid console emulator [for Windows] (Cmd could be used as well or Terminal on Mac OS)</li>
+<li><a href="http://cmder.net/">Cmder</a> – splendid console emulator [for Windows] (Cmd could be used as well or Terminal on Mac OS)</li>
 </ul>
 
 <h2 id="windows">Windows</h2>
 
 <h3 id="chocolatey">Chocolatey</h3>
 
-<p>On a PC we’ll get the sugar out of Chocolatey, it’s a package manager for windows.</p>
+<p>On a PC we’ll get the sugar out of <a href="https://chocolatey.org/">Chocolatey</a>, it’s a package manager for windows.</p>
 
 <p>Chocolatey installation is as easy as run one-line command in CMD (run as administrator for sure):</p>
 
@@ -237,7 +237,7 @@ batch.execute().then(function() {
 
 <h3 id="homebrew">Homebrew</h3>
 
-<p>In a Mac world, Homebrew is responsible for the same stuff, it extends App Store, as its authors say “missing package manager”.</p>
+<p>In a Mac world, <a href="http://brew.sh/">Homebrew</a> is responsible for the same stuff, it extends App Store, as its authors say “missing package manager”.</p>
 
 <p>One-line command again in Terminal:</p>
 
@@ -251,7 +251,7 @@ batch.execute().then(function() {
 <pre><code class="language-bash">brew install node git  
 </code></pre>
 
-<p>Unfortunately, there is no formula for Visual Studio Code or Chrome in Homebrew. Chrome could be installed via App Store. VSC has to be downloaded and installed manually, yet all of this won't take much time.</p>
+<p>Unfortunately, there is no formula for Visual Studio Code or Chrome in Homebrew. Chrome could be installed via App Store. VSC has to be downloaded and installed <a href="https://code.visualstudio.com/Download">manually</a>, yet all of this won't take much time.</p>
 
 <h2 id="nodeenvironment">Node environment</h2>
 
@@ -278,7 +278,7 @@ batch.execute().then(function() {
 
 <h3 id="nodemodules">Node modules</h3>
 
-<p>There is a variety of node modules. You can find thousands of them on NPM site.</p>
+<p>There is a variety of node modules. You can find thousands of them on <a href="https://www.npmjs.com/">NPM site</a>.</p>
 
 <p>Some of the modules could be good, some of them not. So always check the author and community behind the module. As Node application is capable of anything on your machine double check before trust forever.</p>
 
@@ -298,10 +298,10 @@ batch.execute().then(function() {
 <p>Modules that are better to install globally as they going to be used a lot in our projects are:</p>
 
 <ul>
-<li>gulp – will automate your developer’s routine</li>
-<li>bower – yet… oh, yet another package manager we need, this one delivers libraries which are used in a browser (such stuff as React, jQuery, Bootstrap, Knockout, well, all your favorite browser libraries)</li>
-<li>yeoman – is a scaffolding tool for creating projects start point</li>
-<li>eslint – is a brilliant static code analyzer for JS</li>
+<li><a href="http://gulpjs.com/">gulp</a> – will automate your developer’s routine</li>
+<li><a href="https://bower.io/">bower</a> – yet… oh, yet another package manager we need, this one delivers libraries which are used in a browser (such stuff as React, jQuery, Bootstrap, Knockout, well, all your favorite browser libraries)</li>
+<li><a href="http://yeoman.io/">yeoman</a> – is a scaffolding tool for creating projects start point</li>
+<li><a href="http://eslint.org/">eslint</a> – is a brilliant static code analyzer for JS</li>
 <li>… let’s stop on that right now, don’t install too many modules until there is clear understanding why a specific module is needed
 OK, so these can be installed with:</li>
 </ul>
@@ -317,8 +317,8 @@ OK, so these can be installed with:</li>
 
 <ul>
 <li>gulp – you might say “Stop it’s already installed globally”, but it also is needed locally (global installation allows to run “gulp [task]” in a console, but local installation makes it’s possible to use “require(‘gulp’)” in a code and define automation tasks)</li>
-<li>spsave or gulp-spsave – allow to publish files from local folders to SharePoint document libraries, so there is no need to deploy assets manually</li>
-<li>sppull – is responsible for downloading existing files from SharePoint programmatically to your project, so you can ensure easily if the project's assets files were changed somehow and have any differences with the Git HEAD using Git Diff algorithm </li>
+<li><a href="https://www.npmjs.com/package/spsave">spsave</a> or <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> – allow to publish files from local folders to SharePoint document libraries, so there is no need to deploy assets manually</li>
+<li><a href="https://www.npmjs.com/package/sppull">sppull</a> – is responsible for downloading existing files from SharePoint programmatically to your project, so you can ensure easily if the project's assets files were changed somehow and have any differences with the Git HEAD using Git Diff algorithm </li>
 <li>… any other modules depending on the tasks
 Before going next, a few words about local modules installation save options.</li>
 </ul>
@@ -369,11 +369,11 @@ code .  </li></ul></li>
 
 <p>Next time there will be a lot of code and config’s, I’ll describe project setup for instant publishing to SharePoint and fetching and merging files back from running instance. Hope all of this makes sense. Stay tuned. And welcome to the comment section below.</p>]]&gt;</encoded></item><item><title></title><description>Intro
 
-<p>A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer</p>]]&gt;</description><link>/modern-sharepoint-developer-tooling-stack/<guid ispermalink="false">c17fac23-9ee3-4738-8b72-7a90c178ee18</guid><creator></creator><pubdate>Mon, 22 Aug 2016 11:13:00 GMT</pubdate><content url="/content/images/2016/09/VSC.png" medium="image"></content><encoded>Intro
+<p>A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer</p>]]&gt;</description><link>/modern-sharepoint-developer-tooling-stack/<guid ispermalink="false">c17fac23-9ee3-4738-8b72-7a90c178ee18</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Mon, 22 Aug 2016 11:13:00 GMT</pubdate><content url="/content/images/2016/09/VSC.png" medium="image"></content><encoded>Intro
 
 <img src="/content/images/2016/09/VSC.png" alt="Modern SharePoint Developer tooling stack"><p>A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer is likely to be “Very often”.</p>
 
-<p>Soon you might probably forget about using legacy SharePoint Designer and Visual Studio for most cases. Of course, there will be always a place for Visual Studio, especially for code base provisioning and provided-hosted .Net stuff (no one has invented something better than SPMeta2, for example), but I can’t even recall when did I need to open SPD or VS for my daily development routine.</p>
+<p>Soon you might probably forget about using legacy SharePoint Designer and Visual Studio for most cases. Of course, there will be always a place for Visual Studio, especially for code base provisioning and provided-hosted .Net stuff (no one has invented something better than <a href="https://github.com/SubPointSolutions/spmeta2">SPMeta2</a>, for example), but I can’t even recall when did I need to open SPD or VS for my daily development routine.</p>
 
 <p>At the same time, due to my job, I have to write tons of code for SharePoint almost each day. And I prefer to avoid manual routines and automate my work as much as possible. The ideal scenario is “when I press Ctrl+S or Ctrl+B in my editor of choice I want to see changes immediately in a Dev environment”, you could add to this “immediate static code analysis and transpiling” and also “Git-connected-first approach”.</p>
 
@@ -411,7 +411,7 @@ code .  </li></ul></li>
 
 <p>Some might prefer Webpack or Grunt. No problem they are also the great tools. My choice is Gulp as it is <code>code over config</code> and it has modules to work with SharePoint.</p>
 
-<p>To achieve instant publishing, I use gulp watch and gulp-spsave module, which allows delivering local project files right to the SharePoint assets library with publish state and feeding the metadata, when needed.</p>
+<p>To achieve instant publishing, I use gulp watch and <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> module, which allows delivering local project files right to the SharePoint assets library with publish state and feeding the metadata, when needed.</p>
 
 <h3 id="testing">Testing</h3>
 

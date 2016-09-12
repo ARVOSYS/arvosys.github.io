@@ -27,7 +27,15 @@
     <meta property="og:url" content="/modern-sharepoint-developer-tooling-stack/">
     <meta property="og:image" content="/content/images/2016/09/VSC.png">
     <meta property="article:published_time" content="2016-08-22T11:13:00.000Z">
-    <meta property="article:modified_time" content="2016-09-12T15:20:23.000Z">
+    <meta property="article:modified_time" content="2016-09-12T20:29:59.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="VSC">
+    <meta property="article:tag" content="Gulp">
+    <meta property="article:tag" content="SPSave">
+    <meta property="article:tag" content="Toolchain">
+    <meta property="article:tag" content="Git">
+    
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Modern SharePoint Developer tooling stack">
@@ -36,6 +44,8 @@
     <meta name="twitter:image" content="/content/images/2016/09/VSC.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, Node.js, VSC, Gulp, SPSave, Toolchain, Git">
     <meta name="twitter:creator" content="@AndrewKoltyakov">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="999">
@@ -73,13 +83,14 @@
     "headline": "Modern SharePoint Developer tooling stack",
     "url": "/modern-sharepoint-developer-tooling-stack/",
     "datePublished": "2016-08-22T11:13:00.000Z",
-    "dateModified": "2016-09-12T15:20:23.000Z",
+    "dateModified": "2016-09-12T20:29:59.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2016/09/VSC.png",
         "width": 1920,
         "height": 999
     },
+    "keywords": "SharePoint, Node.js, VSC, Gulp, SPSave, Toolchain, Git",
     "description": "Intro A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -91,7 +102,7 @@
     <meta name="generator" content="Ghost 0.10">
     <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../rss/index.html">
 </head>
-<body class="post-template nav-closed">
+<body class="post-template tag-sharepoint tag-node-js tag-vsc tag-gulp tag-spsave tag-toolchain tag-git nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -125,12 +136,12 @@
 </header>
 
 <main class="content" role="main">
-    <article class="post">
+    <article class="post tag-sharepoint tag-node-js tag-vsc tag-gulp tag-spsave tag-toolchain tag-git">
 
         <header class="post-header">
             <h1 class="post-title">Modern SharePoint Developer tooling stack</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2016-08-22">22 August 2016</time> 
+                <time class="post-date" datetime="2016-08-22">22 August 2016</time>  on <a href="../tag/sharepoint/">SharePoint</a>, <a href="../tag/node-js/">Node.js</a>, <a href="../tag/vsc/">VSC</a>, <a href="../tag/gulp/">Gulp</a>, <a href="../tag/spsave/">SPSave</a>, <a href="../tag/toolchain/">Toolchain</a>, <a href="../tag/git/">Git</a>
             </section>
         </header>
 
@@ -139,7 +150,7 @@
 
 <p>A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer is likely to be “Very often”.</p>
 
-<p>Soon you might probably forget about using legacy SharePoint Designer and Visual Studio for most cases. Of course, there will be always a place for Visual Studio, especially for code base provisioning and provided-hosted .Net stuff (no one has invented something better than SPMeta2, for example), but I can’t even recall when did I need to open SPD or VS for my daily development routine.</p>
+<p>Soon you might probably forget about using legacy SharePoint Designer and Visual Studio for most cases. Of course, there will be always a place for Visual Studio, especially for code base provisioning and provided-hosted .Net stuff (no one has invented something better than <a href="https://github.com/SubPointSolutions/spmeta2">SPMeta2</a>, for example), but I can’t even recall when did I need to open SPD or VS for my daily development routine.</p>
 
 <p>At the same time, due to my job, I have to write tons of code for SharePoint almost each day. And I prefer to avoid manual routines and automate my work as much as possible. The ideal scenario is “when I press Ctrl+S or Ctrl+B in my editor of choice I want to see changes immediately in a Dev environment”, you could add to this “immediate static code analysis and transpiling” and also “Git-connected-first approach”.</p>
 
@@ -177,7 +188,7 @@
 
 <p>Some might prefer Webpack or Grunt. No problem they are also the great tools. My choice is Gulp as it is <code>code over config</code> and it has modules to work with SharePoint.</p>
 
-<p>To achieve instant publishing, I use gulp watch and gulp-spsave module, which allows delivering local project files right to the SharePoint assets library with publish state and feeding the metadata, when needed.</p>
+<p>To achieve instant publishing, I use gulp watch and <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> module, which allows delivering local project files right to the SharePoint assets library with publish state and feeding the metadata, when needed.</p>
 
 <h3 id="testing">Testing</h3>
 
