@@ -1,0 +1,411 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Preparing development machine for client-side SharePoint projects (Mac and PC)</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="http://localhost:2368/assets/images/favicon.ico?v=2b4cfc8398">
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:2368/assets/css/arvo-bundle.css?v=2b4cfc8398">
+    <link rel="stylesheet" type="text/css" href="http://localhost:2368/assets/css/screen.css?v=2b4cfc8398">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="ARVO Systems blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Preparing development machine for client-side SharePoint projects (Mac and PC)">
+    <meta property="og:description" content="This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly">
+    <meta property="og:url" content="http://localhost:2368/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">
+    <meta property="og:image" content="http://localhost:2368/content/images/2016/09/Environment.png">
+    <meta property="article:published_time" content="2016-08-25T11:35:00.000Z">
+    <meta property="article:modified_time" content="2016-09-12T11:56:18.000Z">
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Preparing development machine for client-side SharePoint projects (Mac and PC)">
+    <meta name="twitter:description" content="This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly">
+    <meta name="twitter:url" content="http://localhost:2368/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2016/09/Environment.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="969">
+    <meta property="og:image:height" content="583">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ARVO Systems blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2016/09/arvo_logo_105px.png",
+            "width": 105,
+            "height": 42
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Andrew Koltyakov",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2016/09/andrew.koltyakov.jpg",
+            "width": 460,
+            "height": 460
+        },
+        "url": "http://localhost:2368/author/andrew/",
+        "sameAs": [
+            "http://koltyakov.ru",
+            "https://www.facebook.com/andrew.koltyakov",
+            "https://twitter.com/AndrewKoltyakov"
+        ]
+    },
+    "headline": "Preparing development machine for client-side SharePoint projects (Mac and PC)",
+    "url": "http://localhost:2368/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/",
+    "datePublished": "2016-08-25T11:35:00.000Z",
+    "dateModified": "2016-09-12T11:56:18.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/2016/09/Environment.png",
+        "width": 969,
+        "height": 583
+    },
+    "description": "This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../rss/index.html">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+    </ul>
+        <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+        <div id="content-wrapper">
+
+            
+
+
+<header class="main-header post-head " style="background-image: url(../content/images/2016/09/Environment.png)">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href="../"><img src="../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems blog"></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Preparing development machine for client-side SharePoint projects (Mac and PC)</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-08-25">25 August 2016</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <blockquote>
+  <p>This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets</p>
+</blockquote>
+
+<p>Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing.</p>
+
+<p>Initial installation is slightly different on OS X and Windows but the subsequent process of development and capabilities are the same.</p>
+
+<h2 id="softtoinstall">Soft to install</h2>
+
+<p>We need the following tools:</p>
+
+<ul>
+<li>Visual Studio Code – for ninja text editing</li>
+<li>Chrome – if your developer position is in any way connected with the word “web” use this guy, there is nothing better than Chrome Dev Tools then you need to debug or tweak JS or CSS in browser</li>
+<li>Node.js – it’s an engine and a heart of development workflow automation</li>
+<li>Git client – for source control operations</li>
+<li>Cmder – splendid console emulator [for Windows] (Cmd could be used as well or Terminal on Mac OS)</li>
+</ul>
+
+<h2 id="windows">Windows</h2>
+
+<h3 id="chocolatey">Chocolatey</h3>
+
+<p>On a PC we’ll get the sugar out of Chocolatey, it’s a package manager for windows.</p>
+
+<p>Chocolatey installation is as easy as run one-line command in CMD (run as administrator for sure):</p>
+
+<pre><code class="language-bash">@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" &amp;&amp; SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+</code></pre>
+
+<h3 id="packages">Packages</h3>
+
+<p>Here are the benefits, to install all the soft you need it enough to run this (as administrator):</p>
+
+<pre><code class="language-bash">choco install visualstudiocode googlechrome nodejs.install git.install cmder -y  
+</code></pre>
+
+<p>Now relax and take your favorite drink. Coffee in my case. =)</p>
+
+<h2 id="osx">OS X</h2>
+
+<h3 id="homebrew">Homebrew</h3>
+
+<p>In a Mac world, Homebrew is responsible for the same stuff, it extends App Store, as its authors say “missing package manager”.</p>
+
+<p>One-line command again in Terminal:</p>
+
+<pre><code class="language-bash">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+</code></pre>
+
+<h3 id="packages">Packages</h3>
+
+<p>Time saver is:</p>
+
+<pre><code class="language-bash">brew install node git  
+</code></pre>
+
+<p>Unfortunately, there is no formula for Visual Studio Code or Chrome in Homebrew. Chrome could be installed via App Store. VSC has to be downloaded and installed manually, yet all of this won't take much time.</p>
+
+<h2 id="nodeenvironment">Node environment</h2>
+
+<p>Now we’re are ready to check the environment by requesting a version for node and its package manager (yeah, one more package manager, this one is used very often) and, of course, Git.</p>
+
+<pre><code class="language-bash">node -v &amp;&amp; npm -v &amp;&amp; git --version  
+</code></pre>
+
+<p>This should return Node.js version, NPM version, then Git version each after another. Commands are combined together and could be split up.</p>
+
+<p>Also, a good point is to check if the VSC is added to Path environment variable. The best option to check if is to navigate somewhere in your file system in the Console/Terminal and type (there should be a space between “code” and “dot”):</p>
+
+<pre><code class="language-bash">code .  
+</code></pre>
+
+<p>VSC should run with a current folder, where we were in a console, opened.</p>
+
+<p>Before you will be able to use NPM modules, project should be initiated by:</p>
+
+<pre><code class="language-bash">npm init -y  
+</code></pre>
+
+<p>This will create package.json in your project folder. Package.json is a definition of the project.</p>
+
+<h3 id="nodemodules">Node modules</h3>
+
+<p>There is a variety of node modules. You can find thousands of them on NPM site.</p>
+
+<p>Some of the modules could be good, some of them not. So always check the author and community behind the module. As Node application is capable of anything on your machine double check before trust forever.</p>
+
+<p>If you came from .Net world, NPM modules are just like NuGets but for the Node.js.</p>
+
+<p>Modules can be installed globally and locally in the specific project.</p>
+
+<h4 id="globalmodules">Global modules</h4>
+
+<p>Global module installation example:</p>
+
+<pre><code class="language-bash">npm install gulp -g  
+</code></pre>
+
+<p>Flag -g corresponds to “global”, without it installed module will be placed inside node_modules folder inside your project.</p>
+
+<p>Modules that are better to install globally as they going to be used a lot in our projects are:</p>
+
+<ul>
+<li>gulp – will automate your developer’s routine</li>
+<li>bower – yet… oh, yet another package manager we need, this one delivers libraries which are used in a browser (such stuff as React, jQuery, Bootstrap, Knockout, well, all your favorite browser libraries)</li>
+<li>yeoman – is a scaffolding tool for creating projects start point</li>
+<li>eslint – is a brilliant static code analyzer for JS</li>
+<li>… let’s stop on that right now, don’t install too many modules until there is clear understanding why a specific module is needed
+OK, so these can be installed with:</li>
+</ul>
+
+<pre><code class="language-bash">npm install gulp bower yo eslint -g  
+</code></pre>
+
+<h4 id="localmodules">Local modules</h4>
+
+<p>Local modules are a part of your project, dependencies with easily delivering, updating, restoring, that make you reuse community’s efforts and abstract your application.</p>
+
+<p>On most SharePoint assets or let’s say it UI development projects, you can benefit from:</p>
+
+<ul>
+<li>gulp – you might say “Stop it’s already installed globally”, but it also is needed locally (global installation allows to run “gulp [task]” in a console, but local installation makes it’s possible to use “require(‘gulp’)” in a code and define automation tasks)</li>
+<li>spsave or gulp-spsave – allow to publish files from local folders to SharePoint document libraries, so there is no need to deploy assets manually</li>
+<li>sppull – is responsible for downloading existing files from SharePoint programmatically to your project, so you can ensure easily if the project's assets files were changed somehow and have any differences with the Git HEAD using Git Diff algorithm </li>
+<li>… any other modules depending on the tasks
+Before going next, a few words about local modules installation save options.</li>
+</ul>
+
+<p>By installing something like:</p>
+
+<pre><code class="language-bash">npm install sppull  
+</code></pre>
+
+<p>A module and all its dependencies will be downloaded to node_modules and you will be able to require it in the code, but one thing, if your project is in Git repository you might and should want to exclude modules folder from being stored in your repo.</p>
+
+<p>But it’s weird to remember all the references then you clone a project from a remote Git repo, that’s why --save flag should be used.</p>
+
+<p>So a dependency module installation looks like:</p>
+
+<pre><code class="language-bash">npm install sp-request --save-dev  
+</code></pre>
+
+<p>--save-dev adds a module to development dependencies, --save – to production dependencies. The difference is following: --save-dev is applied when a module is used while code creation (it is the support libraries, all that gulp-* libs, sppull, spsave, they help to do stuff when you coding, but they are not included in the project app or dist assets that will be running in SharePoint). For SharePoint UI projects you likely won’t need any npm modules to save in prod.</p>
+
+<p>If npm modules were installed with save option later on after cloning or pulling the project, you will need to run “npm install” and all the references will be downloaded and applied automatically.</p>
+
+<h2 id="bowermodules">Bower modules</h2>
+
+<p>Bower modules concepts and commands are very similar to NPM, the difference is that it manages browsers libraries. I’m not going to stop on Bower for long. Let’s check the command:</p>
+
+<pre><code class="language-bash">bower install jquery#1.4.1 --save  
+</code></pre>
+
+<p>Isn’t it identical? In the case of jQuery I’m fetching a specific version I need, otherwise, the latest will be downloaded.</p>
+
+<h2 id="git">Git</h2>
+
+<p>Hey, folks! You know a lot about Git, don’t you? ;)</p>
+
+<h2 id="finalsteps">Final steps</h2>
+
+<ol>
+<li>Create a project in Git (GitHub, BitBucket, Visual Studio Online, no matter)  </li>
+<li>git clone [your<em>project</em>url]  </li>
+<li>Navigate to your project directory  </li>
+<li>NPM init/install: <br>
+<ul><li>npm init -y – in the case if it is a new blank project</li>
+<li>npm install – in the case of cloning already initiated project from Git
+code .  </li></ul></li>
+<li>... and, with VSC and console opened, you are ready to rock-n-roll</li>
+</ol>
+
+<p>Next time there will be a lot of code and config’s, I’ll describe project setup for instant publishing to SharePoint and fetching and merging files back from running instance. Hope all of this makes sense. Stay tuned. And welcome to the comment section below.</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../author/andrew/" style="background-image: url(../content/images/2016/09/andrew.koltyakov.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../author/andrew/">Andrew Koltyakov</a></h4>
+
+                    <p>Read <a href="../author/andrew/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    <span class="author-link icon-link"><a href="http://koltyakov.ru">http://koltyakov.ru</a></span>
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Preparing%20development%20machine%20for%20client-side%20SharePoint%20projects%20(Mac%20and%20PC)&amp;url=http://localhost:2368/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+
+        </footer>
+
+        <!-- Comments -->
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = "arvo-systems-blog-com";
+            (function() {
+                var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+        </script>
+        <!-- Comments -->
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story " style="background-image: url(../content/images/2016/09/YoSppp.png)" href="../front-end-sharepoint-projects-synced-and-safe/">
+        <section class="post">
+            <h2>Front-end SharePoint projects – synced and safe!</h2>
+            <p>This article is a continuation of my previous one (Preparing development machine for client-side SharePoint projects). I had stopped…</p>
+        </section>
+    </a>
+    <a class="read-next-story prev " style="background-image: url(../content/images/2016/09/modern-tools-1.png)" href="../modern-sharepoint-developer-tooling-stack/">
+        <section class="post">
+            <h2>Modern SharePoint Developer tooling stack</h2>
+            <p>Intro A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        </div>
+    </div>
+
+    <div id="footer" class="bg-dark fg-white">
+        <div class="container">
+            <div class="brands">
+                <div class="padding10 footer-element">
+                <img class="sh" src="http://localhost:2368/assets/images/o365_nm_ft_i.png?v=2b4cfc8398" style="display: none;">
+                <img class="fl" src="http://localhost:2368/assets/images/o365_nm_ft.png?v=2b4cfc8398">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="http://localhost:2368/assets/images/sp_nm_ft_i.png?v=2b4cfc8398" style="display: none;">
+                <img class="fl" src="http://localhost:2368/assets/images/sp_nm_ft.png?v=2b4cfc8398">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="http://localhost:2368/assets/images/msp_nm_ft_i.png?v=2b4cfc8398" style="display: none;">
+                <img class="fl" src="http://localhost:2368/assets/images/msp_nm_ft.png?v=2b4cfc8398">
+                </div>		
+            </div>
+            <div class="copyright">
+                <div class="padding10 footer-element">
+                <img src="http://localhost:2368/assets/images/arvo_nm_ft.png?v=2b4cfc8398">
+                </div>    
+                <div class="padding10 footer-element copy-text">© 2016<br>
+                <small>All rights reserved</small>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="http://localhost:2368/assets/js/jquery.fitvids.js?v=2b4cfc8398"></script>
+    <script type="text/javascript" src="http://localhost:2368/assets/js/index.js?v=2b4cfc8398"></script>
+
+</body>
