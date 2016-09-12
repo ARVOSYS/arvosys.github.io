@@ -2303,3 +2303,7 @@ dl dd, dl dt, ol li, ul li {
 section.post-meta {
     margin-top: 30px !important;
 }
+
+section.post-content img {
+    max-width: 100%;
+}
