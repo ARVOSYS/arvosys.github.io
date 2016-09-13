@@ -1,46 +1,46 @@
+
 <head>
     <meta charset="utf-8">
 
-    <title>SharePoint REST API proxy for local serve in Node.js</title>
+    <title>SharePoint PnP JavaScript Core Components – deserve more attention</title>
     <meta name="description" content="">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="shortcut icon" href="../../../../../favicon.ico">
 
     <link rel="canonical" href="../index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
     <meta property="og:site_name" content="ARVO Systems blog">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta property="og:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta property="og:url" content="/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta property="og:image" content="/content/images/2016/09/RestProxyExample-1.png">
-    <meta property="article:published_time" content="2016-09-03T12:01:00.000Z">
-    <meta property="article:modified_time" content="2016-09-12T20:49:17.000Z">
+    <meta property="og:title" content="SharePoint PnP JavaScript Core Components – deserve more attention">
+    <meta property="og:description" content="I've been eschewed PnP-JS-Core for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. &quot;Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?&quot;, I asked myself a">
+    <meta property="og:url" content="/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">
+    <meta property="og:image" content="/content/images/2016/09/PnP-JS-Core_banner-2.png">
+    <meta property="article:published_time" content="2016-09-09T12:04:00.000Z">
+    <meta property="article:modified_time" content="2016-09-12T20:52:08.000Z">
     <meta property="article:tag" content="SharePoint">
-    <meta property="article:tag" content="Node.js">
     <meta property="article:tag" content="Toolchain">
     <meta property="article:tag" content="REST">
-    <meta property="article:tag" content="Express">
     <meta property="article:tag" content="API">
     <meta property="article:tag" content="sp-rest-proxy">
+    <meta property="article:tag" content="PnP">
     
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta name="twitter:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta name="twitter:url" content="/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta name="twitter:image" content="/content/images/2016/09/RestProxyExample-1.png">
+    <meta name="twitter:title" content="SharePoint PnP JavaScript Core Components – deserve more attention">
+    <meta name="twitter:description" content="I've been eschewed PnP-JS-Core for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. &quot;Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?&quot;, I asked myself a">
+    <meta name="twitter:url" content="/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">
+    <meta name="twitter:image" content="/content/images/2016/09/PnP-JS-Core_banner-2.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Andrew Koltyakov">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy">
+    <meta name="twitter:data2" content="SharePoint, Toolchain, REST, API, sp-rest-proxy, PnP">
     <meta name="twitter:creator" content="@AndrewKoltyakov">
     <meta property="og:image:width" content="1600">
-    <meta property="og:image:height" content="518">
+    <meta property="og:image:height" content="468">
     
     <script type="application/ld+json">
 {
@@ -73,18 +73,18 @@
         ],
         "description": "SharePoint Front-End Developer"
     },
-    "headline": "SharePoint REST API proxy for local serve in Node.js",
-    "url": "/sharepoint-rest-api-proxy-for-local-serve-in-node-js/",
-    "datePublished": "2016-09-03T12:01:00.000Z",
-    "dateModified": "2016-09-12T20:49:17.000Z",
+    "headline": "SharePoint PnP JavaScript Core Components – deserve more attention",
+    "url": "/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/",
+    "datePublished": "2016-09-09T12:04:00.000Z",
+    "dateModified": "2016-09-12T20:52:08.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "/content/images/2016/09/RestProxyExample-1.png",
+        "url": "/content/images/2016/09/PnP-JS-Core_banner-2.png",
         "width": 1600,
-        "height": 518
+        "height": 468
     },
-    "keywords": "SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy",
-    "description": "On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this &quot;dive&quot; was not so deep and actually looked more like SharePoint platform",
+    "keywords": "SharePoint, Toolchain, REST, API, sp-rest-proxy, PnP",
+    "description": "I&#x27;ve been eschewed PnP-JS-Core for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. &quot;Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?&quot;, I asked myself a",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://localhost:2368"
@@ -93,7 +93,7 @@
     </script>
 
     <meta name="generator" content="Ghost 0.10">
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../../rss/index.html">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../../../../../rss/index.html">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
     <style amp-custom>
@@ -869,7 +869,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../">ARVO Systems blog</a>
+            <a href="../../../../../">ARVO Systems blog</a>
         </nav>
     </header>
 
@@ -877,49 +877,121 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">SharePoint REST API proxy for local serve in Node.js</h1>
+                <h1 class="post-title">SharePoint PnP JavaScript Core Components – deserve more attention</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../author/andrew/">Andrew Koltyakov</a></p>
-                    <time class="post-date" datetime="2016-09-03">2016-09-03</time>
+                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
+                    <time class="post-date" datetime="2016-09-09">2016-09-09</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="/content/images/2016/09/RestProxyExample-1.png" width="600" height="400" layout="responsive"></amp-img>
+                <amp-img src="/content/images/2016/09/PnP-JS-Core_banner-2.png" width="600" height="400" layout="responsive"></amp-img>
             </figure>
             <section class="post-content">
 
-                <p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
+                <p>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a couple of times putting PnP-JS-Core aside from learning.</p>
 
-<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
+<p>But there was an opportunity this week to dive into the library and estimate expediency of its usage on a next project. The first fresh glance at it created a new and rather a positive attitude. First of all, it is made with the toolchain I love, and there are so many familiar faces in its contributors group, I didn’t even know to be related to the project. That was a good sign so I started.</p>
 
-<p>One of the coolest thing about SPFx is a capability to run <code>gulp serve</code>, after which you'll find yourself in local workbench ready to add client web parts on a modern page emulator and test them in action.</p>
+<h2 id="whatisit">What is it</h2>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAg0AAAAJDExYmQ1YjkzLWQ3YTItNGNjZC1iNzcxLWI4Mjg2OTUxNTQzMA.png" alt width="717" height="517" layout="responsive"></amp-img></p>
+<p>PnP-JS-Core is a part of Office 365 Developer Patterns and Components for JavaScript’ing in SharePoint.</p>
 
-<p>One of the downsides of such local testing and debug is that you should deal with a mock generated artificial data. Maybe it only for now, maybe I understood incorrectly. But I consider that the real data is vital in many cases and real SharePoint API availability during such runtime can save hours of work and resolve tons of hassles.</p>
+<p>It is a wrapper over RESTful API and a bit more. PnP JS Core provides a fluent JS API simplifying REST calls to SharePoint API.</p>
 
-<p>I'm more than sure that later on real SharePoint API and data will be available locally within the workbench. This availability could be limited at least with REST API.</p>
+<h2 id="stackproject">Stack &amp; Project</h2>
 
-<p>Why I'm so sure? Because it took me a single Friday night to create a REST API proxy with Node.js and Express, which allows running an application locally or on Node.js hosted server, which is actually the same, in other words, is not in the context of SharePoint page.</p>
+<p>Yes, it’s made with the use of all of that shiny technologies we use on the most modern web projects: JavaScript (TypeScript), Gulp, NPM, Typings, Git, Linting, Serve and cool automation. It’s easy to understand the project structure, logic and contribute.</p>
 
-<p>In such local web application page, without any deployment to SharePoint, one can execute GET or POST ajax call, let's say <code>/_api/web/lists</code>, which responses with the result as if an ajax call was on ShatePoint site page <code>~site/_api/web/lists</code>.</p>
+<p>It is not necessary to investigate the source, but a lot of questions can be solved by checking the code and <a href="http://github.com/OfficeDev/PnP/tree/dev/Samples/SharePoint.pnp-js-core">samples</a>. In the end, PnP-JS-Core is not something complex to learn at all.</p>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAlYAAAAJGRiNjU3YjNjLWY0NzYtNDQxNS04ZTYzLWQ5NGQwNzBlOWExOA.png" alt width="795" height="678" layout="responsive"></amp-img></p>
+<h2 id="usage">Usage</h2>
 
-<p>Any GET or POST call is routed to the real SharePoint tenant under specified user credentials, defined in the configuration of the proxy.</p>
+<p>PnP-JS-Core can be <a href="http://github.com/OfficeDev/PnP-JS-Core/wiki/Install-and-Use">installed</a> with the use of NPM or Bower. The library can be used in TypeScript project or referenced as any other JS library and consumed on a page or browser console.</p>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAcrAAAAJGIwYzg2YTEzLTg5ZWUtNGZiNC1iMDY2LWE4MTMzNzQwNGU1MQ.png" alt width="795" height="396" layout="responsive"></amp-img></p>
+<p>PnP-JS-Core uses fetch protocol and ES6 promises, that’s why to make it work in IE, polyfills got to be loaded first. It is important to note, otherwise, if this part in documentation was skipped, one would be wondering “What the heck, it doesn’t work in IE? What is that error message in the console, saying "'Headers' is undefined?"”. But keep calm, PnP works perfectly in IE and Edge with es-promise and fetch polyfills.</p>
 
-<p>Of course, such proxy is limited with REST API only. It can be a complicated task to 're-implement' JSOM, for instance. But as far we go, more and more REST significance we see in SharePoint infrastructure as a universal and language agnostic technology.</p>
+<h2 id="syntax">Syntax</h2>
 
-<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>
+<p>PnP-JS-Core has a base object <code>pnp</code> in case of default TypeScript import and <code>$pnp</code> if there is a pnp.js reference on a page and you are writing plain JS in a console or Chrome snippets.</p>
+
+<p>REST calls, with the use of the PnP, can be constructed via fluent API chains with a promise initiator at the end of the statement.</p>
+
+<p>For example, let’s take some basic REST endpoint: <code>/_api/web/lists/getByTitle('CustomList')/items</code> call and reproduce it with the use of pnp:</p>
+
+<pre><code class="language-javascript">$pnp.sp.web 
+  .lists.getByTitle('ListTitle').items 
+  .get() 
+  .then(function(items) { 
+    // all items are in the `items` array 
+  });
+</code></pre>
+
+<p>$pnp.sp.web.lists.getByTitle('Custom01').items – is a constructor which builds endpoints URI.</p>
+
+<p>IntelliSense helps during the process, so you can be even not aware of REST reference or at least have a bad memory and not necessarily remember the endpoints.</p>
+
+<p>Yet, I highly recommend to have a strong understanding of <a href="http://msdn.microsoft.com/en-us/library/office/jj860569.aspx">REST API reference</a> and plan to receive all the fruits that PnP provide only after or use both during the learning curve of course.</p>
+
+<p>When a fluent call is described, <code>get</code> method should be placed to initiate a query to a server. <code>Get</code> method and some others return a promise, that should be chained with <code>then</code> and <code>catch</code> to treat the results.  </p>
+
+<p>Fluent API is really a piece of gold, all that <code>$select</code>, <code>$filter</code>, <code>$extend</code>, <code>$top</code>, etc. parameters are there as helper methods as well. The same is relevant for REST API properties and methods. But not everything is implemented in the current version. So it’s good to compare REST reference and PnP features if you feel like something is missing.</p>
+
+<p>For example, I’ve found myself unable to get a list by its URL, which I accept as the only reasonable way to communicate with lists and libraries in the code (as display title can be changed anytime in the UI and GUIDs-based code is complex to maintain and is not reasonable too, as IDs will be different from deploy to deploy for the same business objects). But less than in a half an hour I managed to fork and implement <code>pnp.sp.web.getList</code> method representation for <code>/_api/web/getlist(‘/sites/site/web/list/name’)</code> and create a pull request for this.</p>
+
+<p>That’s the power of open source.</p>
+
+<h2 id="batches">Batches</h2>
+
+<p>The well-known fact that REST API is very <code>chatty</code> (over the network) one. Sometimes JSOM’s pros argument over REST says that by queueing some OM queries definitions into one physical executeQueryAsync call you can make an application faster. That is definitely true. But did you know that REST also has such tricks in O365 and SharePoint 2016. That is /_api/$batch endpoint.</p>
+
+<p>PnP provides a great simplification for batch REST queries. Any query can be placed in batch call and retrieved inside one single batch execute.</p>
+
+<pre><code class="language-javascript">var batchResults = [];  
+var batch = new $pnp.sp.createBatch();  
+$pnp.sp.web.getList('/sites/dev01/lists/custom01').items.inBatch(batch).get().then(function(d) {
+  batchResults.push({ 
+    custom01: d 
+  });
+});
+$pnp.sp.web.getList('/sites/dev01/lists/custom02').items.inBatch(batch).get().then(function(d) {
+  batchResults.push({ 
+    custom02: d 
+  });
+});
+for (var i = 0, len = 10; i &lt; len; i += 1) {  
+  $pnp.sp.web.getList('/sites/dev01/lists/custom03').inBatch(batch).items.add({ 
+    Title: 'Item ' + i 
+  });
+}
+batch.execute().then(function() {  
+  console.log("All is done!", batchResults);
+});
+</code></pre>
+
+<p>I was really surprised when discovered such a powerful and simple capability.</p>
+
+<p>Unfortunately, REST batches aren’t supported in On-Prem versions before 2016 version.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There was so much hype around PnP during last few years, but most people (developers or course), with whom I discussed PnP in general, never dived inside it at all, at the same time, were constantly mentioning it as a buzzword on different SP events.</p>
+
+<p>At last, I’ve touched some part of the PnP projects from the JS world side personally and can say it louder that it is a very interesting library, it’s worth learning and I will definitely include it in the next UI project.</p>
+
+<h3 id="upd">UPD:</h3>
+
+<p>I've also tried PnP-JS-Core with <a href="http://github.com/koltyakov/sp-rest-proxy">sp-rest-proxy</a> and it works! :)</p>
+
+<p><amp-img src="https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAj0AAAAJGVhN2VkMDlmLWY0NDItNDVjYS05MTk5LWE1NjFiZWRiOWZhNg.png" alt width="754" height="618" layout="responsive"></amp-img></p>
+
+<p>* This gonna work for GET calls only for now, due to the way sp-rest-proxy and pnp deal with Request Digest on a page.</p>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../">ARVO Systems blog</a> © 2016</section>
+        <section class="copyright"><a href="../../../../../">ARVO Systems blog</a> © 2016</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>

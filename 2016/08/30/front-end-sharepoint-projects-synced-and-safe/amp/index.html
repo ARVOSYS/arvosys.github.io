@@ -1,46 +1,47 @@
+
 <head>
     <meta charset="utf-8">
 
-    <title>SharePoint REST API proxy for local serve in Node.js</title>
+    <title>Front-end SharePoint projects – synced and safe!</title>
     <meta name="description" content="">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="shortcut icon" href="../../../../../favicon.ico">
 
     <link rel="canonical" href="../index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
     <meta property="og:site_name" content="ARVO Systems blog">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta property="og:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta property="og:url" content="/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta property="og:image" content="/content/images/2016/09/RestProxyExample-1.png">
-    <meta property="article:published_time" content="2016-09-03T12:01:00.000Z">
-    <meta property="article:modified_time" content="2016-09-12T20:49:17.000Z">
+    <meta property="og:title" content="Front-end SharePoint projects – synced and safe!">
+    <meta property="og:description" content="This article is a continuation of my previous one (Preparing development machine for client-side SharePoint projects). I had stopped on a development machine with all necessary software installed and ready for coding. And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it">
+    <meta property="og:url" content="/2016/08/30/front-end-sharepoint-projects-synced-and-safe/">
+    <meta property="og:image" content="/content/images/2016/09/YoSppp-1.png">
+    <meta property="article:published_time" content="2016-08-30T11:57:00.000Z">
+    <meta property="article:modified_time" content="2016-09-13T05:54:14.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="Gulp">
+    <meta property="article:tag" content="SPSave">
+    <meta property="article:tag" content="SPPull">
+    <meta property="article:tag" content="Yeoman">
     <meta property="article:tag" content="Toolchain">
-    <meta property="article:tag" content="REST">
-    <meta property="article:tag" content="Express">
-    <meta property="article:tag" content="API">
-    <meta property="article:tag" content="sp-rest-proxy">
     
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta name="twitter:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta name="twitter:url" content="/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta name="twitter:image" content="/content/images/2016/09/RestProxyExample-1.png">
+    <meta name="twitter:title" content="Front-end SharePoint projects – synced and safe!">
+    <meta name="twitter:description" content="This article is a continuation of my previous one (Preparing development machine for client-side SharePoint projects). I had stopped on a development machine with all necessary software installed and ready for coding. And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it">
+    <meta name="twitter:url" content="/2016/08/30/front-end-sharepoint-projects-synced-and-safe/">
+    <meta name="twitter:image" content="/content/images/2016/09/YoSppp-1.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Andrew Koltyakov">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy">
+    <meta name="twitter:data2" content="SharePoint, Node.js, Gulp, SPSave, SPPull, Yeoman, Toolchain">
     <meta name="twitter:creator" content="@AndrewKoltyakov">
     <meta property="og:image:width" content="1600">
-    <meta property="og:image:height" content="518">
+    <meta property="og:image:height" content="434">
     
     <script type="application/ld+json">
 {
@@ -73,18 +74,18 @@
         ],
         "description": "SharePoint Front-End Developer"
     },
-    "headline": "SharePoint REST API proxy for local serve in Node.js",
-    "url": "/sharepoint-rest-api-proxy-for-local-serve-in-node-js/",
-    "datePublished": "2016-09-03T12:01:00.000Z",
-    "dateModified": "2016-09-12T20:49:17.000Z",
+    "headline": "Front-end SharePoint projects – synced and safe!",
+    "url": "/2016/08/30/front-end-sharepoint-projects-synced-and-safe/",
+    "datePublished": "2016-08-30T11:57:00.000Z",
+    "dateModified": "2016-09-13T05:54:14.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "/content/images/2016/09/RestProxyExample-1.png",
+        "url": "/content/images/2016/09/YoSppp-1.png",
         "width": 1600,
-        "height": 518
+        "height": 434
     },
-    "keywords": "SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy",
-    "description": "On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this &quot;dive&quot; was not so deep and actually looked more like SharePoint platform",
+    "keywords": "SharePoint, Node.js, Gulp, SPSave, SPPull, Yeoman, Toolchain",
+    "description": "This article is a continuation of my previous one (Preparing development machine for client-side SharePoint projects). I had stopped on a development machine with all necessary software installed and ready for coding. And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://localhost:2368"
@@ -93,7 +94,7 @@
     </script>
 
     <meta name="generator" content="Ghost 0.10">
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../../rss/index.html">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../../../../../rss/index.html">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
     <style amp-custom>
@@ -862,14 +863,14 @@
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-    
+    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
 
 </head>
 
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../">ARVO Systems blog</a>
+            <a href="../../../../../">ARVO Systems blog</a>
         </nav>
     </header>
 
@@ -877,49 +878,88 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">SharePoint REST API proxy for local serve in Node.js</h1>
+                <h1 class="post-title">Front-end SharePoint projects – synced and safe!</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../author/andrew/">Andrew Koltyakov</a></p>
-                    <time class="post-date" datetime="2016-09-03">2016-09-03</time>
+                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
+                    <time class="post-date" datetime="2016-08-30">2016-08-30</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="/content/images/2016/09/RestProxyExample-1.png" width="600" height="400" layout="responsive"></amp-img>
+                <amp-img src="/content/images/2016/09/YoSppp-1.png" width="600" height="400" layout="responsive"></amp-img>
             </figure>
             <section class="post-content">
 
-                <p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
+                <p>This article is a continuation of my previous one (<a href="../../../25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">Preparing development machine for client-side SharePoint projects</a>).</p>
 
-<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
+<p>I had stopped on a development machine with all necessary software installed and ready for coding.</p>
 
-<p>One of the coolest thing about SPFx is a capability to run <code>gulp serve</code>, after which you'll find yourself in local workbench ready to add client web parts on a modern page emulator and test them in action.</p>
+<p>And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it for us.</p>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAg0AAAAJDExYmQ1YjkzLWQ3YTItNGNjZC1iNzcxLWI4Mjg2OTUxNTQzMA.png" alt width="717" height="517" layout="responsive"></amp-img></p>
+<p>Have you heard about SharePoint Framework (aka SPFx)? What do they use for delivering project starting point? Yep, they use <a href="http://yeoman.io/">Yeoman generator</a>. But some might say “It’s too complex for me at the point”, “I have On-Premises with no Apps configured”, “I want just edit few assets” or “My project task is MasterPage-styling-related and I can’t achieve anything from SPFx yet”.</p>
 
-<p>One of the downsides of such local testing and debug is that you should deal with a mock generated artificial data. Maybe it only for now, maybe I understood incorrectly. But I consider that the real data is vital in many cases and real SharePoint API availability during such runtime can save hours of work and resolve tons of hassles.</p>
+<p>That’s why for the period of transition from old-style to something brighter, somebody created an alternative for you. Which is simpler to use, which allows mastering Git, VSC (or any), Node.js, tasks right now in a very straightforward way for a very simple but tremendously useful thing.</p>
 
-<p>I'm more than sure that later on real SharePoint API and data will be available locally within the workbench. This availability could be limited at least with REST API.</p>
+<p>Here we are. We are going to use <a href="https://www.npmjs.com/package/generator-sppp">SP Pull-n-Push Yeoman Generator</a>. This generator creates a scaffolding project with tasks for pulling files from SharePoint library and saving changed assets to SharePoint back.</p>
 
-<p>Why I'm so sure? Because it took me a single Friday night to create a REST API proxy with Node.js and Express, which allows running an application locally or on Node.js hosted server, which is actually the same, in other words, is not in the context of SharePoint page.</p>
+<p>Yeoman and some other libraries should have been installed if you followed my previous post. Otherwise, just in case, the command:</p>
 
-<p>In such local web application page, without any deployment to SharePoint, one can execute GET or POST ajax call, let's say <code>/_api/web/lists</code>, which responses with the result as if an ajax call was on ShatePoint site page <code>~site/_api/web/lists</code>.</p>
+<pre><code class="language-bash">npm install -g gulp bower yo  
+</code></pre>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAlYAAAAJGRiNjU3YjNjLWY0NzYtNDQxNS04ZTYzLWQ5NGQwNzBlOWExOA.png" alt width="795" height="678" layout="responsive"></amp-img></p>
+<p>Let’s install generator next:</p>
 
-<p>Any GET or POST call is routed to the real SharePoint tenant under specified user credentials, defined in the configuration of the proxy.</p>
+<pre><code class="language-bash">npm install -g generator-sppp  
+</code></pre>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAcrAAAAJGIwYzg2YTEzLTg5ZWUtNGZiNC1iMDY2LWE4MTMzNzQwNGU1MQ.png" alt width="795" height="396" layout="responsive"></amp-img></p>
+<blockquote>
+  <p>Note: SP Pull-n-Push is young, in case of issues or suggestions all the feedback is welcomed on <a href="https://github.com/koltyakov/generator-sppp/issues">GitHub</a>.</p>
+</blockquote>
 
-<p>Of course, such proxy is limited with REST API only. It can be a complicated task to 're-implement' JSOM, for instance. But as far we go, more and more REST significance we see in SharePoint infrastructure as a universal and language agnostic technology.</p>
+<p>On new version release Yeoman generators should be updated by running <code>yo</code> command in a console and selecting “Update your generators”, so you will be using fresh version while scaffolding your next assets project.</p>
 
-<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>
+<p>To scaffold a project you need to create (or better clone blank project from Git) and run <code>yo</code> command inside a project’s directory:</p>
+
+<pre><code class="language-bash">yo sppp [YourProjectName]  
+</code></pre>
+
+<p>The generator’s wizard is executed right away. The wizard asks for project related questions, where you can provide all of the parameters, SharePoint site url and credentials.</p>
+
+<p><amp-anim src="http://koltyakov.ru/images/generator-sppp-demo.gif" alt="Yo in action" width="739" height="571" layout="responsive"></amp-anim></p>
+
+<p>All of the parameters could be changed later on in the project.</p>
+
+<p>The wizard copies files and installs NPM and Bower component if needed.</p>
+
+<p>In current version of this generator there are two tasks:</p>
+
+<p>1. Downloading all the files from target folder in SharePoint to local project <code>./src</code> folder</p>
+
+<p>This task can be useful in some cases. When we need to use existing assets as a start point and too lazy to copy them manually.</p>
+
+<p>The second case is more advanced and consumes Git’s capability of detecting the changes. Imagine that some of the assets were changed and this change have been done outside the Git. That’s awful but happens. And we need to have a tool to run a task, wait a bit and see if it’s ok or if there are some potential issues.</p>
+
+<p>For downloading all files from SharePoint <a href="https://www.npmjs.com/package/sppull">sppull</a> task is there.</p>
+
+<pre><code class="language-bash">gulp sppull-all  
+</code></pre>
+
+<p>And, in a while, all the files from SharePoint target are delivered to a local directory for us.</p>
+
+<p>2. The second task is for more often usage. Actually, it should be running everytime we are changing assets in a local project and expecting the changes to be applied to SharePoint.</p>
+
+<pre><code class="language-bash">gulp watch-assets  
+</code></pre>
+
+<p>This task starts watching ./src folder and on any change uploads corresponding files straight to a destination. The task uses <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> module for Node.js integration with SharePoint.</p>
+
+<p>A project created with the use of sppp yeoman generator could be extended with any other NPM or Bower dependencies and it could be the first step in diving to the new modern way of dealing with SharePoint and transition to SPFx.</p>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../">ARVO Systems blog</a> © 2016</section>
+        <section class="copyright"><a href="../../../../../">ARVO Systems blog</a> © 2016</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>

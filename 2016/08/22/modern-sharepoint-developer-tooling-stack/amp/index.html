@@ -1,46 +1,47 @@
+
 <head>
     <meta charset="utf-8">
 
-    <title>SharePoint REST API proxy for local serve in Node.js</title>
+    <title>Modern SharePoint Developer tooling stack</title>
     <meta name="description" content="">
 
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="shortcut icon" href="../../../../../favicon.ico">
 
     <link rel="canonical" href="../index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
     <meta property="og:site_name" content="ARVO Systems blog">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta property="og:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta property="og:url" content="/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta property="og:image" content="/content/images/2016/09/RestProxyExample-1.png">
-    <meta property="article:published_time" content="2016-09-03T12:01:00.000Z">
-    <meta property="article:modified_time" content="2016-09-12T20:49:17.000Z">
+    <meta property="og:title" content="Modern SharePoint Developer tooling stack">
+    <meta property="og:description" content="Intro A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer">
+    <meta property="og:url" content="/2016/08/22/modern-sharepoint-developer-tooling-stack/">
+    <meta property="og:image" content="/content/images/2016/09/VSC.png">
+    <meta property="article:published_time" content="2016-08-22T11:13:00.000Z">
+    <meta property="article:modified_time" content="2016-09-12T20:29:59.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="VSC">
+    <meta property="article:tag" content="Gulp">
+    <meta property="article:tag" content="SPSave">
     <meta property="article:tag" content="Toolchain">
-    <meta property="article:tag" content="REST">
-    <meta property="article:tag" content="Express">
-    <meta property="article:tag" content="API">
-    <meta property="article:tag" content="sp-rest-proxy">
+    <meta property="article:tag" content="Git">
     
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta name="twitter:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta name="twitter:url" content="/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta name="twitter:image" content="/content/images/2016/09/RestProxyExample-1.png">
+    <meta name="twitter:title" content="Modern SharePoint Developer tooling stack">
+    <meta name="twitter:description" content="Intro A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer">
+    <meta name="twitter:url" content="/2016/08/22/modern-sharepoint-developer-tooling-stack/">
+    <meta name="twitter:image" content="/content/images/2016/09/VSC.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Andrew Koltyakov">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy">
+    <meta name="twitter:data2" content="SharePoint, Node.js, VSC, Gulp, SPSave, Toolchain, Git">
     <meta name="twitter:creator" content="@AndrewKoltyakov">
-    <meta property="og:image:width" content="1600">
-    <meta property="og:image:height" content="518">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="999">
     
     <script type="application/ld+json">
 {
@@ -73,18 +74,18 @@
         ],
         "description": "SharePoint Front-End Developer"
     },
-    "headline": "SharePoint REST API proxy for local serve in Node.js",
-    "url": "/sharepoint-rest-api-proxy-for-local-serve-in-node-js/",
-    "datePublished": "2016-09-03T12:01:00.000Z",
-    "dateModified": "2016-09-12T20:49:17.000Z",
+    "headline": "Modern SharePoint Developer tooling stack",
+    "url": "/2016/08/22/modern-sharepoint-developer-tooling-stack/",
+    "datePublished": "2016-08-22T11:13:00.000Z",
+    "dateModified": "2016-09-12T20:29:59.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "/content/images/2016/09/RestProxyExample-1.png",
-        "width": 1600,
-        "height": 518
+        "url": "/content/images/2016/09/VSC.png",
+        "width": 1920,
+        "height": 999
     },
-    "keywords": "SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy",
-    "description": "On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this &quot;dive&quot; was not so deep and actually looked more like SharePoint platform",
+    "keywords": "SharePoint, Node.js, VSC, Gulp, SPSave, Toolchain, Git",
+    "description": "Intro A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://localhost:2368"
@@ -93,7 +94,7 @@
     </script>
 
     <meta name="generator" content="Ghost 0.10">
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../../rss/index.html">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems blog" href="../../../../../rss/index.html">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
     <style amp-custom>
@@ -869,7 +870,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../">ARVO Systems blog</a>
+            <a href="../../../../../">ARVO Systems blog</a>
         </nav>
     </header>
 
@@ -877,49 +878,91 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">SharePoint REST API proxy for local serve in Node.js</h1>
+                <h1 class="post-title">Modern SharePoint Developer tooling stack</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../author/andrew/">Andrew Koltyakov</a></p>
-                    <time class="post-date" datetime="2016-09-03">2016-09-03</time>
+                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
+                    <time class="post-date" datetime="2016-08-22">2016-08-22</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="/content/images/2016/09/RestProxyExample-1.png" width="600" height="400" layout="responsive"></amp-img>
+                <amp-img src="/content/images/2016/09/VSC.png" width="600" height="400" layout="responsive"></amp-img>
             </figure>
             <section class="post-content">
 
-                <p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
+                <h2 id="intro">Intro</h2>
 
-<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
+<p>A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer is likely to be “Very often”.</p>
 
-<p>One of the coolest thing about SPFx is a capability to run <code>gulp serve</code>, after which you'll find yourself in local workbench ready to add client web parts on a modern page emulator and test them in action.</p>
+<p>Soon you might probably forget about using legacy SharePoint Designer and Visual Studio for most cases. Of course, there will be always a place for Visual Studio, especially for code base provisioning and provided-hosted .Net stuff (no one has invented something better than <a href="https://github.com/SubPointSolutions/spmeta2">SPMeta2</a>, for example), but I can’t even recall when did I need to open SPD or VS for my daily development routine.</p>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAg0AAAAJDExYmQ1YjkzLWQ3YTItNGNjZC1iNzcxLWI4Mjg2OTUxNTQzMA.png" alt width="717" height="517" layout="responsive"></amp-img></p>
+<p>At the same time, due to my job, I have to write tons of code for SharePoint almost each day. And I prefer to avoid manual routines and automate my work as much as possible. The ideal scenario is “when I press Ctrl+S or Ctrl+B in my editor of choice I want to see changes immediately in a Dev environment”, you could add to this “immediate static code analysis and transpiling” and also “Git-connected-first approach”.</p>
 
-<p>One of the downsides of such local testing and debug is that you should deal with a mock generated artificial data. Maybe it only for now, maybe I understood incorrectly. But I consider that the real data is vital in many cases and real SharePoint API availability during such runtime can save hours of work and resolve tons of hassles.</p>
+<p>Yeah, I’m talking about front end part mostly. But not all the way, 20-30% is still something that I have to deploy on a server side, but this server side is actually a client side for SharePoint itself. So why don’t use the same Development tools stack for both too? Luckily it’s possible.</p>
 
-<p>I'm more than sure that later on real SharePoint API and data will be available locally within the workbench. This availability could be limited at least with REST API.</p>
+<p>Now we’re switching to tooling of my choice.</p>
 
-<p>Why I'm so sure? Because it took me a single Friday night to create a REST API proxy with Node.js and Express, which allows running an application locally or on Node.js hosted server, which is actually the same, in other words, is not in the context of SharePoint page.</p>
+<h2 id="stacktools">Stack &amp; tools</h2>
 
-<p>In such local web application page, without any deployment to SharePoint, one can execute GET or POST ajax call, let's say <code>/_api/web/lists</code>, which responses with the result as if an ajax call was on ShatePoint site page <code>~site/_api/web/lists</code>.</p>
+<h3 id="languages">Languages</h3>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAlYAAAAJGRiNjU3YjNjLWY0NzYtNDQxNS04ZTYzLWQ5NGQwNzBlOWExOA.png" alt width="795" height="678" layout="responsive"></amp-img></p>
+<p>As most of you have already understood, I’m going to mention JavaScript here. It’s not only ES5. Sometimes it can be ES2015 and Babel or TypeScript as a nice tool to avoid tons of issues, enhance your code and more.</p>
 
-<p>Any GET or POST call is routed to the real SharePoint tenant under specified user credentials, defined in the configuration of the proxy.</p>
+<p>I’m not even mentioning frameworks, it’s out of this topic. Just will say, yes you should definitely take advantage of frameworks that are your friends.</p>
 
-<p><amp-img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAcrAAAAJGIwYzg2YTEzLTg5ZWUtNGZiNC1iMDY2LWE4MTMzNzQwNGU1MQ.png" alt width="795" height="396" layout="responsive"></amp-img></p>
+<p>If there is a lot of styling in the project it reasonable to take advantages of stylesheet meta languages, I prefer Sass with Scss syntax.</p>
 
-<p>Of course, such proxy is limited with REST API only. It can be a complicated task to 're-implement' JSOM, for instance. But as far we go, more and more REST significance we see in SharePoint infrastructure as a universal and language agnostic technology.</p>
+<h2 id="sourcecontrol">Source control</h2>
 
-<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>
+<p>I am confident that you all agree with me on this, Git is the best. I used TFVS before and will never go back.</p>
+
+<h3 id="editors">Editors</h3>
+
+<p>When code editors are discussed everyone has his or her own preference. I will strongly recommend taking a look at Visual Studio Code or VSC for short. It is lightning fast, has OOTB Git integration, really cool debugger (for a server-side JS) and with most of the plugins support. Alternatively, ATOM is great, but I use VSC for more than a year in my day to day work. It is awesome and its awesomeness is growing with each release. VSC team evolves their product nicely, I can’t say about some other MS products. ;)</p>
+
+<h3 id="staticcodeanalysis">Static code analysis</h3>
+
+<p>This one is must have for any project and team and… well… any coder in almost any situation. Yeah, really. I can’t bear without ESLint when writing JS (even with a compiler inside the brain, static analysis is the thing!) and TSLint in a case of TypeScript. Also, a good thing is to deploy linting tools globally to all team members. Just remember, it saves time and nervous.</p>
+
+<p>It’s nice to have a linting tool as a plugin in an editor and also as a part of build process step.</p>
+
+<h3 id="automatedtasks">Automated tasks</h3>
+
+<p>I can’t see myself doing any project <code>larger to tiny</code> without the automated tasks in the background and on-demand. Gulp is a great choice for almost any case. Watching, linting, combining, uglifying, automated tests, publishing - all the stuff. If you are not familiar with Gulp and want to minimize your manual work I would recommend taking a look at it.</p>
+
+<p>Some might prefer Webpack or Grunt. No problem they are also the great tools. My choice is Gulp as it is <code>code over config</code> and it has modules to work with SharePoint.</p>
+
+<p>To achieve instant publishing, I use gulp watch and <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> module, which allows delivering local project files right to the SharePoint assets library with publish state and feeding the metadata, when needed.</p>
+
+<h3 id="testing">Testing</h3>
+
+<p>I’m not very good in testing but came to the understanding that automated testing is necessary, especially on the long-running projects. Right now I’m trying to implement unit testing on Mocha and the UI testing with use of Nightwatch (which uses Selenium drivers and written in JS) on some projects. Testing is a separate story as it’s not about tooling. One thing, if you have tests they definitely should be a part of your build process as a tool saving your time tremendously.</p>
+
+<h3 id="packagemanagers">Package managers</h3>
+
+<p>NPM for Node.js and Bower for browser libraries. I do not know what to add, they are straightforward and easy. Just use it! And never ever spend your time to go to vendor site to find, download and place a library to your project. Seriously, one line in a console and almost any library is delivered to your project.</p>
+
+<p>Cross library references are also viable here. Especially when you have your private commercial super-duper library inside your private repo. Yet, it’s easy to reference to a library within the package using <code>git+[your_private_git_repo_url]#version</code>.</p>
+
+<h3 id="nodejs">Node.js</h3>
+
+<p>Oh, Node.js, it is outstanding and is a baseline for the tasks automation, package managers, most of the plugins and it’s opening the eyes to the fact that JS lives not only in the browser but also on the server or even a desktop application. Did you know that VSC is made using JS? But this is a completely different story.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So we came to the end of the article.</p>
+
+<p>Tools are very important. Sometimes how we do something could be at the first place over what we do. Right tools and techniques save our time, help to resolve potential issues.</p>
+
+<p>In the world of SharePoint is also possible to use all that nice and shiny tools which are used in modern JavaScript world. As SharePoint is very close saying that JS is a number one technology for its customization. And we are the part of it.</p>
+
+<p>Let’s combine: Git &lt;---&gt; VSC + Node.js + Gulp --&gt; SharePoint = happy coding!</p>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../">ARVO Systems blog</a> © 2016</section>
+        <section class="copyright"><a href="../../../../../">ARVO Systems blog</a> © 2016</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
