@@ -1,4 +1,51 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Tue, 13 Sep 2016 09:50:12 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a]]&gt;</description><link>/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/<guid ispermalink="false">1f49b68e-5af0-433f-8028-7096a9ff76bc</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 09 Sep 2016 12:04:00 GMT</pubdate><content url="/content/images/2016/09/PnP-JS-Core_banner-2.png" medium="image"></content><encoded><p>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a couple of times putting PnP-JS-Core aside from learning.</p>
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Fri, 04 Nov 2016 23:51:49 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
+
+<p>More and more features from the funky front-end development are here at our disposal. Yet, there was</p>]]&gt;</description><link>/2016/11/05/sharepoint-client-side-development-with-live-reload/<guid ispermalink="false">e3276611-dc06-42b9-9a01-5e695e111cd6</guid><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 04 Nov 2016 23:44:19 GMT</pubdate><content url="/content/images/2016/11/SharePointLiveReload.png" medium="image"></content><encoded><p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
+
+<p>More and more features from the funky front-end development are here at our disposal. Yet, there was one which has been missed and desired by some engineers. You might have heard about BrowserSync, have you? It is a module which can be injected into the page(s) and watches for changes for instantaneous page reload or scripts reload. A developer saves a file in the editor and sees the result applied right away.</p>
+
+<p>As we know, SharePoint has its nuances, which prevents BrowserSync from efficient working. Luckily there is an alternative now.</p>
+
+<p>Recently I've wrapped up the technique we have been using in our team for last months into the NPM module - <a href="https://github.com/koltyakov/sp-live-reload">sp-live-reload</a>.</p>
+
+<p>With <code>sp-live-reload</code> it's possible to save a local client side file, such as javascript, css, html (source for content editor web part) with immediate change in open browsers tabs without a necessity for manual page refresh:</p>
+
+<p><img src="http://koltyakov.ru/images/LiveReloadSimpleDemo.gif" alt="SharePoint client side development with Live Reload"></p>
+
+<p>To make it work a developer can install the module with use of NPM command:</p>
+
+<pre><code class="language-bash">npm install sp-live-reload --save-dev  
+</code></pre>
+
+<p>And then use the live reload in Gulp tasks as shown in examples on the project page.</p>
+
+<p>We use it in the combination with SPSave, the module which makes files upload and publishing to SharePoint transparent.</p>
+
+<p>The most controversial moment is how to deliver a live reload client script to SharePoint. Some possible issues are connected with that. As the environment can be shared between different persons.</p>
+
+<p>There are following assumptions taken in mind: <br>
+- Live reload is actual in a development environment (less on a test, and almost never on the production)
+- There are limited developers on a specific development environment to conflict with each other
+- There is a variety of different browsers which should be supported by the reloading module</p>
+
+<p>With this being said, let me describe the approach:</p>
+
+<ul>
+<li>There are two options for delivering live reload client script to SharePoint:
+<ul><li>Manual, when watch task is running it provides a URL to the script</li>
+<li>Automated, a special gulp task exists for provisioning user custom action with script source </li></ul></li>
+<li>Live reload script references for a localhost running server to receive information about updates, a developer who aren't running live reload task and doing something in the console just see one 404 error for a page load (this bothers me a bit, but it's possible to live with that)</li>
+<li>Custom action can be easily retracted with another gulp task after the development session is finished to avoid any hassles</li>
+<li>When two or more developers are "live watching" on the same site collection only one custom action is created, so all developers should share the same settings for the protocol and port, use default if possible</li>
+</ul>
+
+<p>A few words about the architectural implementation. Client and watch server use <a href="http://socket.io/">Socket.io</a> as a transport layer. All the browsers which are supported with Socket.io and SharePoint are automatically supported for live reload. <br>
+The live reload server is running inside some watching task (gulp or other), on change and deliver events the server emits the message with the relative path for the resource in SharePoint which has been updated. <br>
+The live reload client receives the messages from the server and checks if any resource is on the page. The client takes in mind SharePoint related features, like CEWP's source content. Also, there will be a support for a masterpage update and page layout update detection. As well as a community voice, as the module is extendable and open sourced.</p>
+
+<p>Live reload works with On-Premises SharePoint installations (2016 and 2013) and SharePoint Online. Yet with SharePoint Online or any running over HTTPS some additional afford is needed to generate SSL certificate and add import it to trusted. But it worth it!</p>
+
+<p><code>sp-live-reload</code> also is integrated into <a href="https://github.com/koltyakov/generator-sppp">generator-sppp</a> so you can use Yeoman generator to check is in action.</p>]]&gt;</encoded></item><item><title></title><description>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a]]&gt;</description><link>/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/<guid ispermalink="false">1f49b68e-5af0-433f-8028-7096a9ff76bc</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 09 Sep 2016 12:04:00 GMT</pubdate><content url="/content/images/2016/09/PnP-JS-Core_banner-2.png" medium="image"></content><encoded><p>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a couple of times putting PnP-JS-Core aside from learning.</p>
 
 <p>But there was an opportunity this week to dive into the library and estimate expediency of its usage on a next project. The first fresh glance at it created a new and rather a positive attitude. First of all, it is made with the toolchain I love, and there are so many familiar faces in its contributors group, I didn’t even know to be related to the project. That was a good sign so I started.</p>
 

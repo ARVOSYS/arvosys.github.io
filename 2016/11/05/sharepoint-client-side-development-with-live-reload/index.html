@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>SharePoint REST API proxy for local serve in Node.js</title>
+    <title>SharePoint client side development with Live Reload</title>
     <meta name="description" content="">
 
     <meta name="HandheldFriendly" content="True">
@@ -22,33 +22,31 @@
     
     <meta property="og:site_name" content="ARVO Systems Blog">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta property="og:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta property="og:url" content="/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta property="og:image" content="/content/images/2016/09/RestProxyExample-1.png">
-    <meta property="article:published_time" content="2016-09-03T12:01:00.000Z">
-    <meta property="article:modified_time" content="2016-09-12T20:49:17.000Z">
+    <meta property="og:title" content="SharePoint client side development with Live Reload">
+    <meta property="og:description" content="We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks. More and more features from the funky front-end development are here at our disposal. Yet, there was">
+    <meta property="og:url" content="/2016/11/05/sharepoint-client-side-development-with-live-reload/">
+    <meta property="og:image" content="/content/images/2016/11/SharePointLiveReload.png">
+    <meta property="article:published_time" content="2016-11-04T23:44:19.000Z">
+    <meta property="article:modified_time" content="2016-11-04T23:44:19.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="Gulp">
     <meta property="article:tag" content="Toolchain">
-    <meta property="article:tag" content="REST">
-    <meta property="article:tag" content="Express">
-    <meta property="article:tag" content="API">
-    <meta property="article:tag" content="sp-rest-proxy">
+    <meta property="article:tag" content="Live Reload">
     
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SharePoint REST API proxy for local serve in Node.js">
-    <meta name="twitter:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
-    <meta name="twitter:url" content="/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
-    <meta name="twitter:image" content="/content/images/2016/09/RestProxyExample-1.png">
+    <meta name="twitter:title" content="SharePoint client side development with Live Reload">
+    <meta name="twitter:description" content="We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks. More and more features from the funky front-end development are here at our disposal. Yet, there was">
+    <meta name="twitter:url" content="/2016/11/05/sharepoint-client-side-development-with-live-reload/">
+    <meta name="twitter:image" content="/content/images/2016/11/SharePointLiveReload.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Andrew Koltyakov">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy">
+    <meta name="twitter:data2" content="SharePoint, Node.js, Gulp, Toolchain, Live Reload">
     <meta name="twitter:creator" content="@AndrewKoltyakov">
-    <meta property="og:image:width" content="1600">
-    <meta property="og:image:height" content="518">
+    <meta property="og:image:width" content="1338">
+    <meta property="og:image:height" content="585">
     
     <script type="application/ld+json">
 {
@@ -81,18 +79,18 @@
         ],
         "description": "SharePoint Front-End Developer"
     },
-    "headline": "SharePoint REST API proxy for local serve in Node.js",
-    "url": "/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/",
-    "datePublished": "2016-09-03T12:01:00.000Z",
-    "dateModified": "2016-09-12T20:49:17.000Z",
+    "headline": "SharePoint client side development with Live Reload",
+    "url": "/2016/11/05/sharepoint-client-side-development-with-live-reload/",
+    "datePublished": "2016-11-04T23:44:19.000Z",
+    "dateModified": "2016-11-04T23:44:19.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "/content/images/2016/09/RestProxyExample-1.png",
-        "width": 1600,
-        "height": 518
+        "url": "/content/images/2016/11/SharePointLiveReload.png",
+        "width": 1338,
+        "height": 585
     },
-    "keywords": "SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy",
-    "description": "On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this &quot;dive&quot; was not so deep and actually looked more like SharePoint platform",
+    "keywords": "SharePoint, Node.js, Gulp, Toolchain, Live Reload",
+    "description": "We&#x27;re getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code&#x27;ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks. More and more features from the funky front-end development are here at our disposal. Yet, there was",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://external.arvosys.com:2368"
@@ -103,7 +101,7 @@
     <meta name="generator" content="Ghost 0.10">
     <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html">
 </head>
-<body class="post-template tag-sharepoint tag-node-js tag-toolchain tag-rest tag-express tag-api tag-sp-rest-proxy nav-closed">
+<body class="post-template tag-sharepoint tag-node-js tag-gulp tag-toolchain tag-live-reload nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -129,7 +127,7 @@
             
 
 
-<header class="main-header post-head " style="background-image: url(../../../../content/images/2016/09/RestProxyExample-1.png)">
+<header class="main-header post-head " style="background-image: url(../../../../content/images/2016/11/SharePointLiveReload.png)">
     <nav class="main-nav overlay clearfix">
         <a class="blog-logo" href="../../../../"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog"></a>
             <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
@@ -137,41 +135,62 @@
 </header>
 
 <main class="content" role="main">
-    <article class="post tag-sharepoint tag-node-js tag-toolchain tag-rest tag-express tag-api tag-sp-rest-proxy">
+    <article class="post tag-sharepoint tag-node-js tag-gulp tag-toolchain tag-live-reload">
 
         <header class="post-header">
-            <h1 class="post-title">SharePoint REST API proxy for local serve in Node.js</h1>
+            <h1 class="post-title">SharePoint client side development with Live Reload</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2016-09-03">03 September 2016</time>  on <a href="../../../../tag/sharepoint/">SharePoint</a>, <a href="../../../../tag/node-js/">Node.js</a>, <a href="../../../../tag/toolchain/">Toolchain</a>, <a href="../../../../tag/rest/">REST</a>, <a href="../../../../tag/express/">Express</a>, <a href="../../../../tag/api/">API</a>, <a href="../../../../tag/sp-rest-proxy/">sp-rest-proxy</a>
+                <time class="post-date" datetime="2016-11-05">05 November 2016</time>  on <a href="../../../../tag/sharepoint/">SharePoint</a>, <a href="../../../../tag/node-js/">Node.js</a>, <a href="../../../../tag/gulp/">Gulp</a>, <a href="../../../../tag/toolchain/">Toolchain</a>, <a href="../../../../tag/live-reload/">Live Reload</a>
             </section>
         </header>
 
         <section class="post-content">
-            <p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
+            <p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
 
-<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
+<p>More and more features from the funky front-end development are here at our disposal. Yet, there was one which has been missed and desired by some engineers. You might have heard about BrowserSync, have you? It is a module which can be injected into the page(s) and watches for changes for instantaneous page reload or scripts reload. A developer saves a file in the editor and sees the result applied right away.</p>
 
-<p>One of the coolest thing about SPFx is a capability to run <code>gulp serve</code>, after which you'll find yourself in local workbench ready to add client web parts on a modern page emulator and test them in action.</p>
+<p>As we know, SharePoint has its nuances, which prevents BrowserSync from efficient working. Luckily there is an alternative now.</p>
 
-<p><img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAg0AAAAJDExYmQ1YjkzLWQ3YTItNGNjZC1iNzcxLWI4Mjg2OTUxNTQzMA.png" alt=""></p>
+<p>Recently I've wrapped up the technique we have been using in our team for last months into the NPM module - <a href="https://github.com/koltyakov/sp-live-reload">sp-live-reload</a>.</p>
 
-<p>One of the downsides of such local testing and debug is that you should deal with a mock generated artificial data. Maybe it only for now, maybe I understood incorrectly. But I consider that the real data is vital in many cases and real SharePoint API availability during such runtime can save hours of work and resolve tons of hassles.</p>
+<p>With <code>sp-live-reload</code> it's possible to save a local client side file, such as javascript, css, html (source for content editor web part) with immediate change in open browsers tabs without a necessity for manual page refresh:</p>
 
-<p>I'm more than sure that later on real SharePoint API and data will be available locally within the workbench. This availability could be limited at least with REST API.</p>
+<p><img src="http://koltyakov.ru/images/LiveReloadSimpleDemo.gif" alt="SP Live Reload"></p>
 
-<p>Why I'm so sure? Because it took me a single Friday night to create a REST API proxy with Node.js and Express, which allows running an application locally or on Node.js hosted server, which is actually the same, in other words, is not in the context of SharePoint page.</p>
+<p>To make it work a developer can install the module with use of NPM command:</p>
 
-<p>In such local web application page, without any deployment to SharePoint, one can execute GET or POST ajax call, let's say <code>/_api/web/lists</code>, which responses with the result as if an ajax call was on ShatePoint site page <code>~site/_api/web/lists</code>.</p>
+<pre><code class="language-bash">npm install sp-live-reload --save-dev  
+</code></pre>
 
-<p><img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAlYAAAAJGRiNjU3YjNjLWY0NzYtNDQxNS04ZTYzLWQ5NGQwNzBlOWExOA.png" alt=""></p>
+<p>And then use the live reload in Gulp tasks as shown in examples on the project page.</p>
 
-<p>Any GET or POST call is routed to the real SharePoint tenant under specified user credentials, defined in the configuration of the proxy.</p>
+<p>We use it in the combination with SPSave, the module which makes files upload and publishing to SharePoint transparent.</p>
 
-<p><img src="https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAcrAAAAJGIwYzg2YTEzLTg5ZWUtNGZiNC1iMDY2LWE4MTMzNzQwNGU1MQ.png" alt=""></p>
+<p>The most controversial moment is how to deliver a live reload client script to SharePoint. Some possible issues are connected with that. As the environment can be shared between different persons.</p>
 
-<p>Of course, such proxy is limited with REST API only. It can be a complicated task to 're-implement' JSOM, for instance. But as far we go, more and more REST significance we see in SharePoint infrastructure as a universal and language agnostic technology.</p>
+<p>There are following assumptions taken in mind: <br>
+- Live reload is actual in a development environment (less on a test, and almost never on the production)
+- There are limited developers on a specific development environment to conflict with each other
+- There is a variety of different browsers which should be supported by the reloading module</p>
 
-<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>
+<p>With this being said, let me describe the approach:</p>
+
+<ul>
+<li>There are two options for delivering live reload client script to SharePoint:
+<ul><li>Manual, when watch task is running it provides a URL to the script</li>
+<li>Automated, a special gulp task exists for provisioning user custom action with script source </li></ul></li>
+<li>Live reload script references for a localhost running server to receive information about updates, a developer who aren't running live reload task and doing something in the console just see one 404 error for a page load (this bothers me a bit, but it's possible to live with that)</li>
+<li>Custom action can be easily retracted with another gulp task after the development session is finished to avoid any hassles</li>
+<li>When two or more developers are "live watching" on the same site collection only one custom action is created, so all developers should share the same settings for the protocol and port, use default if possible</li>
+</ul>
+
+<p>A few words about the architectural implementation. Client and watch server use <a href="http://socket.io/">Socket.io</a> as a transport layer. All the browsers which are supported with Socket.io and SharePoint are automatically supported for live reload. <br>
+The live reload server is running inside some watching task (gulp or other), on change and deliver events the server emits the message with the relative path for the resource in SharePoint which has been updated. <br>
+The live reload client receives the messages from the server and checks if any resource is on the page. The client takes in mind SharePoint related features, like CEWP's source content. Also, there will be a support for a masterpage update and page layout update detection. As well as a community voice, as the module is extendable and open sourced.</p>
+
+<p>Live reload works with On-Premises SharePoint installations (2016 and 2013) and SharePoint Online. Yet with SharePoint Online or any running over HTTPS some additional afford is needed to generate SSL certificate and add import it to trusted. But it worth it!</p>
+
+<p><code>sp-live-reload</code> also is integrated into <a href="https://github.com/koltyakov/generator-sppp">generator-sppp</a> so you can use Yeoman generator to check is in action.</p>
         </section>
 
         <footer class="post-footer">
@@ -194,13 +213,13 @@
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=SharePoint%20REST%20API%20proxy%20for%20local%20serve%20in%20Node.js&amp;url=/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=SharePoint%20client%20side%20development%20with%20Live%20Reload&amp;url=/2016/11/05/sharepoint-client-side-development-with-live-reload/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2016/11/05/sharepoint-client-side-development-with-live-reload/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2016/11/05/sharepoint-client-side-development-with-live-reload/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -225,16 +244,10 @@
 </main>
 
 <aside class="read-next">
-    <a class="read-next-story " style="background-image: url(../../../../content/images/2016/09/PnP-JS-Core_banner-2.png)" href="../../09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">
+    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2016/09/PnP-JS-Core_banner-2.png)" href="../../../09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">
         <section class="post">
             <h2>SharePoint PnP JavaScript Core Components – deserve more attention</h2>
             <p>I've been eschewed PnP-JS-Core for a long time and preferred to use JSOM or plain REST calls with the…</p>
-        </section>
-    </a>
-    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2016/09/YoSppp-1.png)" href="../../../08/30/front-end-sharepoint-projects-synced-and-safe/">
-        <section class="post">
-            <h2>Front-end SharePoint projects – synced and safe!</h2>
-            <p>This article is a continuation of my previous one (Preparing development machine for client-side SharePoint projects). I had stopped…</p>
         </section>
     </a>
 </aside>
