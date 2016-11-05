@@ -1,4 +1,4 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Sat, 05 Nov 2016 00:01:02 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Sat, 05 Nov 2016 00:07:37 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
 
 <p>More and more features from the funky front-end development are here at our disposal. Yet, there was</p>]]&gt;</description><link>/2016/11/05/sharepoint-client-side-development-with-live-reload/<guid ispermalink="false">e3276611-dc06-42b9-9a01-5e695e111cd6</guid><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 04 Nov 2016 23:44:19 GMT</pubdate><content url="/content/images/2016/11/SharePointLiveReload.png" medium="image"></content><encoded><p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
 
@@ -23,10 +23,13 @@
 
 <p>The most controversial moment is how to deliver a live reload client script to SharePoint. Some possible issues are connected with that. As the environment can be shared between different persons.</p>
 
-<p>There are following assumptions taken in mind: <br>
-- Live reload is actual in a development environment (less on a test, and almost never on the production)
-- There are limited developers on a specific development environment to conflict with each other
-- There is a variety of different browsers which should be supported by the reloading module</p>
+<p>There are following assumptions taken in mind:</p>
+
+<ul>
+<li>Live reload is actual in a development environment (less on a test, and almost never on the production)</li>
+<li>There are limited developers on a specific development environment to conflict with each other</li>
+<li>There is a variety of different browsers which should be supported by the reloading module</li>
+</ul>
 
 <p>With this being said, let me describe the approach:</p>
 
