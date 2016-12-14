@@ -9,11 +9,11 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=82d17a0b14">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=b4d0c408d5">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=82d17a0b14">
-    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=82d17a0b14">
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=82d17a0b14">
+    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=b4d0c408d5">
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=b4d0c408d5">
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=b4d0c408d5">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
 
     <link rel="canonical" href="index.html">
@@ -27,7 +27,7 @@
     <meta property="og:url" content="/2016/11/05/sharepoint-client-side-development-with-live-reload/">
     <meta property="og:image" content="/content/images/2016/11/SharePointLiveReload.png">
     <meta property="article:published_time" content="2016-11-04T23:44:19.000Z">
-    <meta property="article:modified_time" content="2016-11-05T00:07:29.000Z">
+    <meta property="article:modified_time" content="2016-12-14T10:49:22.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="Node.js">
     <meta property="article:tag" content="Gulp">
@@ -82,7 +82,7 @@
     "headline": "SharePoint client side development with Live Reload",
     "url": "/2016/11/05/sharepoint-client-side-development-with-live-reload/",
     "datePublished": "2016-11-04T23:44:19.000Z",
-    "dateModified": "2016-11-05T00:07:29.000Z",
+    "dateModified": "2016-12-14T10:49:22.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2016/11/SharePointLiveReload.png",
@@ -164,7 +164,34 @@
 
 <p>And then use the live reload in Gulp tasks as shown in examples on the project page.</p>
 
-<p>We use it in the combination with SPSave, the module which makes files upload and publishing to SharePoint transparent.</p>
+<p>We use it in the combination with <a href="http://github.com/s-KaiNet/gulp-spsave">SPSave</a>, the module which makes files upload and publishing to SharePoint transparent. Any <a href="http://github.com/koltyakov/sp-live-reload#watch-with-live-reload-gulp-spsync">alternatives</a> will work as well if emitted to the client path is correct.</p>
+
+<pre><code class="language-javascript">var gulp = require('gulp');  
+var spsave = require("gulp-spsave");  
+var watch = require('gulp-watch');  
+var through = require('through2');  
+var LiveReload = require('sp-live-reload');
+
+var config = require('./gulp.config');
+
+gulp.task("watch-assets", function () {  
+    console.log("Watch with reload is initiated.");
+    console.log("Make sure that monitoring script is provisioned to SharePoint.");
+    var liveReload = new LiveReload(config);
+    liveReload.runServer();
+    return watch(config.watchAssets, function (event) {
+        console.log(event.path);
+        gulp.src(event.path, {
+            base: config.watchBase
+        }).pipe(spsave(config.spsaveCoreOptions, config.spsaveCreds))
+        .pipe(through.obj(function (chunk, enc, cb) {
+            var chunkPath = chunk.path;
+            liveReload.emitUpdatedPath(chunkPath);
+            cb(null, chunk);
+        }));
+    });
+});
+</code></pre>
 
 <p>The most controversial moment is how to deliver a live reload client script to SharePoint. Some possible issues are connected with that. As the environment can be shared between different persons.</p>
 
@@ -264,21 +291,21 @@ The live reload client receives the messages from the server and checks if any r
         <div class="container">
             <div class="brands">
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=82d17a0b14" style="display: none;">
-                <img class="fl" src="/assets/images/o365_nm_ft.png?v=82d17a0b14">
+                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=b4d0c408d5" style="display: none;">
+                <img class="fl" src="/assets/images/o365_nm_ft.png?v=b4d0c408d5">
                 </div>
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=82d17a0b14" style="display: none;">
-                <img class="fl" src="/assets/images/sp_nm_ft.png?v=82d17a0b14">
+                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=b4d0c408d5" style="display: none;">
+                <img class="fl" src="/assets/images/sp_nm_ft.png?v=b4d0c408d5">
                 </div>
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=82d17a0b14" style="display: none;">
-                <img class="fl" src="/assets/images/msp_nm_ft.png?v=82d17a0b14">
+                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=b4d0c408d5" style="display: none;">
+                <img class="fl" src="/assets/images/msp_nm_ft.png?v=b4d0c408d5">
                 </div>		
             </div>
             <div class="copyright">
                 <div class="padding10 footer-element">
-                <img src="/assets/images/arvo_nm_ft.png?v=82d17a0b14">
+                <img src="/assets/images/arvo_nm_ft.png?v=b4d0c408d5">
                 </div>    
                 <div class="padding10 footer-element copy-text">© 2016<br>
                 <small>All rights reserved</small>
@@ -289,9 +316,9 @@ The live reload client receives the messages from the server and checks if any r
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     
-    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=82d17a0b14"></script>
-    <script type="text/javascript" src="/assets/js/index.js?v=82d17a0b14"></script>
-    <script type="text/javascript" src="/assets/js/prism.js?v=82d17a0b14"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=b4d0c408d5"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=b4d0c408d5"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=b4d0c408d5"></script>
 
     <!-- Piwik -->
     <script type="text/javascript">

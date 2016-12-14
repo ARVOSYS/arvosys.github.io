@@ -1,4 +1,4 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Sat, 05 Nov 2016 00:07:37 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Wed, 14 Dec 2016 10:50:06 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
 
 <p>More and more features from the funky front-end development are here at our disposal. Yet, there was</p>]]&gt;</description><link>/2016/11/05/sharepoint-client-side-development-with-live-reload/<guid ispermalink="false">e3276611-dc06-42b9-9a01-5e695e111cd6</guid><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 04 Nov 2016 23:44:19 GMT</pubdate><content url="/content/images/2016/11/SharePointLiveReload.png" medium="image"></content><encoded><p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
 
@@ -19,7 +19,34 @@
 
 <p>And then use the live reload in Gulp tasks as shown in examples on the project page.</p>
 
-<p>We use it in the combination with SPSave, the module which makes files upload and publishing to SharePoint transparent.</p>
+<p>We use it in the combination with <a href="http://github.com/s-KaiNet/gulp-spsave">SPSave</a>, the module which makes files upload and publishing to SharePoint transparent. Any <a href="http://github.com/koltyakov/sp-live-reload#watch-with-live-reload-gulp-spsync">alternatives</a> will work as well if emitted to the client path is correct.</p>
+
+<pre><code class="language-javascript">var gulp = require('gulp');  
+var spsave = require("gulp-spsave");  
+var watch = require('gulp-watch');  
+var through = require('through2');  
+var LiveReload = require('sp-live-reload');
+
+var config = require('./gulp.config');
+
+gulp.task("watch-assets", function () {  
+    console.log("Watch with reload is initiated.");
+    console.log("Make sure that monitoring script is provisioned to SharePoint.");
+    var liveReload = new LiveReload(config);
+    liveReload.runServer();
+    return watch(config.watchAssets, function (event) {
+        console.log(event.path);
+        gulp.src(event.path, {
+            base: config.watchBase
+        }).pipe(spsave(config.spsaveCoreOptions, config.spsaveCreds))
+        .pipe(through.obj(function (chunk, enc, cb) {
+            var chunkPath = chunk.path;
+            liveReload.emitUpdatedPath(chunkPath);
+            cb(null, chunk);
+        }));
+    });
+});
+</code></pre>
 
 <p>The most controversial moment is how to deliver a live reload client script to SharePoint. Some possible issues are connected with that. As the environment can be shared between different persons.</p>
 
