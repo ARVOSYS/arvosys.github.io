@@ -1,4 +1,149 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Fri, 16 Dec 2016 08:37:31 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Wed, 15 Feb 2017 15:23:41 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a]]&gt;</description><link>/2017/02/15/working-with-sharepoint-mmd-in-node-js/<guid ispermalink="false">648aa6f7-ebd5-4810-8100-a9f35e6a1ee4</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Wed, 15 Feb 2017 15:15:54 GMT</pubdate><content url="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" medium="image"></content><encoded><p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM probably will be the most obvious answer. But what if you're limited with the choice of used language or a runtime environment and .Net is not an option?</p>
+
+<p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to have a basic layer of functionality to deal with Managed Metadata (Taxonomy), such as:</p>
+
+<ul>
+<li>Get child terms in a term set</li>
+<li>Get child terms in a parent term</li>
+<li>Get a specific term</li>
+<li>Add new term</li>
+<li>Update a term</li>
+<li>Deprecate a term</li>
+<li>Get all terms (for relatively small dictionaries)</li>
+<li>...</li>
+</ul>
+
+<p>The easiest solution for some basic methods will be SOAP services. Yes, SOAP services are deprecated in SharePoint and they smell like mammoth fossils. But still there and working.</p>
+
+<p>There is a SOAP service to work with MMD <code>/_vti_bin/TaxonomyClientService.asmx</code>. Let's take a look at it. The service represents the following methods:</p>
+
+<ul>
+<li>AddTerms</li>
+<li>GetChildTermsInTerm</li>
+<li>GetChildTermsInTermSet</li>
+<li>GetKeywordTermsByGuids</li>
+<li>GetTermSets</li>
+<li>GetTermsByLabel</li>
+</ul>
+
+<p>To consume these in Node.js you can use almost any http request module with encapsulation of auth cookie to the request headers. Likely all these authentication and even the libraries, specific for SharePoint requests, are created and here for our disposal, abstracting scary moments from away. I'm describing <a href="https://github.com/s-KaiNet/sp-request">sp-request</a> with <a href="https://github.com/s-KaiNet/node-sp-auth">node-sp-auth</a>.</p>
+
+<p>One can easily talk to SharePoint SOAP service with use of <code>sp-request</code> like this:</p>
+
+<pre><code class="language-javascript">const baseUrl = 'https://contoso.sharepoint.com/sites/site';  
+let authObject = { ... }; // node-sp-auth authentication format  
+let request = require('sp-request').create(authObject);  
+let headers = {};
+
+let soapBody = `  
+   ... // XML SOAP body for a specific method
+`;
+
+headers['Accept'] = 'application/xml, text/xml, */*; q=0.01';  
+headers['Content-Type'] = 'text/xml;charset=\"UTF-8\"';  
+headers['X-Requested-With'] = 'XMLHttpRequest';  
+headers['Content-Length'] = soapBody.length;
+
+request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {  
+  headers: headers,
+  body: soapBody,
+  json: false
+})
+  .then(response =&gt; {
+    // Proceed the responce object
+  })
+  .catch(err =&gt; console.log(err));
+</code></pre>
+
+<p>Figuring out with SOAP body for some methods can sometimes be tricky as SOAP operations descriptions miss some important parts, but any blog posts related to SP SOAP services also are relevant for Node.js use cases.</p>
+
+<p>I wrapped some methods in an open source library <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a>. It's not for production purposes, yet can be a start point or example how to consume the methods.</p>
+
+<p>Here we're standing in front another wall, those SOAP interfaces are sometimes featureless and offer only a limited number of actions. What about editing existing terms, how to request all them in a single request?</p>
+
+<p>Here I use a little hack, which includes the following workflow:</p>
+
+<ul>
+<li>Create the desired activity in JSOM</li>
+<li>Run it in the browser monitoring actual requests in fiddler </li>
+<li>Parse actual package generated and sent to <code>/_vti_bin/client.svc/ProcessQuery</code></li>
+<li>Recreate the package for reusability and wrap inside a Node.js method</li>
+</ul>
+
+<p>For example, request to set term name in the end looks like:</p>
+
+<pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009"  
+      SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" 
+      ApplicationName="Javascript Library"&gt;
+    &lt;Actions&gt;
+        &lt;SetProperty Id="166" ObjectPathId="157" Name="Name"&gt;
+            &lt;Parameter Type="String"&gt;{{ newName }}&lt;/Parameter&gt;
+        &lt;/SetProperty&gt;
+    &lt;/Actions&gt;
+    &lt;ObjectPaths&gt;
+        &lt;StaticMethod Id="146" 
+           Name="GetTaxonomySession" 
+           TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" /&gt;
+        &lt;Property Id="149" ParentId="146" Name="TermStores" /&gt;
+        &lt;Method Id="151" ParentId="149" Name="GetByName"&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Type="String"&gt;{{ serviceName }}&lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+        &lt;/Method&gt;
+        &lt;Method Id="154" ParentId="151" Name="GetTermSet"&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Type="String"&gt;{{ termSetId }}&lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+        &lt;/Method&gt;
+        &lt;Method Id="157" ParentId="154" Name="GetTerm"&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Type="String"&gt;{{ termId }}&lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+        &lt;/Method&gt;
+    &lt;/ObjectPaths&gt;
+&lt;/Request&gt;  
+</code></pre>
+
+<p>Some comments about the format:</p>
+
+<ul>
+<li>Schema version is changed to <code>15.0.0.0</code> to support On-Premises SharePoint, at the same time it works in SPO.</li>
+<li>Some redundant tags can be deleted from the original package received in fiddler, by looking at a package it's almost clear from the start what is redundant.</li>
+<li>IDs represent the flow or chain and project the sequence. They are different from request  to request, but if to freeze them static and request again and again it just work. So I decided to leave them static.</li>
+<li>Parameters in {{ doubleCurlyBraces }} is a dynamic part, they replaced in runtime with actual values by JS code. Package for sure should not include any {{ }}.</li>
+</ul>
+
+<p>getAllTerms, setTermName and deprecateTerm example wrappers can be seen in <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/mmd.js">sp-screwdriver</a> too.</p>
+
+<p>After the wrapper methods are implemented, Node.js receives a capability to run a request like:</p>
+
+<pre><code class="language-javascript">let Screwdriver = require('sp-scredriver');  
+let context = require('./path_to_private_settings');  
+var screw = new Screwdriver(context);
+
+let data = {  
+    baseUrl: context.siteUrl,
+    serviceName: config.mmd.serviceName,
+    termSetId: config.mmd.termSetId,
+    properties: [
+        'Id', 'Name', 'Description', 'CustomProperties',
+        'IsRoot', 'IsDeprecated', 'PathOfTerm',
+        'IsAvailableForTagging', 'Parent'
+    ]
+};
+
+screw.mmd.getAllTerms(data)  
+    .then(response =&gt; {
+        let results = JSON.parse(response.body);
+        console.log("Response:", results);
+    })
+    .catch(err =&gt; console.log('Error:', err.message));
+</code></pre>
+
+<p>For myself, it was a nice way extending Node.js solutions capabilities. Such approach was applied on a couple of projects in Web Jobs, proceeding some information in SharePoint including MMD which was used as a part of architecture in the host solution. <br>
+Also, working with MMD directly within Node.js code was viable in an Electron application, we implement recently.</p>
+
+<p>It's a not a single try to say that the same should not be done in .Net, actually it should, but, at the same time, there are cases of Node.js usage scenarios and it's nice to be able to extend it to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>]]&gt;</encoded></item><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
 
 <p>More and more features from the funky front-end development are here at our disposal. Yet, there was</p>]]&gt;</description><link>/2016/11/05/sharepoint-client-side-development-with-live-reload/<guid ispermalink="false">e3276611-dc06-42b9-9a01-5e695e111cd6</guid><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 04 Nov 2016 23:44:19 GMT</pubdate><content url="/content/images/2016/11/SharePointLiveReload.png" medium="image"></content><encoded><p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
 

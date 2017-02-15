@@ -1,0 +1,413 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Working with SharePoint MMD in Node.js</title>
+    <meta name="description" content="">
+
+    <meta name="google-site-verification" content="kj4x9HBApwneuGIIlFZj11VGEQnPG5Mp21U2n_mSCcU">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=f32f57e115">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=f32f57e115">
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=f32f57e115">
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=f32f57e115">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="ARVO Systems Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Working with SharePoint MMD in Node.js">
+    <meta property="og:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
+    <meta property="og:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
+    <meta property="og:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
+    <meta property="article:published_time" content="2017-02-15T15:15:54.000Z">
+    <meta property="article:modified_time" content="2017-02-15T15:15:54.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="API">
+    <meta property="article:tag" content="SOAP">
+    <meta property="article:tag" content="JSOM">
+    <meta property="article:tag" content="MMD">
+    
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Working with SharePoint MMD in Node.js">
+    <meta name="twitter:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
+    <meta name="twitter:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
+    <meta name="twitter:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, Node.js, API, SOAP, JSOM, MMD">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="1860">
+    <meta property="og:image:height" content="742">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ARVO Systems Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/content/images/2016/09/arvo_logo_105px.png",
+            "width": 105,
+            "height": 42
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Andrew Koltyakov",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/content/images/2016/09/andrew.koltyakov.jpg",
+            "width": 460,
+            "height": 460
+        },
+        "url": "/author/andrew/",
+        "sameAs": [
+            "http://koltyakov.ru",
+            "https://www.facebook.com/andrew.koltyakov",
+            "https://twitter.com/AndrewKoltyakov"
+        ],
+        "description": "SharePoint Front-End Developer"
+    },
+    "headline": "Working with SharePoint MMD in Node.js",
+    "url": "/2017/02/15/working-with-sharepoint-mmd-in-node-js/",
+    "datePublished": "2017-02-15T15:15:54.000Z",
+    "dateModified": "2017-02-15T15:15:54.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/content/images/2017/02/SharePoint-MMD-Screwdriver.png",
+        "width": 1860,
+        "height": 742
+    },
+    "keywords": "SharePoint, Node.js, API, SOAP, JSOM, MMD",
+    "description": "SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It&#x27;s not an issue when your code lives in a context of a",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://external.arvosys.com:2368"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html">
+</head>
+<body class="post-template tag-sharepoint tag-node-js tag-api tag-soap tag-jsom tag-mmd nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-blog-home" role="presentation"><a href="../../../../">Blog Home</a></li>
+            <li class="nav-search" role="presentation"><a href="http://www.arvosys.com/search/">Search</a></li>
+            <li class="nav-arvo-systems" role="presentation"><a href="http://www.arvosys.com/">ARVO Systems</a></li>
+            <li class="nav--services" role="presentation"><a href="http://www.arvosys.com/services/">... Services</a></li>
+            <li class="nav--platforms" role="presentation"><a href="http://www.arvosys.com/platforms/">... Platforms</a></li>
+            <li class="nav--contacts" role="presentation"><a href="http://www.arvosys.com/about/contacts/">... Contacts</a></li>
+    </ul>
+        <a class="subscribe-button icon-feed" href="../../../../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+        <div id="content-wrapper" class="page-content">
+
+            
+
+
+<header class="main-header post-head " style="background-image: url(../../../../content/images/2017/02/SharePoint-MMD-Screwdriver.png)">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href="../../../../"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog"></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-sharepoint tag-node-js tag-api tag-soap tag-jsom tag-mmd">
+
+        <header class="post-header">
+            <h1 class="post-title">Working with SharePoint MMD in Node.js</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2017-02-15">15 February 2017</time>  on <a href="../../../../tag/sharepoint/">SharePoint</a>, <a href="../../../../tag/node-js/">Node.js</a>, <a href="../../../../tag/api/">API</a>, <a href="../../../../tag/soap/">SOAP</a>, <a href="../../../../tag/jsom/">JSOM</a>, <a href="../../../../tag/mmd/">MMD</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM probably will be the most obvious answer. But what if you're limited with the choice of used language or a runtime environment and .Net is not an option?</p>
+
+<p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to have a basic layer of functionality to deal with Managed Metadata (Taxonomy), such as:</p>
+
+<ul>
+<li>Get child terms in a term set</li>
+<li>Get child terms in a parent term</li>
+<li>Get a specific term</li>
+<li>Add new term</li>
+<li>Update a term</li>
+<li>Deprecate a term</li>
+<li>Get all terms (for relatively small dictionaries)</li>
+<li>...</li>
+</ul>
+
+<p>The easiest solution for some basic methods will be SOAP services. Yes, SOAP services are deprecated in SharePoint and they smell like mammoth fossils. But still there and working.</p>
+
+<p>There is a SOAP service to work with MMD <code>/_vti_bin/TaxonomyClientService.asmx</code>. Let's take a look at it. The service represents the following methods:</p>
+
+<ul>
+<li>AddTerms</li>
+<li>GetChildTermsInTerm</li>
+<li>GetChildTermsInTermSet</li>
+<li>GetKeywordTermsByGuids</li>
+<li>GetTermSets</li>
+<li>GetTermsByLabel</li>
+</ul>
+
+<p>To consume these in Node.js you can use almost any http request module with encapsulation of auth cookie to the request headers. Likely all these authentication and even the libraries, specific for SharePoint requests, are created and here for our disposal, abstracting scary moments from away. I'm describing <a href="https://github.com/s-KaiNet/sp-request">sp-request</a> with <a href="https://github.com/s-KaiNet/node-sp-auth">node-sp-auth</a>.</p>
+
+<p>One can easily talk to SharePoint SOAP service with use of <code>sp-request</code> like this:</p>
+
+<pre><code class="language-javascript">const baseUrl = 'https://contoso.sharepoint.com/sites/site';  
+let authObject = { ... }; // node-sp-auth authentication format  
+let request = require('sp-request').create(authObject);  
+let headers = {};
+
+let soapBody = `  
+   ... // XML SOAP body for a specific method
+`;
+
+headers['Accept'] = 'application/xml, text/xml, */*; q=0.01';  
+headers['Content-Type'] = 'text/xml;charset=\"UTF-8\"';  
+headers['X-Requested-With'] = 'XMLHttpRequest';  
+headers['Content-Length'] = soapBody.length;
+
+request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {  
+  headers: headers,
+  body: soapBody,
+  json: false
+})
+  .then(response =&gt; {
+    // Proceed the responce object
+  })
+  .catch(err =&gt; console.log(err));
+</code></pre>
+
+<p>Figuring out with SOAP body for some methods can sometimes be tricky as SOAP operations descriptions miss some important parts, but any blog posts related to SP SOAP services also are relevant for Node.js use cases.</p>
+
+<p>I wrapped some methods in an open source library <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a>. It's not for production purposes, yet can be a start point or example how to consume the methods.</p>
+
+<p>Here we're standing in front another wall, those SOAP interfaces are sometimes featureless and offer only a limited number of actions. What about editing existing terms, how to request all them in a single request?</p>
+
+<p>Here I use a little hack, which includes the following workflow:</p>
+
+<ul>
+<li>Create the desired activity in JSOM</li>
+<li>Run it in the browser monitoring actual requests in fiddler </li>
+<li>Parse actual package generated and sent to <code>/_vti_bin/client.svc/ProcessQuery</code></li>
+<li>Recreate the package for reusability and wrap inside a Node.js method</li>
+</ul>
+
+<p>For example, request to set term name in the end looks like:</p>
+
+<pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009"  
+      SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" 
+      ApplicationName="Javascript Library"&gt;
+    &lt;Actions&gt;
+        &lt;SetProperty Id="166" ObjectPathId="157" Name="Name"&gt;
+            &lt;Parameter Type="String"&gt;{{ newName }}&lt;/Parameter&gt;
+        &lt;/SetProperty&gt;
+    &lt;/Actions&gt;
+    &lt;ObjectPaths&gt;
+        &lt;StaticMethod Id="146" 
+           Name="GetTaxonomySession" 
+           TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" /&gt;
+        &lt;Property Id="149" ParentId="146" Name="TermStores" /&gt;
+        &lt;Method Id="151" ParentId="149" Name="GetByName"&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Type="String"&gt;{{ serviceName }}&lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+        &lt;/Method&gt;
+        &lt;Method Id="154" ParentId="151" Name="GetTermSet"&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Type="String"&gt;{{ termSetId }}&lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+        &lt;/Method&gt;
+        &lt;Method Id="157" ParentId="154" Name="GetTerm"&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Type="String"&gt;{{ termId }}&lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+        &lt;/Method&gt;
+    &lt;/ObjectPaths&gt;
+&lt;/Request&gt;  
+</code></pre>
+
+<p>Some comments about the format:</p>
+
+<ul>
+<li>Schema version is changed to <code>15.0.0.0</code> to support On-Premises SharePoint, at the same time it works in SPO.</li>
+<li>Some redundant tags can be deleted from the original package received in fiddler, by looking at a package it's almost clear from the start what is redundant.</li>
+<li>IDs represent the flow or chain and project the sequence. They are different from request  to request, but if to freeze them static and request again and again it just work. So I decided to leave them static.</li>
+<li>Parameters in {{ doubleCurlyBraces }} is a dynamic part, they replaced in runtime with actual values by JS code. Package for sure should not include any {{ }}.</li>
+</ul>
+
+<p>getAllTerms, setTermName and deprecateTerm example wrappers can be seen in <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/mmd.js">sp-screwdriver</a> too.</p>
+
+<p>After the wrapper methods are implemented, Node.js receives a capability to run a request like:</p>
+
+<pre><code class="language-javascript">let Screwdriver = require('sp-scredriver');  
+let context = require('./path_to_private_settings');  
+var screw = new Screwdriver(context);
+
+let data = {  
+    baseUrl: context.siteUrl,
+    serviceName: config.mmd.serviceName,
+    termSetId: config.mmd.termSetId,
+    properties: [
+        'Id', 'Name', 'Description', 'CustomProperties',
+        'IsRoot', 'IsDeprecated', 'PathOfTerm',
+        'IsAvailableForTagging', 'Parent'
+    ]
+};
+
+screw.mmd.getAllTerms(data)  
+    .then(response =&gt; {
+        let results = JSON.parse(response.body);
+        console.log("Response:", results);
+    })
+    .catch(err =&gt; console.log('Error:', err.message));
+</code></pre>
+
+<p>For myself, it was a nice way extending Node.js solutions capabilities. Such approach was applied on a couple of projects in Web Jobs, proceeding some information in SharePoint including MMD which was used as a part of architecture in the host solution. <br>
+Also, working with MMD directly within Node.js code was viable in an Electron application, we implement recently.</p>
+
+<p>It's a not a single try to say that the same should not be done in .Net, actually it should, but, at the same time, there are cases of Node.js usage scenarios and it's nice to be able to extend it to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../../../../author/andrew/" style="background-image: url(../../../../content/images/2016/09/andrew.koltyakov.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../../../../author/andrew/">Andrew Koltyakov</a></h4>
+
+                    <p>SharePoint Front-End Developer</p>
+                <div class="author-meta">
+                    
+                    <span class="author-link icon-link"><a href="http://koltyakov.ru">http://koltyakov.ru</a></span>
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Working%20with%20SharePoint%20MMD%20in%20Node.js&amp;url=/2017/02/15/working-with-sharepoint-mmd-in-node-js/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/02/15/working-with-sharepoint-mmd-in-node-js/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2017/02/15/working-with-sharepoint-mmd-in-node-js/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+
+        </footer>
+
+        <!-- Comments -->
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = "arvo-systems-blog-com";
+            (function() {
+                var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+        </script>
+        <!-- Comments -->
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2016/11/SharePointLiveReload.png)" href="../../../../2016/11/05/sharepoint-client-side-development-with-live-reload/">
+        <section class="post">
+            <h2>SharePoint client side development with Live Reload</h2>
+            <p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        </div>
+    </div>
+
+    <div id="footer" class="bg-dark fg-white">
+        <div class="container">
+            <div class="brands">
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=f32f57e115" style="display: none;">
+                <img class="fl" src="/assets/images/o365_nm_ft.png?v=f32f57e115">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=f32f57e115" style="display: none;">
+                <img class="fl" src="/assets/images/sp_nm_ft.png?v=f32f57e115">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=f32f57e115" style="display: none;">
+                <img class="fl" src="/assets/images/msp_nm_ft.png?v=f32f57e115">
+                </div>		
+            </div>
+            <div class="copyright">
+                <div class="padding10 footer-element">
+                <img src="/assets/images/arvo_nm_ft.png?v=f32f57e115">
+                </div>    
+                <div class="padding10 footer-element copy-text">© 2016<br>
+                <small>All rights reserved</small>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=f32f57e115"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=f32f57e115"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=f32f57e115"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(["setDomains", ["*.arvosys.com","*.blog.arvosys.com","*.www.arvosys.com","*.blog.arvosys.com"]]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//piwik.spflow.com/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '9']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+    </script>
+    <noscript><p><img src="http://piwik.spflow.com/piwik.php?idsite=9" style="border:0;" alt=""></p></noscript>
+    <!-- End Piwik Code -->
+
+</body>
