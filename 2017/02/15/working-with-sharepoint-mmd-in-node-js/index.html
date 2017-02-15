@@ -29,7 +29,7 @@
     <meta property="og:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
     <meta property="og:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
     <meta property="article:published_time" content="2017-02-15T15:15:54.000Z">
-    <meta property="article:modified_time" content="2017-02-15T15:15:54.000Z">
+    <meta property="article:modified_time" content="2017-02-15T15:35:10.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="Node.js">
     <meta property="article:tag" content="API">
@@ -85,7 +85,7 @@
     "headline": "Working with SharePoint MMD in Node.js",
     "url": "/2017/02/15/working-with-sharepoint-mmd-in-node-js/",
     "datePublished": "2017-02-15T15:15:54.000Z",
-    "dateModified": "2017-02-15T15:15:54.000Z",
+    "dateModified": "2017-02-15T15:35:10.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2017/02/SharePoint-MMD-Screwdriver.png",
@@ -269,7 +269,7 @@ request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {
 
 <pre><code class="language-javascript">let Screwdriver = require('sp-scredriver');  
 let context = require('./path_to_private_settings');  
-var screw = new Screwdriver(context);
+let screw = new Screwdriver(context);
 
 let data = {  
     baseUrl: context.siteUrl,
@@ -290,8 +290,9 @@ screw.mmd.getAllTerms(data)
     .catch(err =&gt; console.log('Error:', err.message));
 </code></pre>
 
-<p>For myself, it was a nice way extending Node.js solutions capabilities. Such approach was applied on a couple of projects in Web Jobs, proceeding some information in SharePoint including MMD which was used as a part of architecture in the host solution. <br>
-Also, working with MMD directly within Node.js code was viable in an Electron application, we implement recently.</p>
+<p>For myself, it was a nice way extending Node.js solutions capabilities. Such approach was applied on a couple of projects in Web Jobs, proceeding some information in SharePoint including MMD which was used as a part of architecture in the host solution.</p>
+
+<p>Also, working with MMD directly within Node.js code was viable in an Electron application, we implement recently.</p>
 
 <p>It's a not a single try to say that the same should not be done in .Net, actually it should, but, at the same time, there are cases of Node.js usage scenarios and it's nice to be able to extend it to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>
         </section>

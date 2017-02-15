@@ -1,4 +1,4 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Wed, 15 Feb 2017 15:23:41 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a]]&gt;</description><link>/2017/02/15/working-with-sharepoint-mmd-in-node-js/<guid ispermalink="false">648aa6f7-ebd5-4810-8100-a9f35e6a1ee4</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Wed, 15 Feb 2017 15:15:54 GMT</pubdate><content url="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" medium="image"></content><encoded><p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM probably will be the most obvious answer. But what if you're limited with the choice of used language or a runtime environment and .Net is not an option?</p>
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Wed, 15 Feb 2017 15:35:18 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a]]&gt;</description><link>/2017/02/15/working-with-sharepoint-mmd-in-node-js/<guid ispermalink="false">648aa6f7-ebd5-4810-8100-a9f35e6a1ee4</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Wed, 15 Feb 2017 15:15:54 GMT</pubdate><content url="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" medium="image"></content><encoded><p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM probably will be the most obvious answer. But what if you're limited with the choice of used language or a runtime environment and .Net is not an option?</p>
 
 <p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to have a basic layer of functionality to deal with Managed Metadata (Taxonomy), such as:</p>
 
@@ -119,7 +119,7 @@ request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {
 
 <pre><code class="language-javascript">let Screwdriver = require('sp-scredriver');  
 let context = require('./path_to_private_settings');  
-var screw = new Screwdriver(context);
+let screw = new Screwdriver(context);
 
 let data = {  
     baseUrl: context.siteUrl,
@@ -140,8 +140,9 @@ screw.mmd.getAllTerms(data)
     .catch(err =&gt; console.log('Error:', err.message));
 </code></pre>
 
-<p>For myself, it was a nice way extending Node.js solutions capabilities. Such approach was applied on a couple of projects in Web Jobs, proceeding some information in SharePoint including MMD which was used as a part of architecture in the host solution. <br>
-Also, working with MMD directly within Node.js code was viable in an Electron application, we implement recently.</p>
+<p>For myself, it was a nice way extending Node.js solutions capabilities. Such approach was applied on a couple of projects in Web Jobs, proceeding some information in SharePoint including MMD which was used as a part of architecture in the host solution.</p>
+
+<p>Also, working with MMD directly within Node.js code was viable in an Electron application, we implement recently.</p>
 
 <p>It's a not a single try to say that the same should not be done in .Net, actually it should, but, at the same time, there are cases of Node.js usage scenarios and it's nice to be able to extend it to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>]]&gt;</encoded></item><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
 
