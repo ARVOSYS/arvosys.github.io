@@ -11,11 +11,11 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=f32f57e115">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=32f803aeca">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=f32f57e115">
-    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=f32f57e115">
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=f32f57e115">
+    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=32f803aeca">
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=32f803aeca">
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=32f803aeca">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
 
     <link rel="canonical" href="index.html">
@@ -25,11 +25,11 @@
     <meta property="og:site_name" content="ARVO Systems Blog">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Working with SharePoint UPS in Node.js">
-    <meta property="og:description" content="This article is a logical continuation of my previous post where we deal with Managed Metadata services. This post covers some problems of SharePoint API when working in Node.js, to be specific, working with another super popular SharePoint part the User Profiles Services. User Profiles services' REST API is">
+    <meta property="og:description" content="This article is a logical continuation of my previous post where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS). User Profiles services' REST API is much">
     <meta property="og:url" content="/2017/02/16/working-with-sharepoint-ups-in-node-js/">
     <meta property="og:image" content="/content/images/2017/02/UPS-node.png">
     <meta property="article:published_time" content="2017-02-16T13:55:57.000Z">
-    <meta property="article:modified_time" content="2017-02-16T14:11:15.000Z">
+    <meta property="article:modified_time" content="2017-02-17T14:41:57.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="API">
     <meta property="article:tag" content="Node.js">
@@ -41,7 +41,7 @@
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Working with SharePoint UPS in Node.js">
-    <meta name="twitter:description" content="This article is a logical continuation of my previous post where we deal with Managed Metadata services. This post covers some problems of SharePoint API when working in Node.js, to be specific, working with another super popular SharePoint part the User Profiles Services. User Profiles services' REST API is">
+    <meta name="twitter:description" content="This article is a logical continuation of my previous post where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS). User Profiles services' REST API is much">
     <meta name="twitter:url" content="/2017/02/16/working-with-sharepoint-ups-in-node-js/">
     <meta name="twitter:image" content="/content/images/2017/02/UPS-node.png">
     <meta name="twitter:label1" content="Written by">
@@ -86,7 +86,7 @@
     "headline": "Working with SharePoint UPS in Node.js",
     "url": "/2017/02/16/working-with-sharepoint-ups-in-node-js/",
     "datePublished": "2017-02-16T13:55:57.000Z",
-    "dateModified": "2017-02-16T14:11:15.000Z",
+    "dateModified": "2017-02-17T14:41:57.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2017/02/UPS-node.png",
@@ -94,7 +94,7 @@
         "height": 623
     },
     "keywords": "SharePoint, API, Node.js, SOAP, JSOM, REST, UPS",
-    "description": "This article is a logical continuation of my previous post where we deal with Managed Metadata services. This post covers some problems of SharePoint API when working in Node.js, to be specific, working with another super popular SharePoint part the User Profiles Services. User Profiles services&#x27; REST API is",
+    "description": "This article is a logical continuation of my previous post where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS). User Profiles services&#x27; REST API is much",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://external.arvosys.com:2368"
@@ -149,21 +149,21 @@
         </header>
 
         <section class="post-content">
-            <p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where we deal with Managed Metadata services. This post covers some problems of SharePoint API when working in Node.js, to be specific, working with another super popular SharePoint part the User Profiles Services.</p>
+            <p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).</p>
 
-<p>User Profiles services' REST API is much richer than MMD's one. UPS's PeopleManager and ProfileLoader covers a lot of <a href="https://msdn.microsoft.com/en-us/library/office/dn790354.aspx">functionality</a>. Unfortunately, not each and every CSOM capability is there at the place. Most methods expose automation connected with a personal profile, most are getters but not the setters.</p>
+<p>User Profiles services' REST API is much richer than MMD's one, at least it exists. UPS's PeopleManager and ProfileLoader covers a lot of <a href="https://msdn.microsoft.com/en-us/library/office/dn790354.aspx">functionality</a>. Unfortunately, not each and every CSOM capability is there at the place. Most methods expose automation connected with a personal profile, most are getters but not the setters.</p>
 
-<p>In our case scenario, we're going to build a mechanism for writing user profile properties in Node.js. As with MMD, SOAP and CSOM/JSOM capabilities will be used to enrich API on server side JavaScript. Let's imagine that there is a 3rd party data source with properties to be synchronized with UPS on a schedule basis and Node.js is the only option.</p>
+<p>In our scenario, we're going to build a mechanism for writing user profile properties in Node.js. As it was with MMD, we'll be using CSOM/JSOM and SOAP capabilities to enrich program interface on server-side JavaScript field. Let's assume that there is a 3rd party data source with properties which should be synchronized with user profiles, synchronization should run in a schedule and Node.js is the only option to perform operations.</p>
 
 <h3 id="soap">SOAP</h3>
 
-<p>Legacy SOAP API is hidden inside <code>/_vti_bin/UserProfileService.asmx</code> endpoint. The service has a variety of methods. Actually, 43 of them. Pretty nice, isn't it?</p>
+<p>Legacy SOAP API is hidden inside /<em>vti</em>bin/UserProfileService.asmx endpoint. The service has a variety of methods, actually, there are 43 methods. Pretty nice, isn't it?</p>
 
-<p>The method we're interested in is <code>ModifyUserPropertyByAccountName</code>. It allows writing single and multivalued properties to the provided user profile.</p>
+<p>The method we're interested in now is ModifyUserPropertyByAccountName. It allows writing single and multivalued properties to the specific user profile.</p>
 
-<p>Just like in MMD's scenario, <a href="https://github.com/s-KaiNet/sp-request">sp-request</a> and <a href="https://github.com/s-KaiNet/node-sp-auth">node-sp-auth</a> are in charge of transport layer.</p>
+<p>Just like in MMD's scenario, <a href="https://github.com/s-KaiNet/sp-request">sp-request</a> and <a href="https://github.com/s-KaiNet/node-sp-auth">node-sp-auth</a> will be in charge of the communication layer over the wires and protocols.</p>
 
-<p>Let's dive deeper with ModifyUserPropertyByAccountName. SOAP package format is following:</p>
+<p>Let's dive deeper with ModifyUserPropertyByAccountName method. SOAP package format is:</p>
 
 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;  
 &lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
@@ -237,14 +237,20 @@ screw.ups.modifyUserPropertyByAccountName(data)
 
 <p><a href="https://github.com/koltyakov/sp-screwdriver/blob/master/test/ups-test.js">Open on GitHub</a></p>
 
-<p>Here we're done with the SOAP, but I do not like SOAP anyway, so I need yet another alternative - JSOM way.</p>
+<p>Here we're done with the SOAP, but I do not like SOAP actually, so I need yet another alternative, which is CSOM way.</p>
 
 <h3 id="csomjsom">CSOM/JSOM</h3>
 
-<p>In CSOM API there are who methods for writing properties <code>setSingleValueProfileProperty</code>, <code>setMultiValuedProfileProperty</code>. To master them in Node.js application we're doing the hack described in the previous <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">post</a> - executing JSOM version of the script in chrome and watching the traffic in fiddler.</p>
+<p>In CSOM API there are who methods for writing properties setSingleValueProfileProperty and setMultiValuedProfileProperty. To master them in Node.js application, we're doing the hack described in the previous <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">post</a>:</p>
 
-<pre><code class="language-javascript">// JSOM version
-var clientContext = new SP.ClientContext.get_current();  
+<ul>
+<li>executing JSOM version of the script in chrome</li>
+<li>and watching the traffic in fiddler.</li>
+</ul>
+
+<p>So, for example, JSOM script is:</p>
+
+<pre><code class="language-javascript">var clientContext = new SP.ClientContext.get_current();  
 var peopleManager = new SP.UserProfiles.PeopleManager(clientContext);
 
 peopleManager.setMultiValuedProfileProperty(  
@@ -259,7 +265,7 @@ clientContext.executeQueryAsync(
 );
 </code></pre>
 
-<p>After a call with use of fiddler we're getting our client side object model package:</p>
+<p>After a call with use of fiddler, we're getting our client side object model package:</p>
 
 <pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009" SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" ApplicationName="Javascript Library"&gt;  
     &lt;Actions&gt;
@@ -290,7 +296,7 @@ clientContext.executeQueryAsync(
 <li>propertyValues - array of property values</li>
 </ul>
 
-<p>And the usage in Node.js:</p>
+<p>And the usage in Node.js is possible like:</p>
 
 <pre><code class="language-javascript">let Screwdriver = require('sp-scredriver');  
 let context = require('./path_to_private_settings');  
@@ -312,7 +318,7 @@ screw.ups.setMultiValuedProfileProperty(data)
 
 <p>setSingleValueProfileProperty is almost identical and even simpler.</p>
 
-<p>Sources with implementation can be found on <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/ups.js">GitHub</a>. It's a part of <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a> library, which can act as an example for similar tasks of extending Node.js apps for SharePoint's SOAP and CSOM/JSOM APIs usage as well.</p>
+<p>Sources with implementation can be found on <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/ups.js">GitHub</a>. It's a part of <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a> library, library, which was published as an example for similar tasks of extending Node.js apps and services to deal with SharePoint's SOAP and CSOM/JSOM APIs as well.</p>
         </section>
 
         <footer class="post-footer">
@@ -383,21 +389,21 @@ screw.ups.setMultiValuedProfileProperty(data)
         <div class="container">
             <div class="brands">
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=f32f57e115" style="display: none;">
-                <img class="fl" src="/assets/images/o365_nm_ft.png?v=f32f57e115">
+                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=32f803aeca" style="display: none;">
+                <img class="fl" src="/assets/images/o365_nm_ft.png?v=32f803aeca">
                 </div>
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=f32f57e115" style="display: none;">
-                <img class="fl" src="/assets/images/sp_nm_ft.png?v=f32f57e115">
+                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=32f803aeca" style="display: none;">
+                <img class="fl" src="/assets/images/sp_nm_ft.png?v=32f803aeca">
                 </div>
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=f32f57e115" style="display: none;">
-                <img class="fl" src="/assets/images/msp_nm_ft.png?v=f32f57e115">
+                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=32f803aeca" style="display: none;">
+                <img class="fl" src="/assets/images/msp_nm_ft.png?v=32f803aeca">
                 </div>		
             </div>
             <div class="copyright">
                 <div class="padding10 footer-element">
-                <img src="/assets/images/arvo_nm_ft.png?v=f32f57e115">
+                <img src="/assets/images/arvo_nm_ft.png?v=32f803aeca">
                 </div>    
                 <div class="padding10 footer-element copy-text">© 2016<br>
                 <small>All rights reserved</small>
@@ -408,9 +414,9 @@ screw.ups.setMultiValuedProfileProperty(data)
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     
-    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=f32f57e115"></script>
-    <script type="text/javascript" src="/assets/js/index.js?v=f32f57e115"></script>
-    <script type="text/javascript" src="/assets/js/prism.js?v=f32f57e115"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=32f803aeca"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=32f803aeca"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=32f803aeca"></script>
 
     <!-- Piwik -->
     <script type="text/javascript">

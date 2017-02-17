@@ -16,11 +16,11 @@
     <meta property="og:site_name" content="ARVO Systems Blog">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Working with SharePoint MMD in Node.js">
-    <meta property="og:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
+    <meta property="og:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
     <meta property="og:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
     <meta property="og:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
     <meta property="article:published_time" content="2017-02-15T15:15:54.000Z">
-    <meta property="article:modified_time" content="2017-02-15T15:35:10.000Z">
+    <meta property="article:modified_time" content="2017-02-17T14:46:12.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="Node.js">
     <meta property="article:tag" content="API">
@@ -31,7 +31,7 @@
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Working with SharePoint MMD in Node.js">
-    <meta name="twitter:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
+    <meta name="twitter:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
     <meta name="twitter:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
     <meta name="twitter:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
     <meta name="twitter:label1" content="Written by">
@@ -76,7 +76,7 @@
     "headline": "Working with SharePoint MMD in Node.js",
     "url": "/2017/02/15/working-with-sharepoint-mmd-in-node-js/",
     "datePublished": "2017-02-15T15:15:54.000Z",
-    "dateModified": "2017-02-15T15:35:10.000Z",
+    "dateModified": "2017-02-17T14:46:12.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2017/02/SharePoint-MMD-Screwdriver.png",
@@ -84,7 +84,7 @@
         "height": 742
     },
     "keywords": "SharePoint, Node.js, API, SOAP, JSOM, MMD",
-    "description": "SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It&#x27;s not an issue when your code lives in a context of a",
+    "description": "SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It&#x27;s not an issue when your code lives in a context of a",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://external.arvosys.com:2368"
@@ -888,9 +888,9 @@
             </figure>
             <section class="post-content">
 
-                <p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST yet at the same time is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM probably will be the most obvious answer. But what if you're limited with the choice of used language or a runtime environment and .Net is not an option?</p>
+                <p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM will be the most obvious answer probably. But what if you are limited in choice language to use or a runtime environment, in other words, when .Net is not an option?n?</p>
 
-<p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to have a basic layer of functionality to deal with Managed Metadata (Taxonomy), such as:</p>
+<p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to own a basic layer of functionality for manipulating Managed Metadata (Taxonomy), such options as:</p>
 
 <ul>
 <li>Get child terms in a term set</li>
@@ -900,12 +900,11 @@
 <li>Update a term</li>
 <li>Deprecate a term</li>
 <li>Get all terms (for relatively small dictionaries)</li>
-<li>...</li>
 </ul>
 
-<p>The easiest solution for some basic methods will be SOAP services. Yes, SOAP services are deprecated in SharePoint and they smell like mammoth fossils. But still there and working.</p>
+<p>The easiest solution for some basic operations can be SOAP services. Yes, SharePoint SOAP services are deprecated and they smell like mammoth fossils. But still there and work.</p>
 
-<p>There is a SOAP service to work with MMD <code>/_vti_bin/TaxonomyClientService.asmx</code>. Let's take a look at it. The service represents the following methods:</p>
+<p>There is a SOAP service for dealing with MMD <code>/_vti_bin/TaxonomyClientService.asmx</code>. Let's take a look at it. The service represents the following methods:</p>
 
 <ul>
 <li>AddTerms</li>
@@ -916,9 +915,9 @@
 <li>GetTermsByLabel</li>
 </ul>
 
-<p>To consume these in Node.js you can use almost any http request module with encapsulation of auth cookie to the request headers. Likely all these authentication and even the libraries, specific for SharePoint requests, are created and here for our disposal, abstracting scary moments from away. I'm describing <a href="https://github.com/s-KaiNet/sp-request">sp-request</a> with <a href="https://github.com/s-KaiNet/node-sp-auth">node-sp-auth</a>.</p>
+<p>One can consume these in Node.js using almost any http request module with authentication cookie encapsulation into request headers. Likely, there is no need to figure out in low level transport, all these authentication and SharePoint requests libraries exist and are here in our disposal, abstracting scary moments away. I'm describing <a href="https://github.com/s-KaiNet/sp-request">sp-request</a> with <a href="https://github.com/s-KaiNet/node-sp-auth">node-sp-auth</a>.</p>
 
-<p>One can easily talk to SharePoint SOAP service with use of <code>sp-request</code> like this:</p>
+<p><code>sp-request</code> module can easily talk to SharePoint SOAP service like this:</p>
 
 <pre><code class="language-javascript">const baseUrl = 'https://contoso.sharepoint.com/sites/site';  
 let authObject = { ... }; // node-sp-auth authentication format  
@@ -945,22 +944,22 @@ request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {
   .catch(err =&gt; console.log(err));
 </code></pre>
 
-<p>Figuring out with SOAP body for some methods can sometimes be tricky as SOAP operations descriptions miss some important parts, but any blog posts related to SP SOAP services also are relevant for Node.js use cases.</p>
+<p>It can be tricky to figure out with SOAP packages for some methods sometimes, some SOAP operations descriptions are not perfect. Good thing is that any related to SharePoint SOAP services information also is relevant for Node.js use cases.</p>
 
-<p>I wrapped some methods in an open source library <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a>. It's not for production purposes, yet can be a start point or example how to consume the methods.</p>
+<p>I wrapped some methods in an library with the name <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a>. It is not for production purposes as-is, it can act as a start point or example how to consume APIs.</p>
 
-<p>Here we're standing in front another wall, those SOAP interfaces are sometimes featureless and offer only a limited number of actions. What about editing existing terms, how to request all them in a single request?</p>
+<p>Here we're standing in front of another wall, those SOAP interfaces are sometimes featureless and offer only a limited number of actions, it's true with MMD at least. What about editing existing terms, how to request all them in a single call, how to do more?</p>
 
 <p>Here I use a little hack, which includes the following workflow:</p>
 
 <ul>
-<li>Create the desired activity in JSOM</li>
-<li>Run it in the browser monitoring actual requests in fiddler </li>
-<li>Parse actual package generated and sent to <code>/_vti_bin/client.svc/ProcessQuery</code></li>
-<li>Recreate the package for reusability and wrap inside a Node.js method</li>
+<li>Create the desired operation in JSOM</li>
+<li>Run it in the browser monitoring actual request body in fiddler </li>
+<li>Parse a package which was generated and sent to <code>/_vti_bin/client.svc/ProcessQuery</code></li>
+<li>Re-create the package for re-usability and wrap it inside a Node.js method talking to client.svc</li>
 </ul>
 
-<p>For example, request to set term name in the end looks like:</p>
+<p>For example, request, to set term name, looks like:</p>
 
 <pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009"  
       SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" 
@@ -994,18 +993,18 @@ request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {
 &lt;/Request&gt;  
 </code></pre>
 
-<p>Some comments about the format:</p>
+<p>Some comments to the format:</p>
 
 <ul>
-<li>Schema version is changed to <code>15.0.0.0</code> to support On-Premises SharePoint, at the same time it works in SPO.</li>
-<li>Some redundant tags can be deleted from the original package received in fiddler, by looking at a package it's almost clear from the start what is redundant.</li>
-<li>IDs represent the flow or chain and project the sequence. They are different from request  to request, but if to freeze them static and request again and again it just work. So I decided to leave them static.</li>
-<li>Parameters in {{ doubleCurlyBraces }} is a dynamic part, they replaced in runtime with actual values by JS code. Package for sure should not include any {{ }}.</li>
+<li>Library version was changed to <code>15.0.0.0</code> to support backwards compatibility with On-Premises SharePoint 2013, as well as SharePoint 2016 and Online.</li>
+<li>Some redundant tags should be deleted from the package received in fiddler (it's almost clear from the start what is redundant when observing the package).</li>
+<li>IDs represent the flow or chain and reflect the CSOM sequence. They are different from a request to request, but if to freeze them static and request again and again request works. So I decided to leave IDs static.</li>
+<li>Parameters in {{ doubleCurlyBraces }} are dynamic, they replaced in runtime with actual values by JavaScript code. Package for sure should not include any {{ }}. It's an artifact of Handlebars templating engine used.</li>
 </ul>
 
-<p>getAllTerms, setTermName and deprecateTerm example wrappers can be seen in <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/mmd.js">sp-screwdriver</a> too.</p>
+<p>getAllTerms, setTermName and deprecateTerm example wrappers can be found in <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/mmd.js">sp-screwdriver</a> library sources on GitHub.</p>
 
-<p>After the wrapper methods are implemented, Node.js receives a capability to run a request like:</p>
+<p>After the wrapper methods are implemented, the usage can be straightforward:</p>
 
 <pre><code class="language-javascript">let Screwdriver = require('sp-scredriver');  
 let context = require('./path_to_private_settings');  
@@ -1030,11 +1029,11 @@ screw.mmd.getAllTerms(data)
     .catch(err =&gt; console.log('Error:', err.message));
 </code></pre>
 
-<p>For myself, it was a nice way extending Node.js solutions capabilities. Such approach was applied on a couple of projects in Web Jobs, proceeding some information in SharePoint including MMD which was used as a part of architecture in the host solution.</p>
+<p>For myself, it was a nice way extending Node.js solutions capabilities to use not only the REST services but CSOM too. The approach was used on a couple of projects with Web Jobs, proceeding information in SharePoint, including MMD.</p>
 
-<p>Also, working with MMD directly within Node.js code was viable in an Electron application, we implement recently.</p>
+<p>Also, working with MMD directly within Node.js code was viable in a recent Electron application I got to develop.</p>
 
-<p>It's a not a single try to say that the same should not be done in .Net, actually it should, but, at the same time, there are cases of Node.js usage scenarios and it's nice to be able to extend it to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>
+<p>The article doesn't try to say that anyone should use Node.js for similar purposes as I do, as the same can be done in .Net, actually it should. But, at the same time, there are cases where it is nice to have an ability of extending server-side JavaScript to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>
 
             </section>
 
