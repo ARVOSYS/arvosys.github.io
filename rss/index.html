@@ -1,4 +1,80 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Fri, 17 Feb 2017 14:46:33 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Thu, 18 May 2017 07:06:58 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>
+  <p>Expanding scopes of usage of favorite tools</p>
+
+
+<p>I <a href="/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
+
+<p>And what can I say after these months? Now it's one</p>]]&gt;</description><link>/2017/05/18/using-pnp-js-core-outside-a-browser-node-js-environment/<guid ispermalink="false">44738222-d385-43c0-af0c-4510859c05e6</guid><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Thu, 18 May 2017 07:01:43 GMT</pubdate><content url="/content/images/2017/05/sp-pnp-node-2.png" medium="image"></content><encoded>
+  <img src="/content/images/2017/05/sp-pnp-node-2.png" alt="Using PnP JS Core outside a browser (Node.js environment)"><p>Expanding scopes of usage of favorite tools</p>
+
+
+<p>I <a href="/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
+
+<p>And what can I say after these months? Now it's one of the must have dependencies on any new front-end project I scaffold for SharePoint. I almost have forgotten when I needed to grab old fellow JSOM (sp.js) for the reason of communication with SharePoint API within a UI application. It works almost for anything available in REST API. There are some gaps and scenarios in the API when REST have no existing methods implementation (<a href="https://github.com/SharePoint/PnP-JS-Core/issues/415">Manage Metadata</a>, some areas of <a href="/2017/02/16/working-with-sharepoint-ups-in-node-js/">User Profiles Services</a>, <a href="https://github.com/SharePoint/PnP-JS-Core/issues/455">indexed properties</a>, etc.) though it's not something which you need very often in UI application. For the methods, what are there in the REST API, PnP JS Core is an awesome shiny tool.</p>
+
+<p>With time, I faced a couple of project needs where I got to fetch some metadata and data within Node.js using REST where hands themselves started writing in PnP JS Core. Yes, I know that it's not a big deal to prepare REST endpoint URIs and some JSON packages for such tasks. But it's a question of reusability and convenience writing code using your favorite API wrapper.</p>
+
+<p>Luckily, I was not along with such an idea and some folks already <a href="https://blogs.msdn.microsoft.com/patrickrodgers/2016/10/17/using-pnp-js-core-and-node-sp-auth/">experimented</a> with it and even created <a href="https://github.com/s-KaiNet/node-pnpjs-sample">examples</a> on GitHub. It was a matter of minutes to grab those concepts and successfully run PnP JS Core in Node.js on the server side.</p>
+
+<p>The suggested method with "patching" global variables, request headers and fetch client worked perfectly on a production for a couple of different things, one of which is extracting metadata for almost 20 hundred different SharePoint artifact elements.</p>
+
+<p>Month later, I faced a need to reuse the technique and not just once but for a number of times.</p>
+
+<p>Well, it was a perfect time to wrap fetch client patching code into some reusable way and avoid copy &amp; pasting between the projects. Said and done. I created a library named <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a>, which abstracts away any http request patching experience and allows minify extra code.</p>
+
+<p>One can install dependency with NPM or Yarn:</p>
+
+<p><strong>NPM</strong></p>
+
+<pre><code class="language-bash">npm install sp-pnp-node --save  
+</code></pre>
+
+<p><strong>Yarn</strong></p>
+
+<pre><code class="language-bash">yarn add sp-pnp-node --save  
+</code></pre>
+
+<p>Then start using it in server side JavaScript or TypeScript.</p>
+
+<p><strong>Usage in TypeScript</strong></p>
+
+<pre><code class="language-javascript">import { PnPNode } from 'sp-pnp-node';  
+import { Web } from 'sp-pnp-js';
+
+(new PnPNode()).init().then((settings) =&gt; {
+
+    // Here goes PnP JS Core code
+    let web: Web = new Web(settings.siteUrl);
+    // ... do whatever you like with PnP JS Core
+
+});
+</code></pre>
+
+<p><strong>Usage in ES6</strong></p>
+
+<pre><code class="language-javascript">const PnPNode = require('sp-pnp-node').PnPNode;  
+const pnp = require('sp-pnp-js');
+
+(new PnPNode()).init().then((settings) =&gt; {
+
+    // Here goes PnP JS Core code
+    let web = new pnp.Web(settings.siteUrl);
+    // ... do whatever you like with PnP JS Core
+
+});
+</code></pre>
+
+<p>Three additional lines of code and you are in ready PnP JS Core'ing.</p>
+
+<p>It's possible to define some extra settings, yet my number one idea was to make it as simple to use as possible. So, a new object instance of <code>PnPNode</code> can be created with a default settings by providing no configuration parameters in the code at all. What does that mean? How does the lib understand which environment and credentials to use? It will ask for authentication options in a wizard like way and will dump the inputs to a config file, it will even hash your password so it will not be there as a plain text unless you need it to.</p>
+
+<p>Those who familiar with some other projects of myself knows I use <code>node-sp-auth</code> heavily for authentication in SharePoint when dealing with Node.js. To share similar user experience with auth configuration <a href="https://github.com/koltyakov/node-sp-auth-config">node-sp-auth-config</a> was integrated to this lib too. That is <code>node-sp-auth-config</code> in charge for asking and saving these settings.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Once again, I recommend PnP JS Core for the stuff it was designed for. Nine months of constant usage of the library is a strong argument.</p>
+
+<p>Browser is not the only home for PnP JS Core and with tools like <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a> it can be smoothly executed in Node.js (console apps, timer jobs, microservices, electron apps, all of these are benevolent to it).</p>]]&gt;</encoded></item><item><title></title><description>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).
 
 <p>User Profiles services' REST API is much</p>]]&gt;</description><link>/2017/02/16/working-with-sharepoint-ups-in-node-js/<guid ispermalink="false">10e45d85-57b2-4235-aa83-e749998e40b9</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Thu, 16 Feb 2017 13:55:57 GMT</pubdate><content url="/content/images/2017/02/UPS-node.png" medium="image"></content><encoded><p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).</p>
 
