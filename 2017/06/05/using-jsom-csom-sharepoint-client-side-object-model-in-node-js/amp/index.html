@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Working with SharePoint MMD in Node.js</title>
+    <title>Using JSOM (CSOM, SharePoint Client Side Object Model) in Node.js</title>
     <meta name="description" content="">
 
     <meta name="HandheldFriendly" content="True">
@@ -15,32 +15,32 @@
     
     <meta property="og:site_name" content="ARVO Systems Blog">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Working with SharePoint MMD in Node.js">
-    <meta property="og:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
-    <meta property="og:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
-    <meta property="og:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
-    <meta property="article:published_time" content="2017-02-15T15:15:54.000Z">
-    <meta property="article:modified_time" content="2017-02-17T14:46:38.000Z">
+    <meta property="og:title" content="Using JSOM (CSOM, SharePoint Client Side Object Model) in Node.js">
+    <meta property="og:description" content="Intro It's not a secret that it's theoretically feasible to execute SharePoint Client Side Object Model in Node.js. Some folks found a way to master JSOM in Node.js's context around 5 years ago from now. Unfortunately, there was no solid solution as a drop-in library. And you could">
+    <meta property="og:url" content="/2017/06/05/using-jsom-csom-sharepoint-client-side-object-model-in-node-js/">
+    <meta property="og:image" content="/content/images/2017/06/JsomNodeWide.png">
+    <meta property="article:published_time" content="2017-06-05T07:07:56.000Z">
+    <meta property="article:modified_time" content="2017-06-05T07:07:56.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="Node.js">
-    <meta property="article:tag" content="API">
-    <meta property="article:tag" content="SOAP">
     <meta property="article:tag" content="JSOM">
-    <meta property="article:tag" content="MMD">
+    <meta property="article:tag" content="API">
+    <meta property="article:tag" content="TypeScript">
+    <meta property="article:tag" content="JavaScript">
     
     <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Working with SharePoint MMD in Node.js">
-    <meta name="twitter:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
-    <meta name="twitter:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
-    <meta name="twitter:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
+    <meta name="twitter:title" content="Using JSOM (CSOM, SharePoint Client Side Object Model) in Node.js">
+    <meta name="twitter:description" content="Intro It's not a secret that it's theoretically feasible to execute SharePoint Client Side Object Model in Node.js. Some folks found a way to master JSOM in Node.js's context around 5 years ago from now. Unfortunately, there was no solid solution as a drop-in library. And you could">
+    <meta name="twitter:url" content="/2017/06/05/using-jsom-csom-sharepoint-client-side-object-model-in-node-js/">
+    <meta name="twitter:image" content="/content/images/2017/06/JsomNodeWide.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Andrew Koltyakov">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, Node.js, API, SOAP, JSOM, MMD">
+    <meta name="twitter:data2" content="SharePoint, Node.js, JSOM, API, TypeScript, JavaScript">
     <meta name="twitter:creator" content="@AndrewKoltyakov">
-    <meta property="og:image:width" content="1860">
-    <meta property="og:image:height" content="742">
+    <meta property="og:image:width" content="3135">
+    <meta property="og:image:height" content="922">
     
     <script type="application/ld+json">
 {
@@ -73,18 +73,18 @@
         ],
         "description": "SharePoint Front-End Developer"
     },
-    "headline": "Working with SharePoint MMD in Node.js",
-    "url": "/2017/02/15/working-with-sharepoint-mmd-in-node-js/",
-    "datePublished": "2017-02-15T15:15:54.000Z",
-    "dateModified": "2017-02-17T14:46:38.000Z",
+    "headline": "Using JSOM (CSOM, SharePoint Client Side Object Model) in Node.js",
+    "url": "/2017/06/05/using-jsom-csom-sharepoint-client-side-object-model-in-node-js/",
+    "datePublished": "2017-06-05T07:07:56.000Z",
+    "dateModified": "2017-06-05T07:07:56.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "/content/images/2017/02/SharePoint-MMD-Screwdriver.png",
-        "width": 1860,
-        "height": 742
+        "url": "/content/images/2017/06/JsomNodeWide.png",
+        "width": 3135,
+        "height": 922
     },
-    "keywords": "SharePoint, Node.js, API, SOAP, JSOM, MMD",
-    "description": "SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It&#x27;s not an issue when your code lives in a context of a",
+    "keywords": "SharePoint, Node.js, JSOM, API, TypeScript, JavaScript",
+    "description": "Intro It&#x27;s not a secret that it&#x27;s theoretically feasible to execute SharePoint Client Side Object Model in Node.js. Some folks found a way to master JSOM in Node.js&#x27;s context around 5 years ago from now. Unfortunately, there was no solid solution as a drop-in library. And you could",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://external.arvosys.com:2368"
@@ -862,7 +862,7 @@
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-    
+    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
 
 </head>
 
@@ -877,163 +877,136 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">Working with SharePoint MMD in Node.js</h1>
+                <h1 class="post-title">Using JSOM (CSOM, SharePoint Client Side Object Model) in Node.js</h1>
                 <section class="post-meta">
                     <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
-                    <time class="post-date" datetime="2017-02-15">2017-02-15</time>
+                    <time class="post-date" datetime="2017-06-05">2017-06-05</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" width="600" height="400" layout="responsive"></amp-img>
+                <amp-img src="/content/images/2017/06/JsomNodeWide.png" width="600" height="400" layout="responsive"></amp-img>
             </figure>
             <section class="post-content">
 
-                <p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM will be the most obvious answer probably. But what if you are limited in choice language to use or a runtime environment, in other words, when .Net is not an option?n?</p>
+                <h2 id="intro">Intro</h2>
 
-<p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to own a basic layer of functionality for manipulating Managed Metadata (Taxonomy), such options as:</p>
+<p>It's not a secret that it's theoretically feasible to execute SharePoint Client Side Object Model in Node.js. Some folks found a way to master <a href="https://gist.github.com/lstak/2404924">JSOM in Node.js's context</a> around 5 years ago from now.</p>
 
-<ul>
-<li>Get child terms in a term set</li>
-<li>Get child terms in a parent term</li>
-<li>Get a specific term</li>
-<li>Add new term</li>
-<li>Update a term</li>
-<li>Deprecate a term</li>
-<li>Get all terms (for relatively small dictionaries)</li>
-</ul>
+<p>Unfortunately, there was no solid solution as a drop-in library. And you could struggle for hours before the "hack" will work for you. And when you needed to switch to a different SharePoint environment with different authentication strategy and your were in trouble.</p>
 
-<p>The easiest solution for some basic operations can be SOAP services. Yes, SharePoint SOAP services are deprecated and they smell like mammoth fossils. But still there and work.</p>
+<p>You might say, how about <a href="https://github.com/vgrem/CSOMNode">CSOMNode</a> project by Vadim Gremyachev, which is already a drop in library ready to use. Well, it's a nice library and it was the inspiration point for me, actually, but it is limited with SAML and Add-in Only authentication strategies and I'm not sure that guys have enough time to support the project with delivering new breaking features. At least the issue asking for NTLM authentication is unanswered for eight months, another issue with authentication also stays untouched. I can understand it as rough time limitations of the author for such side projects.</p>
 
-<p>There is a SOAP service for dealing with MMD <code>/_vti_bin/TaxonomyClientService.asmx</code>. Let's take a look at it. The service represents the following methods:</p>
+<p>In my case, I needed the same exact authentication methods which are missed in CSOMNode. On other projects, I use <a href="https://www.npmjs.com/package/node-sp-auth">node-sp-auth</a>, which provides a plenty of different authentication strategies and have a wonderful support from the author.</p>
 
-<ul>
-<li>AddTerms</li>
-<li>GetChildTermsInTerm</li>
-<li>GetChildTermsInTermSet</li>
-<li>GetKeywordTermsByGuids</li>
-<li>GetTermSets</li>
-<li>GetTermsByLabel</li>
-</ul>
+<p>Also I needed JSOM in Node.js functionality very urgently for one of recent tasks with integration testing.</p>
 
-<p>One can consume these in Node.js using almost any http request module with authentication cookie encapsulation into request headers. Likely, there is no need to figure out in low level transport, all these authentication and SharePoint requests libraries exist and are here in our disposal, abstracting scary moments away. I'm describing <a href="https://github.com/s-KaiNet/sp-request">sp-request</a> with <a href="https://github.com/s-KaiNet/node-sp-auth">node-sp-auth</a>.</p>
+<p>My first idea was to contribute to CSOMNode and suggest or integrate <code>node-sp-auth</code> by myself and send a Pull Request. After spending some time with the project's code I understood that my PR won't likely be merged soon or at all. I know from my own experience that when an author has an opinion about his approaches, code style, structure, etc., you just can't provide too complex PR and breaking changes even if they are awesome. My changes were going to be such, I mean complex, it's up to you to decide if it's awesome. Also, I have an allergy for writing libraries in pure JavaScript lately and omitting linting rules. But that's my own personal requirement for the code that should be supported later on.</p>
 
-<p><code>sp-request</code> module can easily talk to SharePoint SOAP service like this:</p>
+<p>With all these circumstances in mind I started writing my own version of the library for landing JSOM into Node.js context with a variety of authentication mechanisms.</p>
 
-<pre><code class="language-javascript">const baseUrl = 'https://contoso.sharepoint.com/sites/site';  
-let authObject = { ... }; // node-sp-auth authentication format  
-let request = require('sp-request').create(authObject);  
-let headers = {};
+<h2 id="jsominnodejs">JSOM in Node.js</h2>
 
-let soapBody = `  
-   ... // XML SOAP body for a specific method
-`;
+<p>The algorithm of landing JSOM to Node in general is pretty simple: <br>
+- Adjust global Node.js context to pretend to be a browser (<a href="https://github.com/koltyakov/sp-jsom-node/blob/master/src/JsomNode.ts#L75">in code</a>)
+- Load and eval JSOM JavaScript files' content in a specific order (<a href="https://github.com/koltyakov/sp-jsom-node/blob/master/src/JsomNode.ts#L142">in code</a>)
+- Patch some variables and object to eliminate a couple of issues (e.i. <a href="https://github.com/koltyakov/sp-jsom-node/blob/master/src/JsomNode.ts#L162">microsoft ajax</a>)
+- Inject authentication headers into the requests to the server (<a href="https://github.com/koltyakov/sp-jsom-node/blob/master/src/JsomNode.ts#L179">in code</a>)</p>
 
-headers['Accept'] = 'application/xml, text/xml, */*; q=0.01';  
-headers['Content-Type'] = 'text/xml;charset=\"UTF-8\"';  
-headers['X-Requested-With'] = 'XMLHttpRequest';  
-headers['Content-Length'] = soapBody.length;
+<p>Mimic browser, loading JSOM JavaScripts and patching variables and object is a trivial part, and mostly had been taken from CSOMNode with some refactoring and conversion to TypeScript. You could check a specific parts in code.</p>
 
-request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {  
-  headers: headers,
-  body: soapBody,
-  json: false
-})
-  .then(response =&gt; {
-    // Proceed the responce object
-  })
-  .catch(err =&gt; console.log(err));
+<p>Injecting authentication headers into the requests is really the most complex part.</p>
+
+<p>JavaScript Client Side Object Model uses Microsoft Ajax library and XmlHttpRequest. What can I say?... I don't like their company much.</p>
+
+<p>Initially I planned getting authentication headers and injecting them to all requests in <code>add_executingWebRequest</code> method.</p>
+
+<pre><code class="language-javascript">clientContext.add_executingWebRequest((sender, e) =&gt; {  
+    let headers = e.get_webRequest().get_headers();
+    for (let header of Object.keys(auth)) {
+        if (['Cookie', 'Authorization'].indexOf(header) !== -1) {
+            headers[header] = auth[header];
+        }
+    }
+});
 </code></pre>
 
-<p>It can be tricky to figure out with SOAP packages for some methods sometimes, some SOAP operations descriptions are not perfect. Good thing is that any related to SharePoint SOAP services information also is relevant for Node.js use cases.</p>
+<p>As a result, requests are sent with custom headers.</p>
 
-<p>I wrapped some methods in an library with the name <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a>. It is not for production purposes as-is, it can act as a start point or example how to consume APIs.</p>
+<p>And it worked... only to FedAuth cookies and Bearer authorization... and didn't for NTLM tokens for example.</p>
 
-<p>Here we're standing in front of another wall, those SOAP interfaces are sometimes featureless and offer only a limited number of actions, it's true with MMD at least. What about editing existing terms, how to request all them in a single call, how to do more?</p>
+<p>The struggle was hard, really hard. I ended up with the idea that I should not use any XmlHttpRequest emulators and wrap my own proxy level into WebRequestManager's <code>executeRequest</code> method.</p>
 
-<p>Here I use a little hack, which includes the following workflow:</p>
+<p>Original <code>Sys.Net._WebRequestManager.prototype.executeRequest</code> receives web request object and applies it to XmlHttpRequest.</p>
 
-<ul>
-<li>Create the desired operation in JSOM</li>
-<li>Run it in the browser monitoring actual request body in fiddler </li>
-<li>Parse a package which was generated and sent to <code>/_vti_bin/client.svc/ProcessQuery</code></li>
-<li>Re-create the package for re-usability and wrap it inside a Node.js method talking to client.svc</li>
-</ul>
+<p>In my <a href="https://github.com/koltyakov/sp-jsom-node/blob/master/src/JsomNode.ts#L179">implementation</a>, Sys.Net._WebRequestManager.prototype.executeRequest is completely rewritten to use <a href="https://www.npmjs.com/package/sp-request">sp-request</a>. It's in charge of injecting auth headers and X-RequestDigest, which works smoothly for almost any kind of auth, including NTML, ADFS and FBA.</p>
 
-<p>For example, request, to set term name, looks like:</p>
+<h2 id="usingexamples">Using examples</h2>
 
-<pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009"  
-      SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" 
-      ApplicationName="Javascript Library"&gt;
-    &lt;Actions&gt;
-        &lt;SetProperty Id="166" ObjectPathId="157" Name="Name"&gt;
-            &lt;Parameter Type="String"&gt;{{ newName }}&lt;/Parameter&gt;
-        &lt;/SetProperty&gt;
-    &lt;/Actions&gt;
-    &lt;ObjectPaths&gt;
-        &lt;StaticMethod Id="146" 
-           Name="GetTaxonomySession" 
-           TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" /&gt;
-        &lt;Property Id="149" ParentId="146" Name="TermStores" /&gt;
-        &lt;Method Id="151" ParentId="149" Name="GetByName"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ serviceName }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-        &lt;Method Id="154" ParentId="151" Name="GetTermSet"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ termSetId }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-        &lt;Method Id="157" ParentId="154" Name="GetTerm"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ termId }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-    &lt;/ObjectPaths&gt;
-&lt;/Request&gt;  
+<p>Oh, so much lyrics above. Let's start coding JSOM in Node.js without headache.</p>
+
+<p>Let me introduce you <a href="https://github.com/koltyakov/sp-jsom-node"><code>sp-jsom-node</code></a> library, or JsomNode.</p>
+
+<p><amp-anim src="https://raw.githubusercontent.com/koltyakov/sp-jsom-node/master/docs/imgs/JsomNode.demo.gif" alt="JsomNode Demo" width="766" height="685" layout="responsive"></amp-anim></p>
+
+<p>First, we need a Node.js project and install the library:</p>
+
+<pre><code class="language-bash">npm install sp-jsom-node --save  
 </code></pre>
 
-<p>Some comments to the format:</p>
+<p>After <code>sp-jsom-node</code> is installed, it can be used in TypeScript or JavaScript. I'm going to provide all examples in TypeScript and I assume you have TypeScript global modules (like, typescript, ts-node, tslint, etc.) installed.</p>
 
-<ul>
-<li>Library version was changed to <code>15.0.0.0</code> to support backwards compatibility with On-Premises SharePoint 2013, as well as SharePoint 2016 and Online.</li>
-<li>Some redundant tags should be deleted from the package received in fiddler (it's almost clear from the start what is redundant when observing the package).</li>
-<li>IDs represent the flow or chain and reflect the CSOM sequence. They are different from a request to request, but if to freeze them static and request again and again request works. So I decided to leave IDs static.</li>
-<li>Parameters in {{ doubleCurlyBraces }} are dynamic, they replaced in runtime with actual values by JavaScript code. Package for sure should not include any {{ }}. It's an artifact of Handlebars templating engine used.</li>
-</ul>
+<p>Next, let's create an index.ts (or any) and paste in the following code snippet:</p>
 
-<p>getAllTerms, setTermName and deprecateTerm example wrappers can be found in <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/mmd.js">sp-screwdriver</a> library sources on GitHub.</p>
+<pre><code class="language-javascript">import { JsomNode } from 'sp-jsom-node';
 
-<p>After the wrapper methods are implemented, the usage can be straightforward:</p>
+(new JsomNode()).wizard().then((settings) =&gt; {
 
-<pre><code class="language-javascript">let Screwdriver = require('sp-scredriver');  
-let context = require('./path_to_private_settings');  
-let screw = new Screwdriver(context);
+    // Here we are, ready fo JSOM
 
-let data = {  
-    baseUrl: context.siteUrl,
-    serviceName: config.mmd.serviceName,
-    termSetId: config.mmd.termSetId,
-    properties: [
-        'Id', 'Name', 'Description', 'CustomProperties',
-        'IsRoot', 'IsDeprecated', 'PathOfTerm',
-        'IsAvailableForTagging', 'Parent'
-    ]
+    const ctx = SP.ClientContext.get_current();
+    const oWeb = ctx.get_web();
+
+    ctx.load(oWeb);
+
+    ctx.executeQueryAsync(() =&gt; {
+        console.log(oWeb.get_title());
+    }, (sender, args) =&gt; {
+        console.log(args.get_message());
+    });
+
+
+}).catch(console.log);
+</code></pre>
+
+<p>This is the minimal setup without overwhelming configuration.</p>
+
+<p>In this mode, without initial configuration, if we run <code>ts-node ./index.ts</code> we'll be prompted to target to a specific SharePoint site and provide credentials. A subsequent script run re-uses saved configuration parameters and doesn't prompt no more.</p>
+
+<p>If you do not like wizards and prefer manual configuration, no problem:</p>
+
+<pre><code class="language-javascript">import { JsomNode, IJsomNodeSettings } from 'sp-jsom-node';
+
+let settings: any = require('./config/private.json');
+
+let jsomNodeOptions: IJsomNodeSettings = {  
+    siteUrl: settings.siteUrl,
+    authOptions: {
+        ...(settings as any)
+    }
 };
 
-screw.mmd.getAllTerms(data)  
-    .then(response =&gt; {
-        let results = JSON.parse(response.body);
-        console.log("Response:", results);
-    })
-    .catch(err =&gt; console.log('Error:', err.message));
+(new JsomNode(jsomNodeOptions)).init();
+
+/// ... &lt;&lt;&lt; JSOM can be used here
 </code></pre>
 
-<p>For myself, it was a nice way extending Node.js solutions capabilities to use not only the REST services but CSOM too. The approach was used on a couple of projects with Web Jobs, proceeding information in SharePoint, including MMD.</p>
+<p>The project contains integration tests (I test recent libraries with SharePoint Online, SharePoint 2016 and 2013) and example for a quick start which can be downloaded for first experiments with the library.</p>
 
-<p>Also, working with MMD directly within Node.js code was viable in a recent Electron application I got to develop.</p>
+<h2 id="conclusion">Conclusion</h2>
 
-<p>The article doesn't try to say that anyone should use Node.js for similar purposes as I do, as the same can be done in .Net, actually it should. But, at the same time, there are cases where it is nice to have an ability of extending server-side JavaScript to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>
+<p>If you need JSOM in Node.js for any crazy or rational reasons and something prevented you from doing this, welcome on board with <code>sp-jsom-node</code>. And don't forget to comment about your use cases.</p>
+
+<p>I truly hope the library will find its users and that it wasn't developed only for the tasks I needed to be solved.</p>
 
             </section>
 
