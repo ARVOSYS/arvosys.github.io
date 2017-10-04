@@ -1,0 +1,1368 @@
+
+<head>
+    <meta charset="utf-8">
+
+    <title>SharePoint front-end projects automation and tasks tool-belt</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <link rel="shortcut icon" href="../../../../../favicon.ico">
+
+    <link rel="canonical" href="../index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="ARVO Systems Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SharePoint front-end projects automation and tasks tool-belt">
+    <meta property="og:description" content="I was highly requested to document SharePoint Push &amp;amp; Pull generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head. The generator is the way to">
+    <meta property="og:url" content="/2017/10/04/sharepoint-front-end-projects-automation-and-tasks-tool-belt/">
+    <meta property="og:image" content="/content/images/2017/10/sp-build-tasks.jpg">
+    <meta property="article:published_time" content="2017-10-04T15:53:34.000Z">
+    <meta property="article:modified_time" content="2017-10-04T16:13:44.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Yeoman">
+    <meta property="article:tag" content="Front-End">
+    <meta property="article:tag" content="Build">
+    <meta property="article:tag" content="Tasks">
+    <meta property="article:tag" content="Automation">
+    
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SharePoint front-end projects automation and tasks tool-belt">
+    <meta name="twitter:description" content="I was highly requested to document SharePoint Push &amp;amp; Pull generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head. The generator is the way to">
+    <meta name="twitter:url" content="/2017/10/04/sharepoint-front-end-projects-automation-and-tasks-tool-belt/">
+    <meta name="twitter:image" content="/content/images/2017/10/sp-build-tasks.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, Yeoman, Front-End, Build, Tasks, Automation">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="400">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ARVO Systems Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/content/images/2016/09/arvo_logo_105px.png",
+            "width": 105,
+            "height": 42
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Andrew Koltyakov",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/content/images/2016/09/andrew.koltyakov.jpg",
+            "width": 460,
+            "height": 460
+        },
+        "url": "/author/andrew/",
+        "sameAs": [
+            "http://koltyakov.ru",
+            "https://www.facebook.com/andrew.koltyakov",
+            "https://twitter.com/AndrewKoltyakov"
+        ],
+        "description": "SharePoint Front-End Developer"
+    },
+    "headline": "SharePoint front-end projects automation and tasks tool-belt",
+    "url": "/2017/10/04/sharepoint-front-end-projects-automation-and-tasks-tool-belt/",
+    "datePublished": "2017-10-04T15:53:34.000Z",
+    "dateModified": "2017-10-04T16:13:44.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/content/images/2017/10/sp-build-tasks.jpg",
+        "width": 1920,
+        "height": 400
+    },
+    "keywords": "SharePoint, Yeoman, Front-End, Build, Tasks, Automation",
+    "description": "I was highly requested to document SharePoint Push &amp;amp; Pull generator projects&#x27; build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head. The generator is the way to",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://external.arvosys.com:2368"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
+    <style amp-custom>
+        /* ==========================================================================
+           Table of Contents
+           ========================================================================== */
+
+        /*
+
+            0. Normalize
+            1. General
+            2. Utilities
+            3. AMP Post
+            4. Footer
+
+        */
+
+        /* ==========================================================================
+           0. normalize.css v3.0.3 | MIT License | git.io/normalize | (minified)
+           ========================================================================== */
+
+        html {
+            font-family: sans-serif;
+
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        body {
+            margin: 0;
+        }
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        main,
+        menu,
+        nav,
+        section,
+        summary {
+            display: block;
+        }
+        audio,
+        canvas,
+        progress,
+        video {
+            display: inline-block;
+            vertical-align: baseline;
+        }
+        audio:not([controls]) {
+            display: none;
+            height: 0;
+        }
+        [hidden],
+        template {
+            display: none;
+        }
+        a {
+            background-color: transparent;
+        }
+        a:active,
+        a:hover {
+            outline: 0;
+        }
+        abbr[title] {
+            border-bottom: 1px dotted;
+        }
+        b,
+        strong {
+            font-weight: bold;
+        }
+        dfn {
+            font-style: italic;
+        }
+        h1 {
+            margin: 0.67em 0;
+            font-size: 2em;
+        }
+        mark {
+            background: #ff0;
+            color: #000;
+        }
+        small {
+            font-size: 80%;
+        }
+        sub,
+        sup {
+            position: relative;
+            vertical-align: baseline;
+            font-size: 75%;
+            line-height: 0;
+        }
+        sup {
+            top: -0.5em;
+        }
+        sub {
+            bottom: -0.25em;
+        }
+        img {
+            border: 0;
+        }
+        amp-img {
+            border: 0;
+        }
+        svg:not(:root) {
+            overflow: hidden;
+        }
+        figure {
+            margin: 1em 40px;
+        }
+        hr {
+            box-sizing: content-box;
+            height: 0;
+        }
+        pre {
+            overflow: auto;
+        }
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: monospace, monospace;
+            font-size: 1em;
+        }
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            margin: 0;
+            color: inherit;
+            font: inherit;
+        }
+        button {
+            overflow: visible;
+        }
+        button,
+        select {
+            text-transform: none;
+        }
+        button,
+        html input[type="button"],
+        input[type="reset"],
+        input[type="submit"] {
+            cursor: pointer;
+
+            -webkit-appearance: button;
+        }
+        button[disabled],
+        html input[disabled] {
+            cursor: default;
+        }
+        button::-moz-focus-inner,
+        input::-moz-focus-inner {
+            padding: 0;
+            border: 0;
+        }
+        input {
+            line-height: normal;
+        }
+        input[type="checkbox"],
+        input[type="radio"] {
+            box-sizing: border-box;
+            padding: 0;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            height: auto;
+        }
+        input[type="search"] {
+            -webkit-appearance: textfield;
+        }
+        input[type="search"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-decoration {
+            -webkit-appearance: none;
+        }
+        fieldset {
+            margin: 0 2px;
+            padding: 0.35em 0.625em 0.75em;
+            border: 1px solid #c0c0c0;
+        }
+        legend {
+            padding: 0;
+            border: 0;
+        }
+        textarea {
+            overflow: auto;
+        }
+        optgroup {
+            font-weight: bold;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        td,
+        th {
+            padding: 0;
+        }
+
+
+        /* ==========================================================================
+           1. General - Setting up some base styles
+           ========================================================================== */
+
+        html {
+            max-height: 100%;
+            height: 100%;
+            font-size: 62.5%;
+
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        body {
+            max-height: 100%;
+            height: 100%;
+            color: #3a4145;
+            background: #f4f8fb;
+            letter-spacing: 0.01rem;
+            font-family: "Merriweather", serif;
+            font-size: 1.8rem;
+            line-height: 1.75em;
+            text-rendering: geometricPrecision;
+
+            -webkit-font-feature-settings: "kern" 1;
+            -moz-font-feature-settings: "kern" 1;
+            -o-font-feature-settings: "kern" 1;
+        }
+
+        ::-moz-selection {
+            background: #d6edff;
+        }
+
+        ::selection {
+            background: #d6edff;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0 0 0.3em 0;
+            color: #2e2e2e;
+            font-family: "Open Sans", sans-serif;
+            line-height: 1.15em;
+            text-rendering: geometricPrecision;
+
+            -webkit-font-feature-settings: "dlig" 1, "liga" 1, "lnum" 1, "kern" 1;
+            -moz-font-feature-settings: "dlig" 1, "liga" 1, "lnum" 1, "kern" 1;
+            -o-font-feature-settings: "dlig" 1, "liga" 1, "lnum" 1, "kern" 1;
+        }
+
+        h1 {
+            text-indent: -2px;
+            letter-spacing: -1px;
+            font-size: 2.6rem;
+        }
+
+        h2 {
+            letter-spacing: 0;
+            font-size: 2.4rem;
+        }
+
+        h3 {
+            letter-spacing: -0.6px;
+            font-size: 2.1rem;
+        }
+
+        h4 {
+            font-size: 1.9rem;
+        }
+
+        h5 {
+            font-size: 1.8rem;
+        }
+
+        h6 {
+            font-size: 1.8rem;
+        }
+
+        a {
+            color: #4a4a4a;
+        }
+
+        a:hover {
+            color: #111;
+        }
+
+        p,
+        ul,
+        ol,
+        dl {
+            margin: 0 0 2.5rem 0;
+            font-size: 1.5rem;
+            text-rendering: geometricPrecision;
+
+            -webkit-font-feature-settings: "liga" 1, "onum" 1, "kern" 1;
+            -moz-font-feature-settings: "liga" 1, "onum" 1, "kern" 1;
+            -o-font-feature-settings: "liga" 1, "onum" 1, "kern" 1;
+        }
+
+        ol,
+        ul {
+            padding-left: 2em;
+        }
+
+        ol ol,
+        ul ul,
+        ul ol,
+        ol ul {
+            margin: 0 0 0.4em 0;
+            padding-left: 2em;
+        }
+
+        dl dt {
+            float: left;
+            clear: left;
+            overflow: hidden;
+            margin-bottom: 1em;
+            width: 180px;
+            text-align: right;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 700;
+        }
+
+        dl dd {
+            margin-bottom: 1em;
+            margin-left: 200px;
+        }
+
+        li {
+            margin: 0.4em 0;
+        }
+
+        li li {
+            margin: 0;
+        }
+
+        hr {
+            display: block;
+            margin: 1.75em 0;
+            padding: 0;
+            height: 1px;
+            border: 0;
+            border-top: #efefef 1px solid;
+        }
+
+        blockquote {
+            box-sizing: border-box;
+            margin: 1.75em 0 1.75em 0;
+            padding: 0 0 0 1.75em;
+            border-left: #4a4a4a 0.4em solid;
+
+            -moz-box-sizing: border-box;
+        }
+
+        blockquote p {
+            margin: 0.8em 0;
+            font-style: italic;
+        }
+
+        blockquote small {
+            display: inline-block;
+            margin: 0.8em 0 0.8em 1.5em;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+
+        blockquote small:before {
+            content: "\2014 \00A0";
+        }
+
+        blockquote cite {
+            font-weight: 700;
+        }
+
+        blockquote cite a {
+            font-weight: normal;
+        }
+
+        mark {
+            background-color: #fdffb6;
+        }
+
+        code,
+        tt {
+            padding: 1px 3px;
+            border: #e3edf3 1px solid;
+            background: #f7fafb;
+            border-radius: 2px;
+            white-space: pre-wrap;
+            font-family: Inconsolata, monospace, sans-serif;
+            font-size: 0.85em;
+            font-feature-settings: "liga" 0;
+
+            -webkit-font-feature-settings: "liga" 0;
+            -moz-font-feature-settings: "liga" 0;
+        }
+
+        pre {
+            overflow: auto;
+            box-sizing: border-box;
+            margin: 0 0 1.75em 0;
+            padding: 10px;
+            width: 100%;
+            border: #e3edf3 1px solid;
+            background: #f7fafb;
+            border-radius: 3px;
+            white-space: pre;
+            font-family: Inconsolata, monospace, sans-serif;
+            font-size: 0.9em;
+
+            -moz-box-sizing: border-box;
+        }
+
+        pre code,
+        pre tt {
+            padding: 0;
+            border: none;
+            background: transparent;
+            white-space: pre-wrap;
+            font-size: inherit;
+        }
+
+        kbd {
+            display: inline-block;
+            margin-bottom: 0.4em;
+            padding: 1px 8px;
+            border: #ccc 1px solid;
+            background: #f4f4f4;
+            border-radius: 4px;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2),
+            0 1px 0 0 #fff inset;
+            color: #666;
+            text-shadow: #fff 0 1px 0;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+
+        table {
+            box-sizing: border-box;
+            margin: 1.75em 0;
+            max-width: 100%;
+            width: 100%;
+            background-color: transparent;
+
+            -moz-box-sizing: border-box;
+        }
+
+        table th,
+        table td {
+            padding: 8px;
+            border-top: #efefef 1px solid;
+            vertical-align: top;
+            text-align: left;
+            line-height: 20px;
+        }
+
+        table th {
+            color: #000;
+        }
+
+        table caption + thead tr:first-child th,
+        table caption + thead tr:first-child td,
+        table colgroup + thead tr:first-child th,
+        table colgroup + thead tr:first-child td,
+        table thead:first-child tr:first-child th,
+        table thead:first-child tr:first-child td {
+            border-top: 0;
+        }
+
+        table tbody + tbody {
+            border-top: #efefef 2px solid;
+        }
+
+        table table table {
+            background-color: #fff;
+        }
+
+        table tbody > tr:nth-child(odd) > td,
+        table tbody > tr:nth-child(odd) > th {
+            background-color: #f6f6f6;
+        }
+
+        table.plain tbody > tr:nth-child(odd) > td,
+        table.plain tbody > tr:nth-child(odd) > th {
+            background: transparent;
+        }
+
+        iframe,
+        amp-iframe,
+        .fluid-width-video-wrapper {
+            display: block;
+            margin: 1.75em 0;
+        }
+
+        /* When a video is inside the fitvids wrapper, drop the
+        margin on the iframe, cause it breaks stuff. */
+        .fluid-width-video-wrapper iframe,
+        .fluid-width-video-wrapper amp-iframe {
+            margin: 0;
+        }
+
+        textarea,
+        select,
+        input {
+            margin: 0 0 5px 0;
+            padding: 6px 9px;
+            width: 260px;
+            outline: 0;
+            border: #e7eef2 1px solid;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: none;
+            font-family: "Open Sans", sans-serif;
+            font-size: 1.6rem;
+            line-height: 1.4em;
+            font-weight: 100;
+
+            -webkit-appearance: none;
+        }
+
+        textarea {
+            min-width: 250px;
+            min-height: 80px;
+            max-width: 340px;
+            width: 100%;
+            height: auto;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="search"]:focus,
+        input[type="tel"]:focus,
+        input[type="url"]:focus,
+        input[type="password"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        input[type="month"]:focus,
+        input[type="week"]:focus,
+        input[type="time"]:focus,
+        input[type="datetime"]:focus,
+        input[type="datetime-local"]:focus,
+        textarea:focus {
+            outline: none;
+            outline-width: 0;
+            border: #bbc7cc 1px solid;
+            background: #fff;
+        }
+
+        select {
+            width: 270px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        /* ==========================================================================
+           2. Utilities
+           ========================================================================== */
+
+        /* Clears shit */
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
+        }
+        .clearfix:after {
+            clear: both;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+
+        /* ==========================================================================
+           3. AMP Post
+           ========================================================================== */
+
+
+
+        .main-header {
+            position: relative;
+            display: table;
+            overflow: hidden;
+            box-sizing: border-box;
+            width: 100%;
+            height: 50px;
+            background: #5ba4e5 no-repeat center center;
+            background-size: cover;
+            text-align: left;
+
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .content {
+            background: #fff;
+            padding-top: 15px;
+        }
+        .blog-title,
+        .content {
+            margin: auto;
+            max-width: 600px;
+        }
+
+        .blog-title a {
+            display: block;
+            padding-right: 16px;
+            padding-left: 16px;
+            height: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-family: "Open Sans", sans-serif;
+            font-size: 16px;
+            line-height: 50px;
+            font-weight: 600;
+        }
+
+        .post {
+            position: relative;
+            margin-top: 0;
+            margin-right: 16px;
+            margin-left: 16px;
+            padding-bottom: 0;
+            max-width: 100%;
+            border-bottom: #ebf2f6 1px solid;
+            word-wrap: break-word;
+            font-size: 0.95em;
+            line-height: 1.65em;
+        }
+
+        .post-header {
+            margin-bottom: 1rem;
+        }
+
+        .post-title {
+            margin-bottom: 0;
+        }
+
+        .post-title a {
+            text-decoration: none;
+        }
+
+        .post-meta {
+            display: block;
+            margin: 3px 0 0 0;
+            color: #9eabb3;
+            font-family: "Open Sans", sans-serif;
+            font-size: 1.3rem;
+            line-height: 2.2rem;
+        }
+
+        .post-meta a {
+            color: #9eabb3;
+            text-decoration: none;
+        }
+
+        .post-meta a:hover {
+            text-decoration: underline;
+        }
+
+        .post-meta .author {
+            margin: 0;
+            font-size: 1.3rem;
+            line-height: 1.3em;
+        }
+
+        .post-date {
+            display: inline-block;
+            text-transform: uppercase;
+            white-space: nowrap;
+            font-size: 1.2rem;
+            line-height: 1.2em;
+        }
+
+        .post-image {
+            margin: 0;
+            padding-top: 3rem;
+            padding-bottom: 30px;
+            border-top: 1px #E8E8E8 solid;
+        }
+
+        /* Keep images centered, and allow images wider than the main
+           text column to break out. */
+        .post-content amp-img,
+        .post-content amp-anim {
+            /* Centers an image by (1) pushing its left edge to the
+               center of its container and (2) shifting the entire image
+               in the opposite direction by half its own width.
+               Works for images that are larger than their containers. */
+            position: relative;
+            left: 50%;
+            display: block;
+            padding: 0;
+            min-width: 0;
+            max-width: 112%; /* fallback when calc doesn't work */
+            width: calc(100% + 32px); /* expand with to image + margins */
+            height: auto;
+            transform: translateX(-50%);
+
+            -webkit-transform: translateX(-50%); /* for Safari and iOS */
+            -ms-transform: translateX(-50%); /* for IE9 */
+        }
+
+        .footnotes {
+            font-size: 1.3rem;
+            line-height: 1.6em;
+            font-style: italic;
+        }
+
+        .footnotes li {
+            margin: 0.6rem 0;
+        }
+
+        .footnotes p {
+            margin: 0;
+        }
+
+        .footnotes p a:last-child {
+            text-decoration: none;
+        }
+
+        /* ==========================================================================
+           4. Footer - The bottom the AMP Post
+           ========================================================================== */
+
+        .site-footer {
+            position: relative;
+            margin: 0 auto 20px auto;
+            padding: 1rem 15px;
+            max-width: 600px;
+            color: rgba(0,0,0,0.5);
+            font-family: "Open Sans", sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.75em;
+        }
+
+        .site-footer a {
+            color: rgba(0,0,0,0.5);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .site-footer a:hover {
+            border-bottom: #bbc7cc 1px solid;
+        }
+
+        .poweredby {
+            display: block;
+            float: right;
+            width: 45%;
+            text-align: right;
+        }
+
+        .copyright {
+            display: block;
+            float: left;
+            width: 45%;
+        }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="main-header">
+        <nav class="blog-title">
+            <a href="../../../../../">ARVO Systems Blog</a>
+        </nav>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">SharePoint front-end projects automation and tasks tool-belt</h1>
+                <section class="post-meta">
+                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
+                    <time class="post-date" datetime="2017-10-04">2017-10-04</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="/content/images/2017/10/sp-build-tasks.jpg" width="600" height="400" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p>I was highly requested to document <a href="https://github.com/koltyakov/generator-sppp">SharePoint Push &amp; Pull</a> generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head.</p>
+
+<p>The generator is the way to combine libraries and settings together and simplify reusability. There are plenty of different libraries and even technologies to make front-end solution build process smooth and easy.</p>
+
+<p>Also, there is some sort of inception of automation layers. A lot of folks know about <code>generator-sppp</code>, a few really know that most of the magic is spelled by a dependency library called <a href="https://github.com/koltyakov/sp-build-tasks">sp-build-tasks</a>.</p>
+
+<p>Here we're going to dive into the settings. The article is supposed to be long in some parts it accumulates project's <a href="https://github.com/koltyakov/sp-build-tasks/wiki">wiki</a> pages.</p>
+
+<h2 id="spbuildtasks">sp-build-tasks</h2>
+
+<p>The library was designed for usage with SharePoint Push-n-Pull Yeoman generator but can be used as a stand-alone package as well.</p>
+
+<h3 id="recommendedusage">Recommended usage</h3>
+
+<h4 id="checkprerequisites">Check prerequisites</h4>
+
+<ul>
+<li>Node.js</li>
+<li>NPM or Yarn</li>
+<li>Yeoman</li>
+<li>SPPP Yeoman generator</li>
+<li>TypeScript</li>
+</ul>
+
+<pre><code class="language-bash">npm install yarn yo generator-sppp typescript ts-lint -g  
+</code></pre>
+
+<h4 id="createascaffolderproject">Create a scaffolder project</h4>
+
+<p>Run <code>yo sppp</code> in blank folder for a new project.</p>
+
+<pre><code class="language-bash">yo sppp  
+</code></pre>
+
+<h3 id="buildoptions">Build options</h3>
+
+<p>Build options are a layer of settings which can be defined for a project to set up its unique build workflow.</p>
+
+<p>Settings are stored in <code>./config/app.json</code> file.</p>
+
+<p><strong>Example setup:</strong></p>
+
+<pre><code class="language-json">{
+  "spFolder": "_catalogs/masterpage/spf",
+  "distFolder": "./dist",
+
+  "customStyles": [{
+    "src": "styles/frankfurt/frankfurt.scss",
+    "dist": "styles/frankfurt.min.css"
+  }],
+
+  "bundleJSLibsFiles": [
+    "./node_modules/es6-promise/dist/es6-promise.auto.min.js",
+    "./node_modules/whatwg-fetch/fetch.js",
+    "./node_modules/sp-pnp-js/dist/pnp.js"
+  ],
+
+  "bundleCSSLibsFiles": [
+    "./node_modules/datatables/media/css/jquery.dataTables.min.css"
+  ],
+
+  "copyAssetsMap": [{
+    "src": [
+      "./node_modules/datatables/media/images",
+      "./src/images",
+      "./src/scripts/modules/wysiwyg.js"
+    ],
+    "dist": "./dist"
+  }],
+
+  "webpackItemsMap": [{
+    "entry": "./src/scripts/module-a.ts",
+    "target": "module-a.js",
+    "webpackConfig": {
+      "cache": true,
+      "devtool": "source-map",
+      "plugins": []
+    }
+  }],
+  "webpackConfig": {
+    "cache": true,
+    "devtool": "source-map",
+    "plugins": []
+  },
+
+  "masterpagePath": "masterpage/frankfurt.master",
+  "logoPath": "images/logo.png",
+  "masterpageCodeName": "frankfurt",
+  "platformVersion": "2016",
+  "masterpage": {
+    "copyright": {
+      "year": "2017",
+      "title": "Contoso intranet"
+    }
+  }
+}
+</code></pre>
+
+<h4 id="buildoptionsmappingwithsharepoint">Build options: Mapping with SharePoint</h4>
+
+<p>Build tools map local <code>dist</code> folder with remote target folder in SharePoint within site assets document library. <br>
+<code>_catalogs/masterpage/some_folder</code> is recommended.
+<code>SiteAssets/some_folder</code> or <code>Style Library/some_folder</code> or others can be used as well.</p>
+
+<p>SharePoint mapping paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "spFolder": "_catalogs/masterpage/spf",
+    // Publishing SPWeb relative folder path in SharePoint
+    // where files should be uploaded to
+  "distFolder": "./dist",
+    // Local distribution folder with built assets
+    // ready for publishing
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionswebpack">Build options: Webpack</h4>
+
+<p><code>sp-build-tasks</code> uses Webpack for packing scripts.</p>
+
+<p>TypeScript, ES vNext or vanilla JavaScript can be used as script sources by default.</p>
+
+<p>Webpack settings can be defined in <code>./webpack.config.js</code> in a usual for Webpack way. <br>
+There is a built-in configuration and settings layer. <br>
+Webpack build process can be tweaked in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  // webpackItemsMap: Array or entry/target script pairs
+  "webpackItemsMap": [{
+    "entry": "./src/scripts/scriptName.ts",
+      // Relative path to .ts, .js file within the project's folder structure
+    "target": "scriptName.js", 
+      // Relative path to output bundle script within `./dist/stripts` folder
+    "webpackConfig": {} 
+      // Optional Webpack configuration which is added 
+      // to webpack's configs for a specific entry point 
+  }],
+  "webpackConfig": {},
+    // Optional Webpack configuration which is added 
+    // to webpack's configs for all entry points
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionscustomstyles">Build options: Custom styles</h4>
+
+<p><code>sp-build-tasks</code> uses SCSS as a language for CSS sources.
+SCSS files can store raw CSS as well.</p>
+
+<p>SharePoint mapping paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  // customStyles: Array or a single object element src/dist pair 
+  // of source style entry point and output bundle file
+  "customStyles": [{
+    "src": "styles/frankfurt/frankfurt.scss",
+      // Source entry point path
+      // relative to './src'
+    "dist": "styles/frankfurt.min.css"
+      // Output .css file path
+      // relative to './dist'
+  }],
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionsjslibs">Build options: JS Libs</h4>
+
+<p>Build tools can bundle 3rd party JavaScript libraries.</p>
+
+<p>Libraries' JavaScript paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "bundleJSLibsFiles": [
+    "./node_modules/es6-promise/dist/es6-promise.auto.min.js",
+    "./node_modules/whatwg-fetch/fetch.js",
+    "./node_modules/sp-pnp-js/dist/pnp.js"
+  ],
+  ...
+}
+</code></pre>
+
+<p>It's recommended installing 3rd parties using <code>npm</code> or <code>bower</code> then configuring bundling within the build tools.</p>
+
+<h4 id="buildoptionscsslibs">Build options: CSS Libs</h4>
+
+<p>Build tools can bundle 3rd party CSS libraries.</p>
+
+<p>Libraries' CSS paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "bundleCSSLibsFiles": [
+    "./node_modules/datatables/media/css/jquery.dataTables.min.css"
+  ],
+  ...
+}
+</code></pre>
+
+<p>It's recommended installing 3rd parties using <code>npm</code> or <code>bower</code> then configuring bundling within the build tools.</p>
+
+<h4 id="buildoptionsassetscopy">Build options: Assets copy</h4>
+
+<p>It's better storing static assets in <code>./src</code> or other folders, which are the part of the source control system.</p>
+
+<p>Dist folder should be mapped with SharePoint asset folder. Also, the dist folder sometime should not be a part of sources and isn't stored in Git, for example. Aka, temporary folder.</p>
+
+<p>Sometimes 3rd parties, like fonts, should be installed with <code>npm</code> or <code>bower</code> and deployed to SharePoint only partly, e.g. only a specific files out of numerous files of 3rd party package.</p>
+
+<p>Build tools can be configured to copy some static assets in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  // copyAssetsMap: Is an array of src/dist pairs opbects
+  "copyAssetsMap": [{
+    // src: Is an array of paths to folders or files
+    // Folders and files are copied based on this array, 
+    // subfolders are created automatically
+    "src": [
+      "./node_modules/datatables/media/images",
+      "./src/images",
+      "./src/scripts/modules/wysiwyg.js"
+    ],
+    "dist": "./dist" // Target destination location where files are copied
+  }],
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionsbranding">Build options: Branding</h4>
+
+<p><code>sp-build-tasks</code> supports branding build automation.</p>
+
+<p>Basic branding settings are tweaked in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "masterpagePath": "masterpage/frankfurt.master",
+    // Relative to publishing folder path to custom masterpage
+    // Is used in `gulp masterpage:apply` task
+  "logoPath": "images/logo.png",
+    // Relative to publishing folder path to custom logo
+    // Is used in `gulp masterpage:apply` and `gulp logo:apply` tasks
+  "masterpageCodeName": "frankfurt",
+    // Masterpage code name
+  "platformVersion": "2016",
+    // Masterpage platform version (2016, 2013, etc.)
+  "masterpage": { 
+    // Custom structure object which properties 
+    // can be used while compiling masterpage's .hbs
+    "copyright": {
+      "year": "2017",
+      "title": "Contoso intranet"
+    }
+  }
+  ...
+}
+</code></pre>
+
+<p>Masterpage sources should be placed in:</p>
+
+<ul>
+<li>src
+<ul><li>masterpage</li>
+<li>frankfurt.2016.hbs</li>
+<li>frankfurt.2013.hbs</li></ul></li>
+</ul>
+
+<p>Where <code>frankfurt</code> is a <code>masterpageCodeName</code> sample, <code>2016</code> or <code>2013</code> parts are <code>platformVersion</code>'s. <br>
+.hbs is a handlebars, masterpage .aspx's content should be copied to the .hbs initially. </p>
+
+<h3 id="tasks">Tasks</h3>
+
+<h4 id="gettingtaskslist">Getting tasks list:</h4>
+
+<pre><code class="language-bash">gulp --tasks  
+</code></pre>
+
+<p>By doing this the tree of tasks with dependencies should be rendered in terminal window.</p>
+
+<h5 id="config">Config</h5>
+
+<pre><code class="language-bash">gulp config  
+</code></pre>
+
+<p>Inits SharePoint credentials prompt wizard. <br>
+Wizard is implemented гыштп <a href="https://github.com/koltyakov/node-sp-auth-config">node-sp-auth-config</a> library.</p>
+
+<p>After config is done, auth settings are dumped to './config/private.json'.</p>
+
+<p>Second run of the task checks './config/private.json' and do not prompt if it exists and all parameters for a specific are auth strategy are provided.</p>
+
+<h5 id="pull">Pull</h5>
+
+<pre><code class="language-bash">gulp pull  
+</code></pre>
+
+<p>Initiates download of all remote assets from <code>spFolder</code> to <code>./dist</code> folder. <br>
+This task can be useful if one is intended to check if the assets in SharePoint had been changed since last publish or in migration scenarios when some assets are already created in SharePoint (with SharePoint Designer, for instance).</p>
+
+<h5 id="buildfrontend">Build front-end</h5>
+
+<pre><code class="language-bash">gulp build  
+</code></pre>
+
+<p>Build task combines multiple build actions, such as:</p>
+
+<h6 id="bundlingscriptstypescriptjavascript">Bundling scripts (typescript, javascript)</h6>
+
+<pre><code class="language-bash">gulp build:webpack  
+</code></pre>
+
+<h6 id="bundlingcustomstylesfromscss">Bundling custom styles from SCSS</h6>
+
+<pre><code class="language-bash">gulp build:css-custom  
+</code></pre>
+
+<h6 id="copyingstaticresources">Copying static resources</h6>
+
+<pre><code class="language-bash">gulp build:copy-assets  
+</code></pre>
+
+<h6 id="bundling3rdpartyscriptlibraries">Bundling 3-rd party script libraries</h6>
+
+<pre><code class="language-bash">gulp build:js-libs  
+</code></pre>
+
+<h6 id="bundling3rdpartystylescsslibraries">Bundling 3-rd party styles (CSS) libraries</h6>
+
+<pre><code class="language-bash">gulp build:css-libs  
+</code></pre>
+
+<h6 id="compilingmasterpagetemplate">Compiling masterpage template</h6>
+
+<pre><code class="language-bash">gulp build:masterpage  
+</code></pre>
+
+<h6 id="compilinglayoutstemplates">Compiling layouts templates</h6>
+
+<pre><code class="language-bash">gulp build:layouts  
+</code></pre>
+
+<h6 id="compilingcontenteditorsourceswebparts">Compiling content editor sources webparts</h6>
+
+<pre><code class="language-bash">gulp build:webparts  
+</code></pre>
+
+<h5 id="publishpush">Publish (push)</h5>
+
+<pre><code class="language-bash">gulp push  
+</code></pre>
+
+<p>Uploads and publishes <code>./dist</code> folder's content to remote <code>spFolder</code> in SharePoint. <br>
+The task uses <a href="https://github.com/s-KaiNet/gulp-spsave">gulp-spsave</a> for delivering assets to SharePoint.</p>
+
+<h5 id="watchingassets">Watching assets</h5>
+
+<h6 id="standardwatch">Standard watch</h6>
+
+<pre><code class="language-bash">gulp watch  
+</code></pre>
+
+<p>Watches local files for changes and initiates build and publishing of changed sources. <br>
+The task watches for following sources: <br>
+- src
+  - masterpage
+    - [watches masterpage .hbs]
+    - layouts
+      - [watches layouts.hbs files]
+  - scripts
+    - [watches for .ts files changes]
+  - styles
+    - [watches for .scss files changes]
+  - webpartc
+    - [watches for .hbs files changes]</p>
+
+<h6 id="watchwithpagelivereload">Watch with page live-reload</h6>
+
+<pre><code class="language-bash">gulp live  
+</code></pre>
+
+<p>Does the same as <code>gulp watch</code>, but also emits changed files paths within the live-reload local server. <br>
+Implements socket proactive reload using <a href="https://github.com/koltyakov/sp-live-reload">sp-live-reload</a> library.</p>
+
+<h5 id="deploymenthelpers">Deployment helpers</h5>
+
+<h6 id="applycustommasterpage">Apply custom masterpage</h6>
+
+<pre><code class="language-bash">gulp masterpage:apply  
+</code></pre>
+
+<p>Applyis custom masterpage to the SPWeb. </p>
+
+<h6 id="restoreseattlemasterpage">Restore Seattle masterpage</h6>
+
+<pre><code class="language-bash">gulp masterpage:restore  
+</code></pre>
+
+<h6 id="applycustomlogo">Apply custom logo</h6>
+
+<pre><code class="language-bash">gulp logo:apply  
+</code></pre>
+
+<h6 id="livereloadinstall">Live-reload install</h6>
+
+<pre><code class="language-bash">gulp reload:install  
+</code></pre>
+
+<p>Installs live-reload client script globally on SPWeb as a User ScriptLink custom action.</p>
+
+<h6 id="livereloaduninstall">Live-reload uninstall</h6>
+
+<pre><code class="language-bash">gulp reload:retract  
+</code></pre>
+
+<p>Remove live-reload client script custom action from SPWeb.</p>
+
+<h5 id="other">Other</h5>
+
+<h6 id="typescript">TypeScript</h6>
+
+<p><strong>Compile</strong></p>
+
+<pre><code class="language-bash">gulp tsc  
+</code></pre>
+
+<p>Compiles .ts files.</p>
+
+<p><strong>Linting</strong></p>
+
+<pre><code class="language-bash">gulp tslint  
+</code></pre>
+
+<p>Checks .ts files with TSLint.</p>
+
+<h5 id="clean">Clean</h5>
+
+<pre><code class="language-bash">gulp clean  
+</code></pre>
+
+<p>Deletes <code>./dist</code> folder. <br>
+The task is used as a child in a build process to clean up <code>./dist</code> before building from sources.</p>
+
+<h5 id="customtasks">Custom tasks</h5>
+
+<p>Just in case if you need do more within Gulp tasks there is a capability of adding add-hoc scripts in './build/tasks' folder. <code>sp-build-tasks</code> reads all JavaScripts in the folder and registers the tasks. </p>
+
+<p>The example of add-hoc task is below:</p>
+
+<pre><code class="language-javascript">module.exports = (gulp, $) =&gt; {  
+    'use strict';
+
+    gulp.task('example', (cb) =&gt; {
+        console.log('Example Gulp Task');
+        cb();
+    });
+};
+</code></pre>
+
+<hr>
+
+<p>Here we're, done with the configuration and build tasks. Now it's time to relax and create something valuable for the portal. <br>
+Get ready for automation fun running tasks with understanding how to configure and extend the beast for your own project routines!</p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="../../../../../">ARVO Systems Blog</a> © 2017</section>
+        <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+    </footer>
+</body>

@@ -1,4 +1,473 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Mon, 05 Jun 2017 07:10:47 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>Intro
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Wed, 04 Oct 2017 16:15:44 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>I was highly requested to document <a href="https://github.com/koltyakov/generator-sppp">SharePoint Push &amp; Pull</a> generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head.
+
+<p>The generator is the way to</p>]]&gt;</description><link>/2017/10/04/sharepoint-front-end-projects-automation-and-tasks-tool-belt/<guid ispermalink="false">cfd149df-d289-4179-be0f-fa768d8b3530</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Wed, 04 Oct 2017 15:53:34 GMT</pubdate><content url="/content/images/2017/10/sp-build-tasks.jpg" medium="image"></content><encoded><p>I was highly requested to document <a href="https://github.com/koltyakov/generator-sppp">SharePoint Push &amp; Pull</a> generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head.</p>
+
+<p>The generator is the way to combine libraries and settings together and simplify reusability. There are plenty of different libraries and even technologies to make front-end solution build process smooth and easy.</p>
+
+<p>Also, there is some sort of inception of automation layers. A lot of folks know about <code>generator-sppp</code>, a few really know that most of the magic is spelled by a dependency library called <a href="https://github.com/koltyakov/sp-build-tasks">sp-build-tasks</a>.</p>
+
+<p>Here we're going to dive into the settings. The article is supposed to be long in some parts it accumulates project's <a href="https://github.com/koltyakov/sp-build-tasks/wiki">wiki</a> pages.</p>
+
+<h2 id="spbuildtasks">sp-build-tasks</h2>
+
+<p>The library was designed for usage with SharePoint Push-n-Pull Yeoman generator but can be used as a stand-alone package as well.</p>
+
+<h3 id="recommendedusage">Recommended usage</h3>
+
+<h4 id="checkprerequisites">Check prerequisites</h4>
+
+<ul>
+<li>Node.js</li>
+<li>NPM or Yarn</li>
+<li>Yeoman</li>
+<li>SPPP Yeoman generator</li>
+<li>TypeScript</li>
+</ul>
+
+<pre><code class="language-bash">npm install yarn yo generator-sppp typescript ts-lint -g  
+</code></pre>
+
+<h4 id="createascaffolderproject">Create a scaffolder project</h4>
+
+<p>Run <code>yo sppp</code> in blank folder for a new project.</p>
+
+<pre><code class="language-bash">yo sppp  
+</code></pre>
+
+<h3 id="buildoptions">Build options</h3>
+
+<p>Build options are a layer of settings which can be defined for a project to set up its unique build workflow.</p>
+
+<p>Settings are stored in <code>./config/app.json</code> file.</p>
+
+<p><strong>Example setup:</strong></p>
+
+<pre><code class="language-json">{
+  "spFolder": "_catalogs/masterpage/spf",
+  "distFolder": "./dist",
+
+  "customStyles": [{
+    "src": "styles/frankfurt/frankfurt.scss",
+    "dist": "styles/frankfurt.min.css"
+  }],
+
+  "bundleJSLibsFiles": [
+    "./node_modules/es6-promise/dist/es6-promise.auto.min.js",
+    "./node_modules/whatwg-fetch/fetch.js",
+    "./node_modules/sp-pnp-js/dist/pnp.js"
+  ],
+
+  "bundleCSSLibsFiles": [
+    "./node_modules/datatables/media/css/jquery.dataTables.min.css"
+  ],
+
+  "copyAssetsMap": [{
+    "src": [
+      "./node_modules/datatables/media/images",
+      "./src/images",
+      "./src/scripts/modules/wysiwyg.js"
+    ],
+    "dist": "./dist"
+  }],
+
+  "webpackItemsMap": [{
+    "entry": "./src/scripts/module-a.ts",
+    "target": "module-a.js",
+    "webpackConfig": {
+      "cache": true,
+      "devtool": "source-map",
+      "plugins": []
+    }
+  }],
+  "webpackConfig": {
+    "cache": true,
+    "devtool": "source-map",
+    "plugins": []
+  },
+
+  "masterpagePath": "masterpage/frankfurt.master",
+  "logoPath": "images/logo.png",
+  "masterpageCodeName": "frankfurt",
+  "platformVersion": "2016",
+  "masterpage": {
+    "copyright": {
+      "year": "2017",
+      "title": "Contoso intranet"
+    }
+  }
+}
+</code></pre>
+
+<h4 id="buildoptionsmappingwithsharepoint">Build options: Mapping with SharePoint</h4>
+
+<p>Build tools map local <code>dist</code> folder with remote target folder in SharePoint within site assets document library. <br>
+<code>_catalogs/masterpage/some_folder</code> is recommended.
+<code>SiteAssets/some_folder</code> or <code>Style Library/some_folder</code> or others can be used as well.</p>
+
+<p>SharePoint mapping paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "spFolder": "_catalogs/masterpage/spf",
+    // Publishing SPWeb relative folder path in SharePoint
+    // where files should be uploaded to
+  "distFolder": "./dist",
+    // Local distribution folder with built assets
+    // ready for publishing
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionswebpack">Build options: Webpack</h4>
+
+<p><code>sp-build-tasks</code> uses Webpack for packing scripts.</p>
+
+<p>TypeScript, ES vNext or vanilla JavaScript can be used as script sources by default.</p>
+
+<p>Webpack settings can be defined in <code>./webpack.config.js</code> in a usual for Webpack way. <br>
+There is a built-in configuration and settings layer. <br>
+Webpack build process can be tweaked in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  // webpackItemsMap: Array or entry/target script pairs
+  "webpackItemsMap": [{
+    "entry": "./src/scripts/scriptName.ts",
+      // Relative path to .ts, .js file within the project's folder structure
+    "target": "scriptName.js", 
+      // Relative path to output bundle script within `./dist/stripts` folder
+    "webpackConfig": {} 
+      // Optional Webpack configuration which is added 
+      // to webpack's configs for a specific entry point 
+  }],
+  "webpackConfig": {},
+    // Optional Webpack configuration which is added 
+    // to webpack's configs for all entry points
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionscustomstyles">Build options: Custom styles</h4>
+
+<p><code>sp-build-tasks</code> uses SCSS as a language for CSS sources.
+SCSS files can store raw CSS as well.</p>
+
+<p>SharePoint mapping paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  // customStyles: Array or a single object element src/dist pair 
+  // of source style entry point and output bundle file
+  "customStyles": [{
+    "src": "styles/frankfurt/frankfurt.scss",
+      // Source entry point path
+      // relative to './src'
+    "dist": "styles/frankfurt.min.css"
+      // Output .css file path
+      // relative to './dist'
+  }],
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionsjslibs">Build options: JS Libs</h4>
+
+<p>Build tools can bundle 3rd party JavaScript libraries.</p>
+
+<p>Libraries' JavaScript paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "bundleJSLibsFiles": [
+    "./node_modules/es6-promise/dist/es6-promise.auto.min.js",
+    "./node_modules/whatwg-fetch/fetch.js",
+    "./node_modules/sp-pnp-js/dist/pnp.js"
+  ],
+  ...
+}
+</code></pre>
+
+<p>It's recommended installing 3rd parties using <code>npm</code> or <code>bower</code> then configuring bundling within the build tools.</p>
+
+<h4 id="buildoptionscsslibs">Build options: CSS Libs</h4>
+
+<p>Build tools can bundle 3rd party CSS libraries.</p>
+
+<p>Libraries' CSS paths are configured in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "bundleCSSLibsFiles": [
+    "./node_modules/datatables/media/css/jquery.dataTables.min.css"
+  ],
+  ...
+}
+</code></pre>
+
+<p>It's recommended installing 3rd parties using <code>npm</code> or <code>bower</code> then configuring bundling within the build tools.</p>
+
+<h4 id="buildoptionsassetscopy">Build options: Assets copy</h4>
+
+<p>It's better storing static assets in <code>./src</code> or other folders, which are the part of the source control system.</p>
+
+<p>Dist folder should be mapped with SharePoint asset folder. Also, the dist folder sometime should not be a part of sources and isn't stored in Git, for example. Aka, temporary folder.</p>
+
+<p>Sometimes 3rd parties, like fonts, should be installed with <code>npm</code> or <code>bower</code> and deployed to SharePoint only partly, e.g. only a specific files out of numerous files of 3rd party package.</p>
+
+<p>Build tools can be configured to copy some static assets in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  // copyAssetsMap: Is an array of src/dist pairs opbects
+  "copyAssetsMap": [{
+    // src: Is an array of paths to folders or files
+    // Folders and files are copied based on this array, 
+    // subfolders are created automatically
+    "src": [
+      "./node_modules/datatables/media/images",
+      "./src/images",
+      "./src/scripts/modules/wysiwyg.js"
+    ],
+    "dist": "./dist" // Target destination location where files are copied
+  }],
+  ...
+}
+</code></pre>
+
+<h4 id="buildoptionsbranding">Build options: Branding</h4>
+
+<p><code>sp-build-tasks</code> supports branding build automation.</p>
+
+<p>Basic branding settings are tweaked in <code>./config/app.json</code> within the following parameters:</p>
+
+<pre><code class="language-javascript">{
+  ...
+  "masterpagePath": "masterpage/frankfurt.master",
+    // Relative to publishing folder path to custom masterpage
+    // Is used in `gulp masterpage:apply` task
+  "logoPath": "images/logo.png",
+    // Relative to publishing folder path to custom logo
+    // Is used in `gulp masterpage:apply` and `gulp logo:apply` tasks
+  "masterpageCodeName": "frankfurt",
+    // Masterpage code name
+  "platformVersion": "2016",
+    // Masterpage platform version (2016, 2013, etc.)
+  "masterpage": { 
+    // Custom structure object which properties 
+    // can be used while compiling masterpage's .hbs
+    "copyright": {
+      "year": "2017",
+      "title": "Contoso intranet"
+    }
+  }
+  ...
+}
+</code></pre>
+
+<p>Masterpage sources should be placed in:</p>
+
+<ul>
+<li>src
+<ul><li>masterpage</li>
+<li>frankfurt.2016.hbs</li>
+<li>frankfurt.2013.hbs</li></ul></li>
+</ul>
+
+<p>Where <code>frankfurt</code> is a <code>masterpageCodeName</code> sample, <code>2016</code> or <code>2013</code> parts are <code>platformVersion</code>'s. <br>
+.hbs is a handlebars, masterpage .aspx's content should be copied to the .hbs initially. </p>
+
+<h3 id="tasks">Tasks</h3>
+
+<h4 id="gettingtaskslist">Getting tasks list:</h4>
+
+<pre><code class="language-bash">gulp --tasks  
+</code></pre>
+
+<p>By doing this the tree of tasks with dependencies should be rendered in terminal window.</p>
+
+<h5 id="config">Config</h5>
+
+<pre><code class="language-bash">gulp config  
+</code></pre>
+
+<p>Inits SharePoint credentials prompt wizard. <br>
+Wizard is implemented гыштп <a href="https://github.com/koltyakov/node-sp-auth-config">node-sp-auth-config</a> library.</p>
+
+<p>After config is done, auth settings are dumped to './config/private.json'.</p>
+
+<p>Second run of the task checks './config/private.json' and do not prompt if it exists and all parameters for a specific are auth strategy are provided.</p>
+
+<h5 id="pull">Pull</h5>
+
+<pre><code class="language-bash">gulp pull  
+</code></pre>
+
+<p>Initiates download of all remote assets from <code>spFolder</code> to <code>./dist</code> folder. <br>
+This task can be useful if one is intended to check if the assets in SharePoint had been changed since last publish or in migration scenarios when some assets are already created in SharePoint (with SharePoint Designer, for instance).</p>
+
+<h5 id="buildfrontend">Build front-end</h5>
+
+<pre><code class="language-bash">gulp build  
+</code></pre>
+
+<p>Build task combines multiple build actions, such as:</p>
+
+<h6 id="bundlingscriptstypescriptjavascript">Bundling scripts (typescript, javascript)</h6>
+
+<pre><code class="language-bash">gulp build:webpack  
+</code></pre>
+
+<h6 id="bundlingcustomstylesfromscss">Bundling custom styles from SCSS</h6>
+
+<pre><code class="language-bash">gulp build:css-custom  
+</code></pre>
+
+<h6 id="copyingstaticresources">Copying static resources</h6>
+
+<pre><code class="language-bash">gulp build:copy-assets  
+</code></pre>
+
+<h6 id="bundling3rdpartyscriptlibraries">Bundling 3-rd party script libraries</h6>
+
+<pre><code class="language-bash">gulp build:js-libs  
+</code></pre>
+
+<h6 id="bundling3rdpartystylescsslibraries">Bundling 3-rd party styles (CSS) libraries</h6>
+
+<pre><code class="language-bash">gulp build:css-libs  
+</code></pre>
+
+<h6 id="compilingmasterpagetemplate">Compiling masterpage template</h6>
+
+<pre><code class="language-bash">gulp build:masterpage  
+</code></pre>
+
+<h6 id="compilinglayoutstemplates">Compiling layouts templates</h6>
+
+<pre><code class="language-bash">gulp build:layouts  
+</code></pre>
+
+<h6 id="compilingcontenteditorsourceswebparts">Compiling content editor sources webparts</h6>
+
+<pre><code class="language-bash">gulp build:webparts  
+</code></pre>
+
+<h5 id="publishpush">Publish (push)</h5>
+
+<pre><code class="language-bash">gulp push  
+</code></pre>
+
+<p>Uploads and publishes <code>./dist</code> folder's content to remote <code>spFolder</code> in SharePoint. <br>
+The task uses <a href="https://github.com/s-KaiNet/gulp-spsave">gulp-spsave</a> for delivering assets to SharePoint.</p>
+
+<h5 id="watchingassets">Watching assets</h5>
+
+<h6 id="standardwatch">Standard watch</h6>
+
+<pre><code class="language-bash">gulp watch  
+</code></pre>
+
+<p>Watches local files for changes and initiates build and publishing of changed sources. <br>
+The task watches for following sources: <br>
+- src
+  - masterpage
+    - [watches masterpage .hbs]
+    - layouts
+      - [watches layouts.hbs files]
+  - scripts
+    - [watches for .ts files changes]
+  - styles
+    - [watches for .scss files changes]
+  - webpartc
+    - [watches for .hbs files changes]</p>
+
+<h6 id="watchwithpagelivereload">Watch with page live-reload</h6>
+
+<pre><code class="language-bash">gulp live  
+</code></pre>
+
+<p>Does the same as <code>gulp watch</code>, but also emits changed files paths within the live-reload local server. <br>
+Implements socket proactive reload using <a href="https://github.com/koltyakov/sp-live-reload">sp-live-reload</a> library.</p>
+
+<h5 id="deploymenthelpers">Deployment helpers</h5>
+
+<h6 id="applycustommasterpage">Apply custom masterpage</h6>
+
+<pre><code class="language-bash">gulp masterpage:apply  
+</code></pre>
+
+<p>Applyis custom masterpage to the SPWeb. </p>
+
+<h6 id="restoreseattlemasterpage">Restore Seattle masterpage</h6>
+
+<pre><code class="language-bash">gulp masterpage:restore  
+</code></pre>
+
+<h6 id="applycustomlogo">Apply custom logo</h6>
+
+<pre><code class="language-bash">gulp logo:apply  
+</code></pre>
+
+<h6 id="livereloadinstall">Live-reload install</h6>
+
+<pre><code class="language-bash">gulp reload:install  
+</code></pre>
+
+<p>Installs live-reload client script globally on SPWeb as a User ScriptLink custom action.</p>
+
+<h6 id="livereloaduninstall">Live-reload uninstall</h6>
+
+<pre><code class="language-bash">gulp reload:retract  
+</code></pre>
+
+<p>Remove live-reload client script custom action from SPWeb.</p>
+
+<h5 id="other">Other</h5>
+
+<h6 id="typescript">TypeScript</h6>
+
+<p><strong>Compile</strong></p>
+
+<pre><code class="language-bash">gulp tsc  
+</code></pre>
+
+<p>Compiles .ts files.</p>
+
+<p><strong>Linting</strong></p>
+
+<pre><code class="language-bash">gulp tslint  
+</code></pre>
+
+<p>Checks .ts files with TSLint.</p>
+
+<h5 id="clean">Clean</h5>
+
+<pre><code class="language-bash">gulp clean  
+</code></pre>
+
+<p>Deletes <code>./dist</code> folder. <br>
+The task is used as a child in a build process to clean up <code>./dist</code> before building from sources.</p>
+
+<h5 id="customtasks">Custom tasks</h5>
+
+<p>Just in case if you need do more within Gulp tasks there is a capability of adding add-hoc scripts in './build/tasks' folder. <code>sp-build-tasks</code> reads all JavaScripts in the folder and registers the tasks. </p>
+
+<p>The example of add-hoc task is below:</p>
+
+<pre><code class="language-javascript">module.exports = (gulp, $) =&gt; {  
+    'use strict';
+
+    gulp.task('example', (cb) =&gt; {
+        console.log('Example Gulp Task');
+        cb();
+    });
+};
+</code></pre>
+
+<hr>
+
+<p>Here we're, done with the configuration and build tasks. Now it's time to relax and create something valuable for the portal. <br>
+Get ready for automation fun running tasks with understanding how to configure and extend the beast for your own project routines!</p>]]&gt;</encoded></item><item><title></title><description>Intro
 
 <p>It's not a secret that it's theoretically feasible to execute SharePoint Client Side Object Model in Node.js. Some folks found a way to master <a href="https://gist.github.com/lstak/2404924">JSOM in Node.js's context</a> around 5 years ago from now.</p>
 
