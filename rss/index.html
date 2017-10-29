@@ -1,4 +1,4 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Sun, 29 Oct 2017 23:13:04 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>Intro
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Sun, 29 Oct 2017 23:18:10 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>Intro
 
 <p>I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying "Why don't to [insane idea to implement]", then in one grasp after a while seating and scratching my head with "Oh shoot! It's working! O_o". That's how some of my</p>]]&gt;</description><link>/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/<guid ispermalink="false">599df659-c3c2-470b-8477-da4098979eb5</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Sun, 29 Oct 2017 23:05:08 GMT</pubdate><content url="/content/images/2017/10/PimpMyDonNetWithNode-2.png" medium="image"></content><encoded>Intro
 
@@ -72,12 +72,12 @@ This is a low level, session timeouts should be controlled manually.</p>
 
 <p><img src="/content/images/2017/10/auth-wizard.gif" alt="SharePoint .Net authentication via embedded Node.js"></p>
 
-<p>By default, after the propmpts are done <code>./config/private.json</code> file is created in the root folder of the app.</p>
+<p>By default, after the prompts are done <code>./config/private.json</code> file is created in the root folder of the app.</p>
 
 <p><img src="/content/images/2017/10/private-json.png" alt="SharePoint .Net authentication via embedded Node.js"></p>
 
 <p><code>GetAuth</code> checks for <code>./config/private.json</code> and continues without prompts if all needed for the strategy parameters are filled in.
-Password is stored as a secure string, it can be used only on the machine where it was generated. Password can be rewritten in the config and it will be encrypted on next auth method run.</p>
+The password is stored as a secure string, it can be used only on the machine where it was generated. The password can be rewritten in the config and it will be encrypted on next auth method run.</p>
 
 <h2 id="arguments">Arguments</h2>
 
