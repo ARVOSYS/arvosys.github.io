@@ -1,4 +1,141 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Sun, 29 Oct 2017 23:18:10 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>Intro
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Mon, 27 Nov 2017 21:16:20 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime strategy.
+
+<p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a locally</p>]]&gt;</description><link>/2017/11/27/spfx-workbench-against-real-sharepoint-api/<guid ispermalink="false">20b0f4d0-75de-43d2-b7c5-79034d42f90b</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Mon, 27 Nov 2017 18:21:03 GMT</pubdate><content url="/content/images/2017/11/spfx-proxy-wide.png" medium="image"></content><encoded><p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime strategy.</p>
+
+<p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a locally served page, it has no connection to SharePoint APIs.</p>
+
+<p>Local mode provided the capability of mocking UI and styling based on some artificial data prepared beforehand or generated with specific libs. Local workbench uses hot module reload on changes, once started you just change the code and check for updates in browser's window.</p>
+
+<p>Sometimes, real API's response data is required and mocking is too time-consuming or unproductive. SPFx has a solution for this. There is online version of the workbench, which can be found via <code>[SHAREPOINT_WEB_URL]/_layouts/15/workbench.aspx</code>. When <code>gulp serve --nobrowser</code> (<code>--nobrowser</code> key is handy when you get tired of auto-opening local workbench page) has been started web parts can be placed to online workbench and all the scripts hosted from a local machine.</p>
+
+<p>Such mode allows acting with real data and REST API (or other APIs).</p>
+
+<p>At this moment you might ask "Ok, online workbench saves the day, what the deal? Why do I need local workbench ever talking to the APIs?". Actually, it's a good question, but believe me, there are use cases (for example using web parts in production and developing and delivering new versions within one single tenant). Would be cool hearing your use case in the comment section below!</p>
+
+<p>Anyway, it's super simple to configure "local" to work with "remote", let's take a look how.</p>
+
+<h2 id="configuringspfxsolutiontoworkwiththeproxy">Configuring SPFx solution to work with the proxy</h2>
+
+<p>As a prerequisite SPFx project should be created and used.</p>
+
+<p>1. Install SharePoint REST Proxy in SPFx solution's project.</p>
+
+<pre><code class="language-bash">npm install sp-rest-proxy --save-dev  
+</code></pre>
+
+<p><a href="https://github.com/koltyakov/sp-rest-proxy">sp-rest-proxy</a> is a dev dependency, it provides authorized anonymous proxy gateway to SharePoint APIs with CORS enabled. So any page on a developer's machine can request SharePoint API seamlessly.</p>
+
+<p>2. Create <code>proxy.js</code> file in a root or wherever in the project with the following content:</p>
+
+<pre><code class="language-javascript">const CertificateStore = require('@microsoft/gulp-core-build-serve/lib/CertificateStore');  
+const RestProxy = require('sp-rest-proxy');
+
+const settings = {  
+  port: 4323,
+  protocol: 'https',
+  ssl: {
+    cert: CertificateStore.default.instance.certificateData,
+    key: CertificateStore.default.instance.keyData
+  }
+};
+
+const restProxy = new RestProxy(settings);  
+restProxy.serve();  
+</code></pre>
+
+<p>[ <a href="https://github.com/koltyakov/sp-rest-proxy/blob/master/examples/spfx-proxy-example/proxy.js">Download script</a> ]</p>
+
+<p>To make requests from the local workbench to proxy happen, the proxy's local server should be running on https/SSL. Here is the script we're using some sort of trick and reusing SPFx certificate, so proxy's SSL trust is tied up with workbench's cert. (You can trust/untrust SPFx cert with <code>gulp trust-dev-cert</code> and <code>gulp untrust-dev-cert</code> accordingly).</p>
+
+<p>3. Create npm task to start proxy, e.g. <code>"proxy": "node ./proxy"</code>.</p>
+
+<p>4. Run and configure proxy's connection to the environment by <code>node ./proxy</code> or currently created npm task <code>npm run proxy</code>.</p>
+
+<p>This is required once you need to "bind" the proxy with remote SharePoint server and provide credentials. Follow the wizard prompts to finish this step. Check out project's <a href="https://github.com/koltyakov/sp-rest-proxy">page</a> for more details.</p>
+
+<p>5. Configure a task to start proxy and gulp serve at the same time, e.g. using <a href="https://www.npmjs.com/package/concurrently">concurrently</a> or <a href="https://www.npmjs.com/package/npm-run-all">npm-run-all</a>.</p>
+
+<p>Setup with <code>concurrently</code>:</p>
+
+<p>5.1 Install dependency:</p>
+
+<pre><code class="language-bash">npm install concurrently --save-dev  
+</code></pre>
+
+<p>5.2 Add npm task to package.json:</p>
+
+<pre><code class="language-json">"scripts": {
+  ...
+  "serve": "concurrently --kill-others \"npm run proxy\" \"gulp serve\""
+  ...
+}
+</code></pre>
+
+<p>Now you can start both proxy and SPFx local server with one command:</p>
+
+<pre><code class="language-bash">npm run serve  
+</code></pre>
+
+<p>We are done with configuration. Now it's time to cover some coding aspects.</p>
+
+<h2 id="detectinglocalmode">Detecting local mode</h2>
+
+<p>With proxy at our disposal, we SPFx consume real API in local mode. All we need to do is implement variability of switching between endpoint.</p>
+
+<p>Let's assume your SharePoint Web is located at <code>https://contoso.sharepoint.com/sites/site/my_web</code>.</p>
+
+<p>SPFx web part is generally agnostic to the future location of the web. Web URL can be know in a runtime using <code>this.context.pageContext.web.absoluteUrl</code> or <code>this.context.pageContext.web.serverRelativeUrl</code>. Using this variables REST requests are built.</p>
+
+<p>The local mode, in the opposite, knows nothing about target environment. You're in charge of pointing it requesting correct URLs. One of them is kind of static, it's a proxy's host URL, <code>https://localhost:4323</code>, web relative URL should be somewhere in the settings.</p>
+
+<p>In the local mode, a web part should construct the following sort of endpoint for requests <code>https://localhost:4323/sites/site/my_web/_api/...</code>. It should always deal with absolute URLs in this kind of setup.</p>
+
+<p>Once this is clear, the question is how to detect local mode gracefully. Luckily SPFx has helpers for this situation (and there is no need to use <code>window.location.href.indexOf('https://localhost:') === 0</code>):</p>
+
+<pre><code class="language-typescript">import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
+
+if (Environment.type === EnvironmentType.Local) {  
+  // Local mode
+} else {
+  // Online mode
+}
+</code></pre>
+
+<p>We can rely code logic on this condition. And provide initial endpoint rather robustly.</p>
+
+<h2 id="bonussectionconfiguringpnpjscore">Bonus section - configuring PnP JS Core</h2>
+
+<p>Oh, you might know, I'm a huge fan of <a href="https://github.com/SharePoint/PnP-JS-Core">sp-pnp-js</a> and prefer this library over building requests manually.</p>
+
+<p>PnP JS Core works nicely with SPFx and glad to inform you it works great with SPFx plus SharePoint REST Proxy. Once configured properly.</p>
+
+<pre><code class="language-typescript">import { Web, setup } from 'sp-pnp-js';  
+import { proxyUrl, webRelativeUrl } from './../settings';  
+// settings.ts should be created with corresponding exports
+
+...
+let web: Web;  
+if (Environment.type === EnvironmentType.Local) {  
+  web = new Web(`${proxyUrl}${webRelativeUrl}`);
+} else {
+  // On SharePoint page sp-pnp-js should be configured with
+  setup({ spfxContext: this.context });
+  // or a Web object should be created with explicit web URL
+  web = new Web(this.context.pageContext.web.absoluteUrl);
+}
+// Then universal pnp code and dealing with SPFx specifics
+/*
+web.lists.get()  
+  .then(...).catch(...);
+*/
+...
+</code></pre>
+
+<h2 id="example">Example</h2>
+
+<p>I've published a simple example with the setup described above. The example can be found <a href="https://github.com/koltyakov/sp-rest-proxy/tree/master/examples/spfx-proxy-example">here</a>.</p>
+
+<p><img src="/content/images/2017/11/demo.jpg" alt="Local SPFx Workbench against real SharePoint API"></p>]]&gt;</encoded></item><item><title></title><description>Intro
 
 <p>I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying "Why don't to [insane idea to implement]", then in one grasp after a while seating and scratching my head with "Oh shoot! It's working! O_o". That's how some of my</p>]]&gt;</description><link>/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/<guid ispermalink="false">599df659-c3c2-470b-8477-da4098979eb5</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Sun, 29 Oct 2017 23:05:08 GMT</pubdate><content url="/content/images/2017/10/PimpMyDonNetWithNode-2.png" medium="image"></content><encoded>Intro
 
