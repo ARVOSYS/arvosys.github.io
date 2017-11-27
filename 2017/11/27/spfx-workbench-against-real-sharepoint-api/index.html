@@ -29,7 +29,7 @@
     <meta property="og:url" content="/2017/11/27/spfx-workbench-against-real-sharepoint-api/">
     <meta property="og:image" content="/content/images/2017/11/spfx-proxy-wide.png">
     <meta property="article:published_time" content="2017-11-27T18:21:03.000Z">
-    <meta property="article:modified_time" content="2017-11-27T21:30:07.000Z">
+    <meta property="article:modified_time" content="2017-11-27T21:33:25.000Z">
     <meta property="article:tag" content="SharePoint">
     <meta property="article:tag" content="development">
     <meta property="article:tag" content="sp-rest-proxy">
@@ -86,7 +86,7 @@
     "headline": "Local SPFx Workbench against real SharePoint API",
     "url": "/2017/11/27/spfx-workbench-against-real-sharepoint-api/",
     "datePublished": "2017-11-27T18:21:03.000Z",
-    "dateModified": "2017-11-27T21:30:07.000Z",
+    "dateModified": "2017-11-27T21:33:25.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2017/11/spfx-proxy-wide.png",
@@ -233,7 +233,7 @@ restProxy.serve();
 
 <p>Let's assume your SharePoint Web is located at <code>https://contoso.sharepoint.com/sites/site/my_web</code>.</p>
 
-<p>SPFx web part is generally agnostic to the future location of the web. Web URL can be get known in a runtime using <code>this.context.pageContext.web.absoluteUrl</code> or <code>this.context.pageContext.web.serverRelativeUrl</code>. REST requests are usually built using this variables.</p>
+<p>SPFx web part is generally agnostic to the future location of the web. Web URL can be get known in a runtime using <code>this.context.pageContext.web</code>'s object properties: <code>absoluteUrl</code> or <code>serverRelativeUrl</code>. REST requests are usually built using this variables.</p>
 
 <p>The local mode, in the opposite, knows nothing about target environment. You're in charge of pointing HttpClient to request correct URLs. One of them is kind of static, it's a proxy's host URL, <code>https://localhost:4323</code>, web relative URL should be somewhere in the settings.</p>
 
