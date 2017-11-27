@@ -1,22 +1,22 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Mon, 27 Nov 2017 21:16:20 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime strategy.
+<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Mon, 27 Nov 2017 21:30:11 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy.
 
-<p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a locally</p>]]&gt;</description><link>/2017/11/27/spfx-workbench-against-real-sharepoint-api/<guid ispermalink="false">20b0f4d0-75de-43d2-b7c5-79034d42f90b</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Mon, 27 Nov 2017 18:21:03 GMT</pubdate><content url="/content/images/2017/11/spfx-proxy-wide.png" medium="image"></content><encoded><p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime strategy.</p>
+<p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a</p>]]&gt;</description><link>/2017/11/27/spfx-workbench-against-real-sharepoint-api/<guid ispermalink="false">20b0f4d0-75de-43d2-b7c5-79034d42f90b</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Mon, 27 Nov 2017 18:21:03 GMT</pubdate><content url="/content/images/2017/11/spfx-proxy-wide.png" medium="image"></content><encoded><p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy.</p>
 
 <p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a locally served page, it has no connection to SharePoint APIs.</p>
 
 <p>Local mode provided the capability of mocking UI and styling based on some artificial data prepared beforehand or generated with specific libs. Local workbench uses hot module reload on changes, once started you just change the code and check for updates in browser's window.</p>
 
-<p>Sometimes, real API's response data is required and mocking is too time-consuming or unproductive. SPFx has a solution for this. There is online version of the workbench, which can be found via <code>[SHAREPOINT_WEB_URL]/_layouts/15/workbench.aspx</code>. When <code>gulp serve --nobrowser</code> (<code>--nobrowser</code> key is handy when you get tired of auto-opening local workbench page) has been started web parts can be placed to online workbench and all the scripts hosted from a local machine.</p>
+<p>Sometimes, real API's response data is required and mocking is too time-consuming and unproductive. SPFx has a solution for this. There is online version of the workbench, which can be found via <code>[SHAREPOINT_WEB_URL]/_layouts/15/workbench.aspx</code>. When <code>gulp serve --nobrowser</code> (<code>--nobrowser</code> key is handy when you get tired of auto-opening local workbench page) has been started web parts can be placed to online workbench while scripts can be hosted from a local machine.</p>
 
 <p>Such mode allows acting with real data and REST API (or other APIs).</p>
 
-<p>At this moment you might ask "Ok, online workbench saves the day, what the deal? Why do I need local workbench ever talking to the APIs?". Actually, it's a good question, but believe me, there are use cases (for example using web parts in production and developing and delivering new versions within one single tenant). Would be cool hearing your use case in the comment section below!</p>
+<p>At this moment you might ask "Ok, online workbench saves the day, what the deal? Why do I need local workbench ever talking to the APIs?". Actually, it's a good question, but believe me, there are use cases (for example using web parts in production and developing and delivering new versions within one single tenant). Would be cool hearing about your use cases in the comment section below!</p>
 
 <p>Anyway, it's super simple to configure "local" to work with "remote", let's take a look how.</p>
 
 <h2 id="configuringspfxsolutiontoworkwiththeproxy">Configuring SPFx solution to work with the proxy</h2>
 
-<p>As a prerequisite SPFx project should be created and used.</p>
+<p>As a prerequisite SPFx project should be created.</p>
 
 <p>1. Install SharePoint REST Proxy in SPFx solution's project.</p>
 
@@ -80,13 +80,13 @@ restProxy.serve();
 
 <h2 id="detectinglocalmode">Detecting local mode</h2>
 
-<p>With proxy at our disposal, we SPFx consume real API in local mode. All we need to do is implement variability of switching between endpoint.</p>
+<p>With proxy at our disposal, SPFx consumes real API in local mode. All we need to do is implement variability of switching between endpoints.</p>
 
 <p>Let's assume your SharePoint Web is located at <code>https://contoso.sharepoint.com/sites/site/my_web</code>.</p>
 
-<p>SPFx web part is generally agnostic to the future location of the web. Web URL can be know in a runtime using <code>this.context.pageContext.web.absoluteUrl</code> or <code>this.context.pageContext.web.serverRelativeUrl</code>. Using this variables REST requests are built.</p>
+<p>SPFx web part is generally agnostic to the future location of the web. Web URL can be get known in a runtime using <code>this.context.pageContext.web.absoluteUrl</code> or <code>this.context.pageContext.web.serverRelativeUrl</code>. REST requests are usually built using this variables.</p>
 
-<p>The local mode, in the opposite, knows nothing about target environment. You're in charge of pointing it requesting correct URLs. One of them is kind of static, it's a proxy's host URL, <code>https://localhost:4323</code>, web relative URL should be somewhere in the settings.</p>
+<p>The local mode, in the opposite, knows nothing about target environment. You're in charge of pointing HttpClient to request correct URLs. One of them is kind of static, it's a proxy's host URL, <code>https://localhost:4323</code>, web relative URL should be somewhere in the settings.</p>
 
 <p>In the local mode, a web part should construct the following sort of endpoint for requests <code>https://localhost:4323/sites/site/my_web/_api/...</code>. It should always deal with absolute URLs in this kind of setup.</p>
 
@@ -101,13 +101,13 @@ if (Environment.type === EnvironmentType.Local) {
 }
 </code></pre>
 
-<p>We can rely code logic on this condition. And provide initial endpoint rather robustly.</p>
+<p>We can rely code logic on this condition and provide initial endpoint rather robustly.</p>
 
 <h2 id="bonussectionconfiguringpnpjscore">Bonus section - configuring PnP JS Core</h2>
 
 <p>Oh, you might know, I'm a huge fan of <a href="https://github.com/SharePoint/PnP-JS-Core">sp-pnp-js</a> and prefer this library over building requests manually.</p>
 
-<p>PnP JS Core works nicely with SPFx and glad to inform you it works great with SPFx plus SharePoint REST Proxy. Once configured properly.</p>
+<p>PnP JS Core works nicely with SPFx and I glad to inform you it works great with SPFx plus SharePoint REST Proxy. Once configured properly.</p>
 
 <pre><code class="language-typescript">import { Web, setup } from 'sp-pnp-js';  
 import { proxyUrl, webRelativeUrl } from './../settings';  
