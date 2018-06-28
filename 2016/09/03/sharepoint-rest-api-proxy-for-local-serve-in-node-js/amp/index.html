@@ -1,48 +1,47 @@
-<!DOCTYPE html>
-<html ⚡>
+
 <head>
     <meta charset="utf-8">
 
     <title>SharePoint REST API proxy for local serve in Node.js</title>
-    <meta name="description" content="" />
+    <meta name="description" content="">
 
-    <meta name="HandheldFriendly" content="True" />
+    <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <link rel="shortcut icon" href="../../../../../favicon.ico">
 
-    <link rel="canonical" href="../index.html" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="canonical" href="../index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
     
-    <meta property="og:site_name" content="ARVO Systems Blog" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="SharePoint REST API proxy for local serve in Node.js" />
-    <meta property="og:description" content="On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this &quot;dive&quot; was not so deep and actually looked more like SharePoint platform" />
-    <meta property="og:url" content="/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/" />
-    <meta property="og:image" content="/content/images/2016/09/RestProxyExample-1.png" />
-    <meta property="article:published_time" content="2016-09-03T12:01:00.000Z" />
-    <meta property="article:modified_time" content="2016-09-12T20:49:17.000Z" />
-    <meta property="article:tag" content="SharePoint" />
-    <meta property="article:tag" content="Node.js" />
-    <meta property="article:tag" content="Toolchain" />
-    <meta property="article:tag" content="REST" />
-    <meta property="article:tag" content="Express" />
-    <meta property="article:tag" content="API" />
-    <meta property="article:tag" content="sp-rest-proxy" />
+    <meta property="og:site_name" content="ARVO Systems Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SharePoint REST API proxy for local serve in Node.js">
+    <meta property="og:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
+    <meta property="og:url" content="/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
+    <meta property="og:image" content="/content/images/2016/09/RestProxyExample-1.png">
+    <meta property="article:published_time" content="2016-09-03T12:01:00.000Z">
+    <meta property="article:modified_time" content="2016-09-12T20:49:17.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="Toolchain">
+    <meta property="article:tag" content="REST">
+    <meta property="article:tag" content="Express">
+    <meta property="article:tag" content="API">
+    <meta property="article:tag" content="sp-rest-proxy">
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SharePoint REST API proxy for local serve in Node.js" />
-    <meta name="twitter:description" content="On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this &quot;dive&quot; was not so deep and actually looked more like SharePoint platform" />
-    <meta name="twitter:url" content="/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/" />
-    <meta name="twitter:image" content="/content/images/2016/09/RestProxyExample-1.png" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Andrew Koltyakov" />
-    <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy" />
-    <meta name="twitter:creator" content="@AndrewKoltyakov" />
-    <meta property="og:image:width" content="1600" />
-    <meta property="og:image:height" content="518" />
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SharePoint REST API proxy for local serve in Node.js">
+    <meta name="twitter:description" content='On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts. As for me this "dive" was not so deep and actually looked more like SharePoint platform'>
+    <meta name="twitter:url" content="/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/">
+    <meta name="twitter:image" content="/content/images/2016/09/RestProxyExample-1.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, Node.js, Toolchain, REST, Express, API, sp-rest-proxy">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="518">
     
     <script type="application/ld+json">
 {
@@ -94,10 +93,10 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10" />
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html" />
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html">
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
     <style amp-custom>
         /* ==========================================================================
            Table of Contents
@@ -871,7 +870,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../../../../index.html">ARVO Systems Blog</a>
+            <a href="../../../../../">ARVO Systems Blog</a>
         </nav>
     </header>
 
@@ -881,7 +880,7 @@
             <header class="post-header">
                 <h1 class="post-title">SharePoint REST API proxy for local serve in Node.js</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../../../../author/andrew/index.html">Andrew Koltyakov</a></p>
+                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
                     <time class="post-date" datetime="2016-09-03">2016-09-03</time>
                 </section>
             </header>
@@ -890,9 +889,9 @@
             </figure>
             <section class="post-content">
 
-                <html><body><p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
+                <p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
 
-<p>As for me this &quot;dive&quot; was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
+<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
 
 <p>One of the coolest thing about SPFx is a capability to run <code>gulp serve</code>, after which you'll find yourself in local workbench ready to add client web parts on a modern page emulator and test them in action.</p>
 
@@ -914,15 +913,14 @@
 
 <p>Of course, such proxy is limited with REST API only. It can be a complicated task to 're-implement' JSOM, for instance. But as far we go, more and more REST significance we see in SharePoint infrastructure as a universal and language agnostic technology.</p>
 
-<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p></body></html>
+<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../../../../index.html">ARVO Systems Blog</a> &copy; 2018</section>
+        <section class="copyright"><a href="../../../../../">ARVO Systems Blog</a> © 2018</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
-</html>

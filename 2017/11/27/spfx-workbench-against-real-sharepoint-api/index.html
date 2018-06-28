@@ -1,57 +1,56 @@
-<!DOCTYPE html>
-<html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Local SPFx Workbench against real SharePoint API</title>
-    <meta name="description" content="" />
+    <meta name="description" content="">
 
-    <meta name="google-site-verification" content="kj4x9HBApwneuGIIlFZj11VGEQnPG5Mp21U2n_mSCcU" />
+    <meta name="google-site-verification" content="kj4x9HBApwneuGIIlFZj11VGEQnPG5Mp21U2n_mSCcU">
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?v=2d92e18292">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=2d92e18292" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=2d92e18292" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=2d92e18292" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=2d92e18292">
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=2d92e18292">
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=2d92e18292">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
 
-    <link rel="canonical" href="index.html" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="amp/index.html" />
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
     
-    <meta property="og:site_name" content="ARVO Systems Blog" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Local SPFx Workbench against real SharePoint API" />
-    <meta property="og:description" content="When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy. By default by running gulp serve, the local workbench is started. Local workbench opens on https://localhost:4321/temp/workbench.html, it is a page which mimics SharePoint modern UI, yet it&#x27;s just a" />
-    <meta property="og:url" content="/2017/11/27/spfx-workbench-against-real-sharepoint-api/" />
-    <meta property="og:image" content="/content/images/2017/11/spfx-proxy-wide.png" />
-    <meta property="article:published_time" content="2017-11-27T18:21:03.000Z" />
-    <meta property="article:modified_time" content="2017-11-27T21:39:31.000Z" />
-    <meta property="article:tag" content="SharePoint" />
-    <meta property="article:tag" content="development" />
-    <meta property="article:tag" content="sp-rest-proxy" />
-    <meta property="article:tag" content="Toolchain" />
-    <meta property="article:tag" content="Framework" />
-    <meta property="article:tag" content="SPFx" />
-    <meta property="article:tag" content="sp-pnp-js" />
+    <meta property="og:site_name" content="ARVO Systems Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Local SPFx Workbench against real SharePoint API">
+    <meta property="og:description" content="When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy. By default by running gulp serve, the local workbench is started. Local workbench opens on https://localhost:4321/temp/workbench.html, it is a page which mimics SharePoint modern UI, yet it's just a">
+    <meta property="og:url" content="/2017/11/27/spfx-workbench-against-real-sharepoint-api/">
+    <meta property="og:image" content="/content/images/2017/11/spfx-proxy-wide.png">
+    <meta property="article:published_time" content="2017-11-27T18:21:03.000Z">
+    <meta property="article:modified_time" content="2017-11-27T21:39:31.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="development">
+    <meta property="article:tag" content="sp-rest-proxy">
+    <meta property="article:tag" content="Toolchain">
+    <meta property="article:tag" content="Framework">
+    <meta property="article:tag" content="SPFx">
+    <meta property="article:tag" content="sp-pnp-js">
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Local SPFx Workbench against real SharePoint API" />
-    <meta name="twitter:description" content="When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy. By default by running gulp serve, the local workbench is started. Local workbench opens on https://localhost:4321/temp/workbench.html, it is a page which mimics SharePoint modern UI, yet it&#x27;s just a" />
-    <meta name="twitter:url" content="/2017/11/27/spfx-workbench-against-real-sharepoint-api/" />
-    <meta name="twitter:image" content="/content/images/2017/11/spfx-proxy-wide.png" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Andrew Koltyakov" />
-    <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="SharePoint, development, sp-rest-proxy, Toolchain, Framework, SPFx, sp-pnp-js" />
-    <meta name="twitter:creator" content="@AndrewKoltyakov" />
-    <meta property="og:image:width" content="1920" />
-    <meta property="og:image:height" content="334" />
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Local SPFx Workbench against real SharePoint API">
+    <meta name="twitter:description" content="When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy. By default by running gulp serve, the local workbench is started. Local workbench opens on https://localhost:4321/temp/workbench.html, it is a page which mimics SharePoint modern UI, yet it's just a">
+    <meta name="twitter:url" content="/2017/11/27/spfx-workbench-against-real-sharepoint-api/">
+    <meta name="twitter:image" content="/content/images/2017/11/spfx-proxy-wide.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, development, sp-rest-proxy, Toolchain, Framework, SPFx, sp-pnp-js">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="334">
     
     <script type="application/ld+json">
 {
@@ -103,8 +102,8 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10" />
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html" />
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html">
 </head>
 <body class="post-template tag-sharepoint tag-development tag-sp-rest-proxy tag-toolchain tag-framework tag-spfx tag-sp-pnp-js nav-closed">
 
@@ -114,14 +113,14 @@
         <span class="hidden">Close</span>
     </a>
     <ul>
-            <li class="nav-blog-home" role="presentation"><a href="../../../../index.html">Blog Home</a></li>
+            <li class="nav-blog-home" role="presentation"><a href="../../../../">Blog Home</a></li>
             <li class="nav-search" role="presentation"><a href="http://www.arvosys.com/search/">Search</a></li>
             <li class="nav-arvo-systems" role="presentation"><a href="http://www.arvosys.com/">ARVO Systems</a></li>
             <li class="nav--services" role="presentation"><a href="http://www.arvosys.com/services/">... Services</a></li>
             <li class="nav--platforms" role="presentation"><a href="http://www.arvosys.com/platforms/">... Platforms</a></li>
             <li class="nav--contacts" role="presentation"><a href="http://www.arvosys.com/about/contacts/">... Contacts</a></li>
     </ul>
-        <a class="subscribe-button icon-feed" href="../../../../rss/index.html">Subscribe</a>
+        <a class="subscribe-button icon-feed" href="../../../../rss/index.rss">Subscribe</a>
 </div>
 <span class="nav-cover"></span>
 
@@ -134,7 +133,7 @@
 
 <header class="main-header post-head " style="background-image: url(../../../../content/images/2017/11/spfx-proxy-wide.png)">
     <nav class="main-nav overlay clearfix">
-        <a class="blog-logo" href="../../../../index.html"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog" /></a>
+        <a class="blog-logo" href="../../../../"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog"></a>
             <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
     </nav>
 </header>
@@ -145,7 +144,7 @@
         <header class="post-header">
             <h1 class="post-title">Local SPFx Workbench against real SharePoint API</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2017-11-27">27 November 2017</time>  on <a href="../../../../tag/sharepoint/index.html">SharePoint</a>, <a href="../../../../tag/development/index.html">development</a>, <a href="../../../../tag/sp-rest-proxy/index.html">sp-rest-proxy</a>, <a href="../../../../tag/toolchain/index.html">Toolchain</a>, <a href="../../../../tag/framework/index.html">Framework</a>, <a href="../../../../tag/spfx/index.html">SPFx</a>, <a href="../../../../tag/sp-pnp-js/index.html">sp-pnp-js</a>
+                <time class="post-date" datetime="2017-11-27">27 November 2017</time>  on <a href="../../../../tag/sharepoint/">SharePoint</a>, <a href="../../../../tag/development/">development</a>, <a href="../../../../tag/sp-rest-proxy/">sp-rest-proxy</a>, <a href="../../../../tag/toolchain/">Toolchain</a>, <a href="../../../../tag/framework/">Framework</a>, <a href="../../../../tag/spfx/">SPFx</a>, <a href="../../../../tag/sp-pnp-js/">sp-pnp-js</a>
             </section>
         </header>
 
@@ -283,19 +282,19 @@ web.lists.get()
 
 <h2 id="example">Example</h2>
 
-<p>I've published a simple example with the setup described above. The example can be found <a href="https://github.com/koltyakov/sp-rest-proxy/tree/master/examples/spfx-proxy-example">here</a>. <br />
-<img src="../../../../content/images/2017/11/demo.jpg" alt="" /></p>
+<p>I've published a simple example with the setup described above. The example can be found <a href="https://github.com/koltyakov/sp-rest-proxy/tree/master/examples/spfx-proxy-example">here</a>. <br>
+<img src="../../../../content/images/2017/11/demo.jpg" alt=""></p>
         </section>
 
         <footer class="post-footer">
 
 
             <figure class="author-image">
-                <a class="img" href="../../../../author/andrew/index.html" style="background-image: url(../../../../content/images/2016/09/andrew.koltyakov.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
+                <a class="img" href="../../../../author/andrew/" style="background-image: url(../../../../content/images/2016/09/andrew.koltyakov.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
             </figure>
 
             <section class="author">
-                <h4><a href="../../../../author/andrew/index.html">Andrew Koltyakov</a></h4>
+                <h4><a href="../../../../author/andrew/">Andrew Koltyakov</a></h4>
 
                     <p>SharePoint Front-End Developer</p>
                 <div class="author-meta">
@@ -307,16 +306,13 @@ web.lists.get()
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Local%20SPFx%20Workbench%20against%20real%20SharePoint%20API&amp;url=/2017/11/27/spfx-workbench-against-real-sharepoint-api/"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Local%20SPFx%20Workbench%20against%20real%20SharePoint%20API&amp;url=/2017/11/27/spfx-workbench-against-real-sharepoint-api/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/11/27/spfx-workbench-against-real-sharepoint-api/"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/11/27/spfx-workbench-against-real-sharepoint-api/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2017/11/27/spfx-workbench-against-real-sharepoint-api/"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2017/11/27/spfx-workbench-against-real-sharepoint-api/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -341,16 +337,16 @@ web.lists.get()
 </main>
 
 <aside class="read-next">
-    <a class="read-next-story " style="background-image: url(../../../../content/images/2017/12/vscode_debug_02.png)" href="../../../12/02/contribution-to-pnp-js-core-debugging-source-changes/index.html">
+    <a class="read-next-story " style="background-image: url(../../../../content/images/2017/12/vscode_debug_02.png)" href="../../../12/02/contribution-to-pnp-js-core-debugging-source-changes/">
         <section class="post">
             <h2>Contribution to PnP JS Core: Debugging source code changes</h2>
-            <p>While contributing to the Open Source project one should follow blueprints of the community project at the same time&hellip;</p>
+            <p>While contributing to the Open Source project one should follow blueprints of the community project at the same time…</p>
         </section>
     </a>
-    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2017/10/PimpMyDonNetWithNode-2.png)" href="../../../10/30/sharepoint-net-authentication-via-embedded-node-js/index.html">
+    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2017/10/PimpMyDonNetWithNode-2.png)" href="../../../10/30/sharepoint-net-authentication-via-embedded-node-js/">
         <section class="post">
             <h2>SharePoint .Net authentication via embedded Node.js</h2>
-            <p>Intro I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying&hellip;</p>
+            <p>Intro I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying…</p>
         </section>
     </a>
 </aside>
@@ -407,8 +403,7 @@ web.lists.get()
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
     })();
     </script>
-    <noscript><p><img src="http://piwik.spflow.com/piwik.php?idsite=9" style="border:0;" alt="" /></p></noscript>
+    <noscript><p><img src="http://piwik.spflow.com/piwik.php?idsite=9" style="border:0;" alt=""></p></noscript>
     <!-- End Piwik Code -->
 
 </body>
-</html>

@@ -1,49 +1,48 @@
-<!DOCTYPE html>
-<html ⚡>
+
 <head>
     <meta charset="utf-8">
 
     <title>Preparing development machine for client-side SharePoint projects (Mac and PC)</title>
-    <meta name="description" content="" />
+    <meta name="description" content="">
 
-    <meta name="HandheldFriendly" content="True" />
+    <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <link rel="shortcut icon" href="../../../../../favicon.ico">
 
-    <link rel="canonical" href="../index.html" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="canonical" href="../index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
     
-    <meta property="og:site_name" content="ARVO Systems Blog" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Preparing development machine for client-side SharePoint projects (Mac and PC)" />
-    <meta property="og:description" content="This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly" />
-    <meta property="og:url" content="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/" />
-    <meta property="og:image" content="/content/images/2016/09/Environment-1.png" />
-    <meta property="article:published_time" content="2016-08-25T11:35:00.000Z" />
-    <meta property="article:modified_time" content="2016-09-12T20:34:28.000Z" />
-    <meta property="article:tag" content="SharePoint" />
-    <meta property="article:tag" content="Node.js" />
-    <meta property="article:tag" content="VSC" />
-    <meta property="article:tag" content="Gulp" />
-    <meta property="article:tag" content="Toolchain" />
-    <meta property="article:tag" content="Yeoman" />
-    <meta property="article:tag" content="SPPull" />
-    <meta property="article:tag" content="Git" />
+    <meta property="og:site_name" content="ARVO Systems Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Preparing development machine for client-side SharePoint projects (Mac and PC)">
+    <meta property="og:description" content="This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly">
+    <meta property="og:url" content="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">
+    <meta property="og:image" content="/content/images/2016/09/Environment-1.png">
+    <meta property="article:published_time" content="2016-08-25T11:35:00.000Z">
+    <meta property="article:modified_time" content="2016-09-12T20:34:28.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="VSC">
+    <meta property="article:tag" content="Gulp">
+    <meta property="article:tag" content="Toolchain">
+    <meta property="article:tag" content="Yeoman">
+    <meta property="article:tag" content="SPPull">
+    <meta property="article:tag" content="Git">
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Preparing development machine for client-side SharePoint projects (Mac and PC)" />
-    <meta name="twitter:description" content="This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly" />
-    <meta name="twitter:url" content="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/" />
-    <meta name="twitter:image" content="/content/images/2016/09/Environment-1.png" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Andrew Koltyakov" />
-    <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="SharePoint, Node.js, VSC, Gulp, Toolchain, Yeoman, SPPull, Git" />
-    <meta name="twitter:creator" content="@AndrewKoltyakov" />
-    <meta property="og:image:width" content="1600" />
-    <meta property="og:image:height" content="583" />
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Preparing development machine for client-side SharePoint projects (Mac and PC)">
+    <meta name="twitter:description" content="This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing. Initial installation is slightly">
+    <meta name="twitter:url" content="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">
+    <meta name="twitter:image" content="/content/images/2016/09/Environment-1.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, Node.js, VSC, Gulp, Toolchain, Yeoman, SPPull, Git">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="583">
     
     <script type="application/ld+json">
 {
@@ -95,10 +94,10 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10" />
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html" />
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html">
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
     <style amp-custom>
         /* ==========================================================================
            Table of Contents
@@ -872,7 +871,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../../../../index.html">ARVO Systems Blog</a>
+            <a href="../../../../../">ARVO Systems Blog</a>
         </nav>
     </header>
 
@@ -882,7 +881,7 @@
             <header class="post-header">
                 <h1 class="post-title">Preparing development machine for client-side SharePoint projects (Mac and PC)</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../../../../author/andrew/index.html">Andrew Koltyakov</a></p>
+                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
                     <time class="post-date" datetime="2016-08-25">2016-08-25</time>
                 </section>
             </header>
@@ -891,7 +890,7 @@
             </figure>
             <section class="post-content">
 
-                <html><body><blockquote>
+                <blockquote>
   <p>This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets</p>
 </blockquote>
 
@@ -919,7 +918,7 @@
 
 <p>Chocolatey installation is as easy as run one-line command in CMD (run as administrator for sure):</p>
 
-<pre><code class="language-bash">@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;
+<pre><code class="language-bash">@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" &amp;&amp; SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 </code></pre>
 
 <h3 id="packages">Packages</h3>
@@ -939,7 +938,7 @@
 
 <p>One-line command again in Terminal:</p>
 
-<pre><code class="language-bash">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+<pre><code class="language-bash">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 </code></pre>
 
 <h3 id="packages">Packages</h3>
@@ -1058,22 +1057,21 @@ Before going next, a few words about local modules installation save options.</l
 <li>Create a project in Git (GitHub, BitBucket, Visual Studio Online, no matter)  </li>
 <li>git clone [your<em>project</em>url]  </li>
 <li>Navigate to your project directory  </li>
-<li>NPM init/install: <br></br>
+<li>NPM init/install: <br>
 <ul><li>npm init -y – in the case if it is a new blank project</li>
 <li>npm install – in the case of cloning already initiated project from Git
 code .  </li></ul></li>
 <li>... and, with VSC and console opened, you are ready to rock-n-roll</li>
 </ol>
 
-<p>Next time there will be a lot of code and config’s, I’ll describe project setup for instant publishing to SharePoint and fetching and merging files back from running instance. Hope all of this makes sense. Stay tuned. And welcome to the comment section below.</p></body></html>
+<p>Next time there will be a lot of code and config’s, I’ll describe project setup for instant publishing to SharePoint and fetching and merging files back from running instance. Hope all of this makes sense. Stay tuned. And welcome to the comment section below.</p>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../../../../index.html">ARVO Systems Blog</a> &copy; 2018</section>
+        <section class="copyright"><a href="../../../../../">ARVO Systems Blog</a> © 2018</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
-</html>

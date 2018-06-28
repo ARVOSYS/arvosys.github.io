@@ -1,47 +1,46 @@
-<!DOCTYPE html>
-<html ⚡>
+
 <head>
     <meta charset="utf-8">
 
     <title>SharePoint .Net authentication via embedded Node.js</title>
-    <meta name="description" content="" />
+    <meta name="description" content="">
 
-    <meta name="HandheldFriendly" content="True" />
+    <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <link rel="shortcut icon" href="../../../../../favicon.ico">
 
-    <link rel="canonical" href="../index.html" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="canonical" href="../index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
     
-    <meta property="og:site_name" content="ARVO Systems Blog" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="SharePoint .Net authentication via embedded Node.js" />
-    <meta property="og:description" content="Intro I&#x27;m a fan of crazy experiments with technologies and code. How many times I catch myself on saying &quot;Why don&#x27;t to [insane idea to implement]&quot;, then in one grasp after a while seating and scratching my head with &quot;Oh shoot! It&#x27;s working! O_o&quot;. That&#x27;s how some of my" />
-    <meta property="og:url" content="/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/" />
-    <meta property="og:image" content="/content/images/2017/10/PimpMyDonNetWithNode-2.png" />
-    <meta property="article:published_time" content="2017-10-29T23:05:08.000Z" />
-    <meta property="article:modified_time" content="2017-10-29T23:18:05.000Z" />
-    <meta property="article:tag" content="SharePoint" />
-    <meta property="article:tag" content="Node.js" />
-    <meta property="article:tag" content="API" />
-    <meta property="article:tag" content="development" />
-    <meta property="article:tag" content=".Net" />
-    <meta property="article:tag" content="Authentication" />
+    <meta property="og:site_name" content="ARVO Systems Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SharePoint .Net authentication via embedded Node.js">
+    <meta property="og:description" content="Intro I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying &quot;Why don't to [insane idea to implement]&quot;, then in one grasp after a while seating and scratching my head with &quot;Oh shoot! It's working! O_o&quot;. That's how some of my">
+    <meta property="og:url" content="/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/">
+    <meta property="og:image" content="/content/images/2017/10/PimpMyDonNetWithNode-2.png">
+    <meta property="article:published_time" content="2017-10-29T23:05:08.000Z">
+    <meta property="article:modified_time" content="2017-10-29T23:18:05.000Z">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="API">
+    <meta property="article:tag" content="development">
+    <meta property="article:tag" content=".Net">
+    <meta property="article:tag" content="Authentication">
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SharePoint .Net authentication via embedded Node.js" />
-    <meta name="twitter:description" content="Intro I&#x27;m a fan of crazy experiments with technologies and code. How many times I catch myself on saying &quot;Why don&#x27;t to [insane idea to implement]&quot;, then in one grasp after a while seating and scratching my head with &quot;Oh shoot! It&#x27;s working! O_o&quot;. That&#x27;s how some of my" />
-    <meta name="twitter:url" content="/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/" />
-    <meta name="twitter:image" content="/content/images/2017/10/PimpMyDonNetWithNode-2.png" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Andrew Koltyakov" />
-    <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="SharePoint, Node.js, API, development, .Net, Authentication" />
-    <meta name="twitter:creator" content="@AndrewKoltyakov" />
-    <meta property="og:image:width" content="1920" />
-    <meta property="og:image:height" content="322" />
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SharePoint .Net authentication via embedded Node.js">
+    <meta name="twitter:description" content="Intro I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying &quot;Why don't to [insane idea to implement]&quot;, then in one grasp after a while seating and scratching my head with &quot;Oh shoot! It's working! O_o&quot;. That's how some of my">
+    <meta name="twitter:url" content="/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/">
+    <meta name="twitter:image" content="/content/images/2017/10/PimpMyDonNetWithNode-2.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SharePoint, Node.js, API, development, .Net, Authentication">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="322">
     
     <script type="application/ld+json">
 {
@@ -93,10 +92,10 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10" />
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html" />
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html">
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
     <style amp-custom>
         /* ==========================================================================
            Table of Contents
@@ -870,7 +869,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../../../../index.html">ARVO Systems Blog</a>
+            <a href="../../../../../">ARVO Systems Blog</a>
         </nav>
     </header>
 
@@ -880,7 +879,7 @@
             <header class="post-header">
                 <h1 class="post-title">SharePoint .Net authentication via embedded Node.js</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../../../../author/andrew/index.html">Andrew Koltyakov</a></p>
+                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
                     <time class="post-date" datetime="2017-10-30">2017-10-30</time>
                 </section>
             </header>
@@ -889,21 +888,21 @@
             </figure>
             <section class="post-content">
 
-                <html><body><h2 id="intro">Intro</h2>
+                <h2 id="intro">Intro</h2>
 
-<p>I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying &quot;Why don't to [insane idea to implement]&quot;, then in one grasp after a while seating and scratching my head with &quot;Oh shoot! It's working! O_o&quot;. That's how some of my open source projects saw the light.</p>
+<p>I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying "Why don't to [insane idea to implement]", then in one grasp after a while seating and scratching my head with "Oh shoot! It's working! O_o". That's how some of my open source projects saw the light.</p>
 
 <p>Last week there was the idea to dig <a href="https://github.com/tjanczuk/edge">Edge.js</a> a bit. Edge.js is a library which allows running CLR languages like C# .Net from Node.js and vice versa.</p>
 
 <p>For a while, we had a plan of syncing <code>sp-cmd-deploy</code> (.Net module for getting CSOM context) with <code>node-sp-auth-config</code> (Node.js module for a work with auth). Both modules have some common ideas. And it would have been great to share some settings between them.</p>
 
-<p>Jungling these ideas somebody said &quot;Why don't we just use <code>node-sp-auth-conf</code> in our .Net apps too?&quot;. <br></br>
+<p>Jungling these ideas somebody said "Why don't we just use <code>node-sp-auth-conf</code> in our .Net apps too?". <br>
 Well... said and done!</p>
 
 <h2 id="spauthnhttpsgithubcomkoltyakovspauthn"><a href="https://github.com/koltyakov/SPAuthN">SPAuthN</a></h2>
 
-<p>Here our pet Frankenstein <code>SPAuthN</code>. <br></br>
-SPAuthN is a .Net library available in NuGets. And it's a wrapper for <a href="https://www.npmjs.com/package/node-sp-auth">node-sp-auth</a> and <a href="https://www.npmjs.com/package/node-sp-auth-config">node-sp-auth-config</a>. <br></br>
+<p>Here our pet Frankenstein <code>SPAuthN</code>. <br>
+SPAuthN is a .Net library available in NuGets. And it's a wrapper for <a href="https://www.npmjs.com/package/node-sp-auth">node-sp-auth</a> and <a href="https://www.npmjs.com/package/node-sp-auth-config">node-sp-auth-config</a>. <br>
 This monster allows authenticating in SharePoint in whatever you need scenarios and provides a wizard-like approach for building and managing connection config files.</p>
 
 <h2 id="disclaimer">Disclaimer</h2>
@@ -921,14 +920,14 @@ This monster allows authenticating in SharePoint in whatever you need scenarios 
 <p>And definitely not for the situations when these work for you:</p>
 
 <ul>
-<li>context.Credentials = new SharePointOnlineCredentials(&quot;username&quot;, &quot;securepass&quot;);</li>
-<li>context.Credentials = new NetworkCredential(&quot;username&quot;, &quot;password&quot;, &quot;domain&quot;);</li>
+<li>context.Credentials = new SharePointOnlineCredentials("username", "securepass");</li>
+<li>context.Credentials = new NetworkCredential("username", "password", "domain");</li>
 <li>Any other native authentication routes.</li>
 </ul>
 
 <h2 id="features">Features</h2>
 
-<p>SPAuthN supports authenticating against SharePoint Online, 2016, 2013. <br></br>
+<p>SPAuthN supports authenticating against SharePoint Online, 2016, 2013. <br>
 It's one ring to rule Addin only permissions, SAML based with user credentials, ADFS user credentials, User credentials through the http NTLM handshake, ADFS user credentials, Form-based (FBA), Forefront TMG authentication strategies.</p>
 
 <h2 id="howitworksinanutshell">How it works in a nutshell</h2>
@@ -948,7 +947,7 @@ It's one ring to rule Addin only permissions, SAML based with user credentials, 
 
 <p>That's it! Really!</p>
 
-<p>Now <code>options.headers</code> object contains Cookie or Authorization which can be injected to web requests. <br></br>
+<p>Now <code>options.headers</code> object contains Cookie or Authorization which can be injected to web requests. <br>
 This is a low level, session timeouts should be controlled manually.</p>
 
 <h2 id="firstrun">First run</h2>
@@ -972,7 +971,7 @@ The password is stored as a secure string, it can be used only on the machine wh
 
 <p><code>GetAuth</code> method receives a string with arguments which are passed as initiators to <a href="https://github.com/koltyakov/node-sp-auth-config/blob/master/src/interfaces/index.ts#L35">AuthConfigSettings</a>.</p>
 
-<pre><code class="language-csharp">Options options = SPAuth.GetAuth(&quot;--encryptPassword=false --configPath='./config/private.uat.json'&quot;);  
+<pre><code class="language-csharp">Options options = SPAuth.GetAuth("--encryptPassword=false --configPath='./config/private.uat.json'");  
 </code></pre>
 
 <h3 id="argumentsusecases">Arguments use cases</h3>
@@ -999,15 +998,15 @@ The password is stored as a secure string, it can be used only on the machine wh
 
 <h4 id="rawauthoptionsexample">Raw auth options (example)</h4>
 
-<pre><code class="language-bash">--authOptions.siteUrl=&quot;http://sharepoint&quot; --authOptions.username=&quot;user@contoso.com&quot; --authOptions.password=&quot;p@ssw0rd&quot; --saveConfigOnDisk=false
+<pre><code class="language-bash">--authOptions.siteUrl="http://sharepoint" --authOptions.username="user@contoso.com" --authOptions.password="p@ssw0rd" --saveConfigOnDisk=false
 </code></pre>
 
 <h3 id="usageexamples">Usage examples</h3>
 
 <h4 id="webrequest">WebRequest</h4>
 
-<pre><code class="language-csharp">Options options = SPAuth.GetAuth(&quot;--configPath='./config/private.json'&quot;);  
-WebRequest request = WebRequest.Create(options.SiteUrl + &quot;/_api/web?$select=Title&quot;);  
+<pre><code class="language-csharp">Options options = SPAuth.GetAuth("--configPath='./config/private.json'");  
+WebRequest request = WebRequest.Create(options.SiteUrl + "/_api/web?$select=Title");  
 request.Headers = options.Headers;  
 HttpWebResponse response = (HttpWebResponse)request.GetResponse();  
 if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.NoContent)  
@@ -1015,15 +1014,15 @@ if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatu
   Stream dataStream = response.GetResponseStream();
   XDocument xDoc = XDocument.Load(dataStream);
 
-  XNamespace ns = &quot;http://www.w3.org/2005/Atom&quot;;
-  XNamespace d = &quot;http://schemas.microsoft.com/ado/2007/08/dataservices&quot;;
-  XNamespace m = &quot;http://schemas.microsoft.com/ado/2007/08/dataservices/metadata&quot;;
+  XNamespace ns = "http://www.w3.org/2005/Atom";
+  XNamespace d = "http://schemas.microsoft.com/ado/2007/08/dataservices";
+  XNamespace m = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
 
   string title = xDoc
-    .Element(ns + &quot;entry&quot;).Element(ns + &quot;content&quot;)
-    .Element(m + &quot;properties&quot;).Element(d + &quot;Title&quot;).Value;
+    .Element(ns + "entry").Element(ns + "content")
+    .Element(m + "properties").Element(d + "Title").Value;
 
-  Console.WriteLine(&quot;REST | Web title is: {0}&quot;, title);
+  Console.WriteLine("REST | Web title is: {0}", title);
   dataStream.Close();
 }
 response.Close();  
@@ -1031,7 +1030,7 @@ response.Close();
 
 <h4 id="csom">CSOM</h4>
 
-<pre><code class="language-csharp">Options options = SPAuth.GetAuth(&quot;--configPath='./config/private.json'&quot;);  
+<pre><code class="language-csharp">Options options = SPAuth.GetAuth("--configPath='./config/private.json'");  
 using (ClientContext clientContext = new ClientContext(options.SiteUrl))  
 {
   clientContext.ExecutingWebRequest += (sender, arguments) =&gt;
@@ -1046,21 +1045,20 @@ using (ClientContext clientContext = new ClientContext(options.SiteUrl))
   clientContext.Load(web);
   clientContext.ExecuteQuery();
 
-  Console.WriteLine(&quot;CSOM | Web title is: {0}&quot;, web.Title);
+  Console.WriteLine("CSOM | Web title is: {0}", web.Title);
 }
 </code></pre>
 
 <h2 id="afterwords">Afterwords</h2>
 
-<p>Please don't understand me wrong. I know that it's a crazy stuff, but at the same time, it's an interesting example of reusing code base from absolutely different worlds and stacks and integrating one thing into another.</p></body></html>
+<p>Please don't understand me wrong. I know that it's a crazy stuff, but at the same time, it's an interesting example of reusing code base from absolutely different worlds and stacks and integrating one thing into another.</p>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../../../../index.html">ARVO Systems Blog</a> &copy; 2018</section>
+        <section class="copyright"><a href="../../../../../">ARVO Systems Blog</a> © 2018</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
-</html>
