@@ -1,45 +1,46 @@
-
+<!DOCTYPE html>
+<html ⚡>
 <head>
     <meta charset="utf-8">
 
     <title>Using PnP JS Core outside a browser (Node.js environment)</title>
-    <meta name="description" content="">
+    <meta name="description" content="" />
 
-    <meta name="HandheldFriendly" content="True">
+    <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <link rel="shortcut icon" href="../../../../../favicon.ico">
 
-    <link rel="canonical" href="../index.html">
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     
-    <meta property="og:site_name" content="ARVO Systems Blog">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Using PnP JS Core outside a browser (Node.js environment)">
-    <meta property="og:description" content="Expanding scopes of usage of favorite tools I wrote about PnP JS Core 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects. And what can I say after these months? Now it's one">
-    <meta property="og:url" content="/2017/05/18/using-pnp-js-core-outside-a-browser-node-js-environment/">
-    <meta property="og:image" content="/content/images/2017/05/sp-pnp-node-2.png">
-    <meta property="article:published_time" content="2017-05-18T07:01:43.000Z">
-    <meta property="article:modified_time" content="2017-05-18T07:05:41.000Z">
-    <meta property="article:tag" content="SharePoint">
-    <meta property="article:tag" content="Node.js">
-    <meta property="article:tag" content="PnP">
-    <meta property="article:tag" content="REST">
-    <meta property="article:tag" content="PnP JS Core">
+    <meta property="og:site_name" content="ARVO Systems Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Using PnP JS Core outside a browser (Node.js environment)" />
+    <meta property="og:description" content="Expanding scopes of usage of favorite tools I wrote about PnP JS Core 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects. And what can I say after these months? Now it&#x27;s one" />
+    <meta property="og:url" content="/2017/05/18/using-pnp-js-core-outside-a-browser-node-js-environment/" />
+    <meta property="og:image" content="/content/images/2017/05/sp-pnp-node-2.png" />
+    <meta property="article:published_time" content="2017-05-18T07:01:43.000Z" />
+    <meta property="article:modified_time" content="2017-05-18T07:05:41.000Z" />
+    <meta property="article:tag" content="SharePoint" />
+    <meta property="article:tag" content="Node.js" />
+    <meta property="article:tag" content="PnP" />
+    <meta property="article:tag" content="REST" />
+    <meta property="article:tag" content="PnP JS Core" />
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Using PnP JS Core outside a browser (Node.js environment)">
-    <meta name="twitter:description" content="Expanding scopes of usage of favorite tools I wrote about PnP JS Core 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects. And what can I say after these months? Now it's one">
-    <meta name="twitter:url" content="/2017/05/18/using-pnp-js-core-outside-a-browser-node-js-environment/">
-    <meta name="twitter:image" content="/content/images/2017/05/sp-pnp-node-2.png">
-    <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="Andrew Koltyakov">
-    <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, Node.js, PnP, REST, PnP JS Core">
-    <meta name="twitter:creator" content="@AndrewKoltyakov">
-    <meta property="og:image:width" content="1280">
-    <meta property="og:image:height" content="400">
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Using PnP JS Core outside a browser (Node.js environment)" />
+    <meta name="twitter:description" content="Expanding scopes of usage of favorite tools I wrote about PnP JS Core 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects. And what can I say after these months? Now it&#x27;s one" />
+    <meta name="twitter:url" content="/2017/05/18/using-pnp-js-core-outside-a-browser-node-js-environment/" />
+    <meta name="twitter:image" content="/content/images/2017/05/sp-pnp-node-2.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Andrew Koltyakov" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="SharePoint, Node.js, PnP, REST, PnP JS Core" />
+    <meta name="twitter:creator" content="@AndrewKoltyakov" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="400" />
     
     <script type="application/ld+json">
 {
@@ -91,10 +92,10 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10">
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html">
+    <meta name="generator" content="Ghost 0.10" />
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html" />
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
     <style amp-custom>
         /* ==========================================================================
            Table of Contents
@@ -868,7 +869,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../../../../">ARVO Systems Blog</a>
+            <a href="../../../../../index.html">ARVO Systems Blog</a>
         </nav>
     </header>
 
@@ -878,7 +879,7 @@
             <header class="post-header">
                 <h1 class="post-title">Using PnP JS Core outside a browser (Node.js environment)</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
+                    <p class="author">by <a href="../../../../../author/andrew/index.html">Andrew Koltyakov</a></p>
                     <time class="post-date" datetime="2017-05-18">2017-05-18</time>
                 </section>
             </header>
@@ -887,19 +888,19 @@
             </figure>
             <section class="post-content">
 
-                <blockquote>
+                <html><body><blockquote>
   <p>Expanding scopes of usage of favorite tools</p>
 </blockquote>
 
-<p>I <a href="../../../../../2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
+<p>I <a href="../../../../../2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/index.html">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
 
-<p>And what can I say after these months? Now it's one of the must have dependencies on any new front-end project I scaffold for SharePoint. I almost have forgotten when I needed to grab old fellow JSOM (sp.js) for the reason of communication with SharePoint API within a UI application. It works almost for anything available in REST API. There are some gaps and scenarios in the API when REST have no existing methods implementation (<a href="https://github.com/SharePoint/PnP-JS-Core/issues/415">Manage Metadata</a>, some areas of <a href="../../../../02/16/working-with-sharepoint-ups-in-node-js/">User Profiles Services</a>, <a href="https://github.com/SharePoint/PnP-JS-Core/issues/455">indexed properties</a>, etc.) though it's not something which you need very often in UI application. For the methods, what are there in the REST API, PnP JS Core is an awesome shiny tool.</p>
+<p>And what can I say after these months? Now it's one of the must have dependencies on any new front-end project I scaffold for SharePoint. I almost have forgotten when I needed to grab old fellow JSOM (sp.js) for the reason of communication with SharePoint API within a UI application. It works almost for anything available in REST API. There are some gaps and scenarios in the API when REST have no existing methods implementation (<a href="https://github.com/SharePoint/PnP-JS-Core/issues/415">Manage Metadata</a>, some areas of <a href="../../../../02/16/working-with-sharepoint-ups-in-node-js/index.html">User Profiles Services</a>, <a href="https://github.com/SharePoint/PnP-JS-Core/issues/455">indexed properties</a>, etc.) though it's not something which you need very often in UI application. For the methods, what are there in the REST API, PnP JS Core is an awesome shiny tool.</p>
 
 <p>With time, I faced a couple of project needs where I got to fetch some metadata and data within Node.js using REST where hands themselves started writing in PnP JS Core. Yes, I know that it's not a big deal to prepare REST endpoint URIs and some JSON packages for such tasks. But it's a question of reusability and convenience writing code using your favorite API wrapper.</p>
 
 <p>Luckily, I was not along with such an idea and some folks already <a href="https://blogs.msdn.microsoft.com/patrickrodgers/2016/10/17/using-pnp-js-core-and-node-sp-auth/">experimented</a> with it and even created <a href="https://github.com/s-KaiNet/node-pnpjs-sample">examples</a> on GitHub. It was a matter of minutes to grab those concepts and successfully run PnP JS Core in Node.js on the server side.</p>
 
-<p>The suggested method with "patching" global variables, request headers and fetch client worked perfectly on a production for a couple of different things, one of which is extracting metadata for almost 20 hundred different SharePoint artifact elements.</p>
+<p>The suggested method with &quot;patching&quot; global variables, request headers and fetch client worked perfectly on a production for a couple of different things, one of which is extracting metadata for almost 20 hundred different SharePoint artifact elements.</p>
 
 <p>Month later, I faced a need to reuse the technique and not just once but for a number of times.</p>
 
@@ -957,14 +958,15 @@ const pnp = require('sp-pnp-js');
 
 <p>Once again, I recommend PnP JS Core for the stuff it was designed for. Nine months of constant usage of the library is a strong argument.</p>
 
-<p>Browser is not the only home for PnP JS Core and with tools like <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a> it can be smoothly executed in Node.js (console apps, timer jobs, microservices, electron apps, all of these are benevolent to it).</p>
+<p>Browser is not the only home for PnP JS Core and with tools like <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a> it can be smoothly executed in Node.js (console apps, timer jobs, microservices, electron apps, all of these are benevolent to it).</p></body></html>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../../../../">ARVO Systems Blog</a> © 2017</section>
+        <section class="copyright"><a href="../../../../../index.html">ARVO Systems Blog</a> &copy; 2018</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
+</html>

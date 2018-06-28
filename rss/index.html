@@ -1,5 +1,163 @@
-<channel><title></title><description></description><link>/<generator>Ghost 0.10</generator><lastbuilddate>Sat, 02 Dec 2017 11:44:51 GMT</lastbuilddate><link href="/rss/" rel="self" type="application/rss+xml"><ttl>60</ttl><item><title></title><description>While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively. <br>
-This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript]]&gt;</description><link>/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/<guid ispermalink="false">fba1140f-a558-45b4-849d-3344c70ec93a</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Sat, 02 Dec 2017 11:07:02 GMT</pubdate><content url="/content/images/2017/12/vscode_debug_02.png" medium="image"></content><encoded><p>While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively. <br>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[ARVO Systems Blog]]></title><description><![CDATA[SharePoint Development, Office 365, solutions in the cloud.]]></description><link>/</link><generator>Ghost 0.10</generator><lastBuildDate>Thu, 28 Jun 2018 14:37:32 GMT</lastBuildDate><atom:link href="/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Modern web parts provisioning in SharePoint Online]]></title><description><![CDATA[<html><head></head><body><p>Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites with modern pages have a number of advantages starting with simplicity for end users who manages the content and finishing with OOTB responsiveness and mobile friendliness. There is a bunch of</p></body></html>]]></description><link>/2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/</link><guid isPermaLink="false">20f0d671-0675-473e-81f3-efb7f309fc4f</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[JavaScript]]></category><category><![CDATA[PnP]]></category><category><![CDATA[SPO]]></category><category><![CDATA[Provisioning]]></category><category><![CDATA[PowerShell]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Thu, 28 Jun 2018 14:03:51 GMT</pubDate><media:content url="/content/images/2018/06/modern-webparts-provisioning.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2018/06/modern-webparts-provisioning.png" alt="Modern web parts provisioning in SharePoint Online"><p>Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites with modern pages have a number of advantages starting with simplicity for end users who manages the content and finishing with OOTB responsiveness and mobile friendliness. There is a bunch of great web parts to use out of the shelf as well as a rich tooling and the framework for rapid development of custom ones. After a while, a question of modern sites managing and automated provisioning appears. In this post, I'm going to reveal and investigate some options for pages and web parts provisioning.</p>
+
+<h2 id="modernpagestructurequickoverview">Modern page structure quick overview</h2>
+
+<p>The modern page is a page in SitePages on a modern SharePoint site which provides a capability of organizing content within the page. A page can be configured with sections (rows), a section can be dynamically divided into columns or declared as a full-width section, then web parts can be added into a column. All of these gives a flexible way of managing the visual representation of information on the page.</p>
+
+<h2 id="modernwebpartquickoverview">Modern web part quick overview</h2>
+
+<p>Only modern web parts can be located on a modern page. Modern web parts can be separated to OOTB provided by Microsoft and custom 3rd party developed using SharePoint Framework (SPFx). OOTB web parts can't be changed, but all the web parts could be configured with properties defined during development time. Sometimes changing properties, one can receive absolutely different experience within the same web part.</p>
+
+<p>Modern web parts are rendered on the pages as canvas controls, so "canvas control" is the second name for modern web parts.</p>
+
+<p>Each web part has its own unique id, alias, version, manifest and data. The simplest way to research web parts' metadata is to add web parts you're interested in on the page, provide settings in the UI, publish the page and then add <code>?maintenancemode=true</code> parameter to the URL. This switches page into maintenance mode showing web parts' service information.</p>
+
+<h2 id="provisioningoptions">Provisioning options</h2>
+
+<p>Any developer in the wild should be equipped with provisioning toolchains. Only microscopic solutions should assume manual actions as a rule. I say this words as a mantra to the team members and customers. Depending on preferences and scenarios different approaches can be used for provisioning, but the process should be automated, point or even exclamation mark.</p>
+
+<h3 id="pnpprovisioning">PnP provisioning</h3>
+
+<p><a href="https://docs.microsoft.com/en-us/sharepoint/dev/solution-guidance/pnp-remote-provisioning">PnP provisioning</a> is a set of tools for .Net and PowerShell, which provides cutting edge feature capabilities when it comes to SharePoint Online.</p>
+
+<p>PnP provisioning assumes two approaches: functional code-base provisioning and declarative schema-based processing. So, for example, one can provisiong an artifact using a specific PowerShell commandlet or .Net method or create an XML template based of a <a href="https://github.com/SharePoint/PnP-Provisioning-Schema/blob/master/ProvisioningSchema-2018-05.md">schema</a> and apply this template to site.</p>
+
+<pre><code class="language-xml"><?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema https://raw.githubusercontent.com/OfficeDev/PnP-Provisioning-Schema/master/OfficeDevPnP.ProvisioningSchema/ProvisioningSchema-2018-05.xsd">
+  <pnp:Preferences Generator="OfficeDevPnP.Core, Version=2.26.1805.0, Culture=neutral, PublicKeyToken=5e633289e95c321a" />
+  <pnp:Templates ID="PORTAL-PAGES-TEMPLATE">
+    <pnp:ProvisioningTemplate ID="PAGES-TEMPLATE" Version="1.0">
+      <pnp:ClientSidePages>
+        <pnp:ClientSidePage PageName="SamplePage01.aspx" Title="Sample Page 01" Layout="Article" PromoteAsNewsArticle="false" Overwrite="true" EnableComments="true" Publish="true">
+          <pnp:Sections>
+            <pnp:Section>
+              <pnp:Controls>
+                <pnp:CanvasControl WebPartType="Custom" ControlId="34f46dbd-abbb-4ff9-be98-7483df537309" Order="1" Column="1">
+                  <pnp:CanvasControlProperties>
+                    <pnp:CanvasControlProperty Key="PropName" Value="PropValue" />
+                  </pnp:CanvasControlProperties>
+                </pnp:CanvasControl>
+              </pnp:Controls>
+            </pnp:Section>
+          </pnp:Sections>
+        </pnp:ClientSidePage>
+      </pnp:ClientSidePages>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>
+</code></pre>
+
+<p>This XML sample shows configuration of creation <code>SamplePage01.aspx</code> page with one sections and a custom web part placed to the first and the only column in this case.</p>
+
+<p>Having such a template it can be applyed to a site with a bit of PowerShell:</p>
+
+<pre><code class="language-powershell">$Connection = Connect-PnPOnline -Url $SiteUrl -UseWebLogin -ReturnConnection;
+Apply-PnPProvisioningTemplate -Path $SchemaPath -Connection $Connection;
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+<li><code>$SiteUrl</code> is a URL of SharePoint modern site, </li>
+<li><code>$SchemaPath</code> is path to the XML template.</li>
+</ul>
+
+<p>Declarative style gives an idea how to organize pages, sections and web parts. Let's investigate canvas control in particular.</p>
+
+<pre><code class="language-xml"><!-- Out of the box web part -->
+<pnp:CanvasControl
+  WebPartType="Spacer"
+  JsonControlData="{&quot;autoHide&quot;:true,&quot;height&quot;:56}"
+  Order="1" Column="1"
+/>
+
+<!-- Custom web part -->
+<pnp:CanvasControl
+  WebPartType="Custom"
+  ControlId="4f87b698-f910-451f-b4ea-7848a472af0f"
+  JsonControlData="{&quot;description&quot;:&quot;Seattle&quot;,&quot;timeZoneOffset&quot;:10}"
+  Order="1" Column="2"
+/>
+</code></pre>
+
+<p>The example above shows OOTB web part provisioning definition. For OOTB controls PnP schema has <code>WebPartType</code>s dictionary, no need in providing <code>ControlId</code>s. For a custom types, ControlId is required. It can be easily found in maintanence mode or web part manifest.</p>
+
+<p>The most annoying part is providing properties, i.e., <code>JsonControlData</code> stored escaped version of properties JSON. Yet you can get used dealing with this rather soon, especially, for some simple cases the props can be provided in XML way:</p>
+
+<pre><code class="language-xml"><pnp:CanvasControlProperties>
+  <pnp:CanvasControlProperty Key="PropName" Value="PropValue" />
+</pnp:CanvasControlProperties>
+</code></pre>
+
+<p>A good example of web parts provisioning and modern SharePoint solution in general with all moving parts can be found in <a href="https://github.com/SharePoint/sp-starter-kit">SharePoint Starter Kit</a> repository.</p>
+
+<h3 id="pnpjsprovisioning">PnPjs provisioning</h3>
+
+<p><a href="https://github.com/pnp/pnpjs">PnPjs</a>, client side libraries for Microsoft 365, wrapper for SharePoint REST API and much more, also <a href="https://pnp.github.io/pnpjs/sp/client-side-pages.html">provides its mechanisms</a> for dealing with client side pages via REST API.</p>
+
+<p>With REST API, most of the actions with client site pages and modern web parts are in out disposal.</p>
+
+<pre><code class="language-javascript">import { sp, ClientSidePage, ClientSideWebpart, ClientSideText } from '@pnp/sp';
+
+(async () => {
+
+  const page = await sp.web.addClientSidePage('SamplePage01.aspx', 'Sample Page 01');
+
+  // Getting existing page
+  // const pageFile = sp.web.getFileByServerRelativeUrl(`${webUri}/SitePages/SamplePage01.aspx`);
+  // const page = await ClientSidePage.fromFile(pageFile);
+
+  page.sections = [];
+  const section = page.addSection();
+
+  // Placing all the webparts in one section
+
+  // Standard text control
+  section.addControl(new ClientSideText('HTML content goes here'));
+
+  // Custom 3rd party webpart
+  section.addControl(
+    new ClientSideWebpart('Custom web part', null, {
+      parameter01: 'value 01'
+    }, '34f46dbd-abbb-4ff9-be98-7483df537309')
+  );
+
+  // Image gallery webpart
+  section.addControl(
+    new ClientSideWebpart('ImageGallery', null, {
+      layout: 2,
+      gridSettings: {
+        imageSize: 2,
+        imageCropping: 1,
+        imageAspectRatio: 1,
+        lightbox: false
+      },
+      images: [
+        { url: '/sites/hub/SiteAssets/ImageGallery/88876.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/77559.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/77371.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/36732.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/97899.jpg' }
+      ]
+    }, 'af8be689-990e-492a-81f7-ba3e4cd3ed9c')
+  );
+
+  await page.save();
+
+})()
+  .then(_ => console.log('Done'))
+  .catch(console.log);
+</code></pre>
+
+<p>Such scripts can be a part of admin applications within SPFx solution for example, can be executed right in the browser using <a href="https://chrome.google.com/webstore/detail/sp-editor/ecblfcmjnbbgaojblcpmjoamegpbodhd?hl=en">SP Editor</a> extension, or can run in Node.js process.</p>
+
+<h2 id="wrappingup">Wrapping up</h2>
+
+<p>Both PnP Provisioning (.Net, PowerShell) and PnPjs scripts are friendly for automated processes and CI/CD. In my opinion these tools are mandatory and de-facto for modern SharePoint developers and administrators.</p>
+
+<p>The second wrapping idea is that it has been never so easy to provision pages and web parts as it is now with Modern cutting edge SharePoint.</p></body></html>]]></content:encoded></item><item><title><![CDATA[Contribution to PnP JS Core: Debugging source code changes]]></title><description><![CDATA[<html><head></head><body><p>While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively. <br>
+This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript</p></body></html>]]></description><link>/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/</link><guid isPermaLink="false">fba1140f-a558-45b4-849d-3344c70ec93a</guid><category><![CDATA[PnP JS Core]]></category><category><![CDATA[Toolchain]]></category><category><![CDATA[development]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[sp-pnp-node]]></category><category><![CDATA[Debug]]></category><category><![CDATA[TypeScript]]></category><category><![CDATA[VS Code]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Sat, 02 Dec 2017 11:07:02 GMT</pubDate><media:content url="/content/images/2017/12/vscode_debug_02.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2017/12/vscode_debug_02.png" alt="Contribution to PnP JS Core: Debugging source code changes"><p>While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively. <br>
 This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript project. But as the SharePoint development has its nuances setup is unique in some parts. <br>
 I really hope to inspire you to contribute to Open Source too.</p>
 
@@ -143,7 +301,7 @@ Follow <a href="https://github.com/SharePoint/PnP-JS-Core/wiki/Getting-Started:-
 import { initEnvironment as init } from './../utils/pnpnode';  
 import './../utils/setup';
 
-init().then(async settings =&gt; {
+init().then(async settings => {
 
   let web = new Web(settings.siteUrl);
   // executing methods to test
@@ -160,9 +318,9 @@ Open a runner which executes logic to test and start a debugger for the current 
 
 <p><img src="/content/images/2017/12/vscode_debug_02.png" alt="Contribution to PnP JS Core: Debugging source code changes"></p>
 
-<p>As usual, feel free ask questions in <a href="https://gitter.im/OfficeDev/PnP-JS-Core">Gitter</a> chat.</p>]]&gt;</encoded></item><item><title></title><description>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy.
+<p>As usual, feel free ask questions in <a href="https://gitter.im/OfficeDev/PnP-JS-Core">Gitter</a> chat.</p></body></html>]]></content:encoded></item><item><title><![CDATA[Local SPFx Workbench against real SharePoint API]]></title><description><![CDATA[<html><head></head><body><p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy.</p>
 
-<p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a</p>]]&gt;</description><link>/2017/11/27/spfx-workbench-against-real-sharepoint-api/<guid ispermalink="false">20b0f4d0-75de-43d2-b7c5-79034d42f90b</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Mon, 27 Nov 2017 18:21:03 GMT</pubdate><content url="/content/images/2017/11/spfx-proxy-wide.png" medium="image"></content><encoded><p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy.</p>
+<p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a</p></body></html>]]></description><link>/2017/11/27/spfx-workbench-against-real-sharepoint-api/</link><guid isPermaLink="false">20b0f4d0-75de-43d2-b7c5-79034d42f90b</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[development]]></category><category><![CDATA[sp-rest-proxy]]></category><category><![CDATA[Toolchain]]></category><category><![CDATA[Framework]]></category><category><![CDATA[SPFx]]></category><category><![CDATA[sp-pnp-js]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Mon, 27 Nov 2017 18:21:03 GMT</pubDate><media:content url="/content/images/2017/11/spfx-proxy-wide.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2017/11/spfx-proxy-wide.png" alt="Local SPFx Workbench against real SharePoint API"><p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy.</p>
 
 <p>By default by running <code>gulp serve</code>, the local workbench is started. Local workbench opens on <code>https://localhost:4321/temp/workbench.html</code>, it is a page which mimics SharePoint modern UI, yet it's just a locally served page, it has no connection to SharePoint APIs.</p>
 
@@ -296,9 +454,9 @@ web.lists.get()
 <h2 id="example">Example</h2>
 
 <p>I've published a simple example with the setup described above. The example can be found <a href="https://github.com/koltyakov/sp-rest-proxy/tree/master/examples/spfx-proxy-example">here</a>. <br>
-<img src="/content/images/2017/11/demo.jpg" alt="Local SPFx Workbench against real SharePoint API"></p>]]&gt;</encoded></item><item><title></title><description>Intro
+<img src="/content/images/2017/11/demo.jpg" alt="Local SPFx Workbench against real SharePoint API"></p></body></html>]]></content:encoded></item><item><title><![CDATA[SharePoint .Net authentication via embedded Node.js]]></title><description><![CDATA[<html><head></head><body><h2 id="intro">Intro</h2>
 
-<p>I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying "Why don't to [insane idea to implement]", then in one grasp after a while seating and scratching my head with "Oh shoot! It's working! O_o". That's how some of my</p>]]&gt;</description><link>/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/<guid ispermalink="false">599df659-c3c2-470b-8477-da4098979eb5</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Sun, 29 Oct 2017 23:05:08 GMT</pubdate><content url="/content/images/2017/10/PimpMyDonNetWithNode-2.png" medium="image"></content><encoded>Intro
+<p>I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying "Why don't to [insane idea to implement]", then in one grasp after a while seating and scratching my head with "Oh shoot! It's working! O_o". That's how some of my</p></body></html>]]></description><link>/2017/10/30/sharepoint-net-authentication-via-embedded-node-js/</link><guid isPermaLink="false">599df659-c3c2-470b-8477-da4098979eb5</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[API]]></category><category><![CDATA[development]]></category><category><![CDATA[.Net]]></category><category><![CDATA[Authentication]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Sun, 29 Oct 2017 23:05:08 GMT</pubDate><media:content url="/content/images/2017/10/PimpMyDonNetWithNode-2.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><h2 id="intro">Intro</h2>
 
 <img src="/content/images/2017/10/PimpMyDonNetWithNode-2.png" alt="SharePoint .Net authentication via embedded Node.js"><p>I'm a fan of crazy experiments with technologies and code. How many times I catch myself on saying "Why don't to [insane idea to implement]", then in one grasp after a while seating and scratching my head with "Oh shoot! It's working! O_o". That's how some of my open source projects saw the light.</p>
 
@@ -443,7 +601,7 @@ response.Close();
 <pre><code class="language-csharp">Options options = SPAuth.GetAuth("--configPath='./config/private.json'");  
 using (ClientContext clientContext = new ClientContext(options.SiteUrl))  
 {
-  clientContext.ExecutingWebRequest += (sender, arguments) =&gt;
+  clientContext.ExecutingWebRequest += (sender, arguments) =>
   {
     foreach (var key in options.Headers.AllKeys)
     {
@@ -461,10 +619,10 @@ using (ClientContext clientContext = new ClientContext(options.SiteUrl))
 
 <h2 id="afterwords">Afterwords</h2>
 
-<p>Please don't understand me wrong. I know that it's a crazy stuff, but at the same time, it's an interesting example of reusing code base from absolutely different worlds and stacks and integrating one thing into another.</p>]]&gt;</encoded></item><item><title></title><description>Intro
+<p>Please don't understand me wrong. I know that it's a crazy stuff, but at the same time, it's an interesting example of reusing code base from absolutely different worlds and stacks and integrating one thing into another.</p></body></html>]]></content:encoded></item><item><title><![CDATA[Getting started with React local development for SharePoint with sp-rest-proxy]]></title><description><![CDATA[<html><head></head><body><h2 id="intro">Intro</h2>
 
 <p>React is a beloved library of many folks which allows building modular reusable user interfaces and applications. <br>
-As a most of modern tools React has a nice ecosystem of toolchains for scaffolding, development and build processes. But when it comes to creating React app for SharePoint reusing common (native)</p>]]&gt;</description><link>/2017/10/29/getting-started-with-react-local-development-for-sharepoint-with-sp-rest-proxy/<guid ispermalink="false">11335bc7-4917-4a54-be89-0b5b8eb15827</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Sun, 29 Oct 2017 15:57:24 GMT</pubdate><content url="/content/images/2017/10/ReactPlusProxy1.jpg" medium="image"></content><encoded>Intro
+As a most of modern tools React has a nice ecosystem of toolchains for scaffolding, development and build processes. But when it comes to creating React app for SharePoint reusing common (native)</p></body></html>]]></description><link>/2017/10/29/getting-started-with-react-local-development-for-sharepoint-with-sp-rest-proxy/</link><guid isPermaLink="false">11335bc7-4917-4a54-be89-0b5b8eb15827</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[sp-rest-proxy]]></category><category><![CDATA[Toolchain]]></category><category><![CDATA[REST]]></category><category><![CDATA[API]]></category><category><![CDATA[development]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Sun, 29 Oct 2017 15:57:24 GMT</pubDate><media:content url="/content/images/2017/10/ReactPlusProxy1.jpg" medium="image"/><content:encoded><![CDATA[<html><head></head><body><h2 id="intro">Intro</h2>
 
 <img src="/content/images/2017/10/ReactPlusProxy1.jpg" alt="Getting started with React local development for SharePoint with sp-rest-proxy"><p>React is a beloved library of many folks which allows building modular reusable user interfaces and applications. <br>
 As a most of modern tools React has a nice ecosystem of toolchains for scaffolding, development and build processes. But when it comes to creating React app for SharePoint reusing common (native) toolchains one can scratch his/her head for a while until become productive.</p>
@@ -482,9 +640,9 @@ Some details about setting up dev machine are <a href="http://blog.arvosys.com/2
 
 <h2 id="guide">Guide</h2>
 
-<p>1. Create React app &amp;&amp; navigate to it:</p>
+<p>1. Create React app && navigate to it:</p>
 
-<pre><code class="language-bash">create-react-app sharepoint-react-webpart &amp;&amp; cd sharepoint-react-webpart  
+<pre><code class="language-bash">create-react-app sharepoint-react-webpart && cd sharepoint-react-webpart  
 </code></pre>
 
 <p>2. Install <code>sp-rest-proxy</code> and <code>concurrently</code> dependency:</p>
@@ -575,15 +733,15 @@ It's good to add <code>config/private.json</code> to <code>.gitignore</code> to 
 <pre><code class="language-javascript">fetch(`/_api/web`, {  
     accept: 'application/json;odata=verbose',
 })
-  .then(r =&gt; r.json())
+  .then(r => r.json())
   .then(console.log)
   .catch(console.log);
 </code></pre>
 
 <p>Data from SharePoint is here on the page! Black magic! <br>
-Now you can create something awesome being productive within the stack. Happy codding!</p>]]&gt;</encoded></item><item><title></title><description>I was highly requested to document <a href="https://github.com/koltyakov/generator-sppp">SharePoint Push &amp; Pull</a> generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head.
+Now you can create something awesome being productive within the stack. Happy codding!</p></body></html>]]></content:encoded></item><item><title><![CDATA[SharePoint front-end projects automation and tasks tool-belt]]></title><description><![CDATA[<html><head></head><body><p>I was highly requested to document <a href="https://github.com/koltyakov/generator-sppp">SharePoint Push & Pull</a> generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head.</p>
 
-<p>The generator is the way to</p>]]&gt;</description><link>/2017/10/04/sharepoint-front-end-projects-automation-and-tasks-tool-belt/<guid ispermalink="false">cfd149df-d289-4179-be0f-fa768d8b3530</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Wed, 04 Oct 2017 15:53:34 GMT</pubdate><content url="/content/images/2017/10/sp-build-tasks.jpg" medium="image"></content><encoded><p>I was highly requested to document <a href="https://github.com/koltyakov/generator-sppp">SharePoint Push &amp; Pull</a> generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head.</p>
+<p>The generator is the way to combine</p></body></html>]]></description><link>/2017/10/04/sharepoint-front-end-projects-automation-and-tasks-tool-belt/</link><guid isPermaLink="false">cfd149df-d289-4179-be0f-fa768d8b3530</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Yeoman]]></category><category><![CDATA[Front-End]]></category><category><![CDATA[Build]]></category><category><![CDATA[Tasks]]></category><category><![CDATA[Automation]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Wed, 04 Oct 2017 15:53:34 GMT</pubDate><media:content url="/content/images/2017/10/sp-build-tasks.jpg" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2017/10/sp-build-tasks.jpg" alt="SharePoint front-end projects automation and tasks tool-belt"><p>I was highly requested to document <a href="https://github.com/koltyakov/generator-sppp">SharePoint Push & Pull</a> generator projects' build and configuration process and parameters recently. Despite the fact that the project is open sourced there was real lack of documentation and a lot of things were only in my head.</p>
 
 <p>The generator is the way to combine libraries and settings together and simplify reusability. There are plenty of different libraries and even technologies to make front-end solution build process smooth and easy.</p>
 
@@ -1037,10 +1195,10 @@ The task is used as a child in a build process to clean up <code>./dist</code> b
 
 <p>The example of add-hoc task is below:</p>
 
-<pre><code class="language-javascript">module.exports = (gulp, $) =&gt; {  
+<pre><code class="language-javascript">module.exports = (gulp, $) => {  
     'use strict';
 
-    gulp.task('example', (cb) =&gt; {
+    gulp.task('example', (cb) => {
         console.log('Example Gulp Task');
         cb();
     });
@@ -1050,11 +1208,11 @@ The task is used as a child in a build process to clean up <code>./dist</code> b
 <hr>
 
 <p>Here we're, done with the configuration and build tasks. Now it's time to relax and create something valuable for the portal. <br>
-Get ready for automation fun running tasks with understanding how to configure and extend the beast for your own project routines!</p>]]&gt;</encoded></item><item><title></title><description>Intro
+Get ready for automation fun running tasks with understanding how to configure and extend the beast for your own project routines!</p></body></html>]]></content:encoded></item><item><title><![CDATA[Using JSOM (CSOM, SharePoint Client Side Object Model) in Node.js]]></title><description><![CDATA[<html><head></head><body><h2 id="intro">Intro</h2>
 
 <p>It's not a secret that it's theoretically feasible to execute SharePoint Client Side Object Model in Node.js. Some folks found a way to master <a href="https://gist.github.com/lstak/2404924">JSOM in Node.js's context</a> around 5 years ago from now.</p>
 
-<p>Unfortunately, there was no solid solution as a drop-in library. And you could</p>]]&gt;</description><link>/2017/06/05/using-jsom-csom-sharepoint-client-side-object-model-in-node-js/<guid ispermalink="false">47f99d6a-383b-4b02-b962-76e3a00f460b</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Mon, 05 Jun 2017 07:07:56 GMT</pubdate><content url="/content/images/2017/06/JsomNodeWide-1.png" medium="image"></content><encoded>Intro
+<p>Unfortunately, there was no solid solution as a drop-in library. And you could</p></body></html>]]></description><link>/2017/06/05/using-jsom-csom-sharepoint-client-side-object-model-in-node-js/</link><guid isPermaLink="false">47f99d6a-383b-4b02-b962-76e3a00f460b</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[JSOM]]></category><category><![CDATA[API]]></category><category><![CDATA[TypeScript]]></category><category><![CDATA[JavaScript]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Mon, 05 Jun 2017 07:07:56 GMT</pubDate><media:content url="/content/images/2017/06/JsomNodeWide-1.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><h2 id="intro">Intro</h2>
 
 <img src="/content/images/2017/06/JsomNodeWide-1.png" alt="Using JSOM (CSOM, SharePoint Client Side Object Model) in Node.js"><p>It's not a secret that it's theoretically feasible to execute SharePoint Client Side Object Model in Node.js. Some folks found a way to master <a href="https://gist.github.com/lstak/2404924">JSOM in Node.js's context</a> around 5 years ago from now.</p>
 
@@ -1086,7 +1244,7 @@ Get ready for automation fun running tasks with understanding how to configure a
 
 <p>Initially I planned getting authentication headers and injecting them to all requests in <code>add_executingWebRequest</code> method.</p>
 
-<pre><code class="language-javascript">clientContext.add_executingWebRequest((sender, e) =&gt; {  
+<pre><code class="language-javascript">clientContext.add_executingWebRequest((sender, e) => {  
     let headers = e.get_webRequest().get_headers();
     for (let header of Object.keys(auth)) {
         if (['Cookie', 'Authorization'].indexOf(header) !== -1) {
@@ -1125,7 +1283,7 @@ Get ready for automation fun running tasks with understanding how to configure a
 
 <pre><code class="language-javascript">import { JsomNode } from 'sp-jsom-node';
 
-(new JsomNode()).wizard().then((settings) =&gt; {
+(new JsomNode()).wizard().then((settings) => {
 
     // Here we are, ready fo JSOM
 
@@ -1134,9 +1292,9 @@ Get ready for automation fun running tasks with understanding how to configure a
 
     ctx.load(oWeb);
 
-    ctx.executeQueryAsync(() =&gt; {
+    ctx.executeQueryAsync(() => {
         console.log(oWeb.get_title());
-    }, (sender, args) =&gt; {
+    }, (sender, args) => {
         console.log(args.get_message());
     });
 
@@ -1163,7 +1321,7 @@ let jsomNodeOptions: IJsomNodeSettings = {
 
 (new JsomNode(jsomNodeOptions)).init();
 
-/// ... &lt;&lt;&lt; JSOM can be used here
+/// ... <<< JSOM can be used here
 </code></pre>
 
 <p>The project contains integration tests (I test recent libraries with SharePoint Online, SharePoint 2016 and 2013) and example for a quick start which can be downloaded for first experiments with the library.</p>
@@ -1172,15 +1330,15 @@ let jsomNodeOptions: IJsomNodeSettings = {
 
 <p>If you need JSOM in Node.js for any crazy or rational reasons and something prevented you from doing this, welcome on board with <code>sp-jsom-node</code>. And don't forget to comment about your use cases.</p>
 
-<p>I truly hope the library will find its users and that it wasn't developed only for the tasks I needed to be solved.</p>]]&gt;</encoded></item><item><title></title><description>
+<p>I truly hope the library will find its users and that it wasn't developed only for the tasks I needed to be solved.</p></body></html>]]></content:encoded></item><item><title><![CDATA[Using PnP JS Core outside a browser (Node.js environment)]]></title><description><![CDATA[<html><head></head><body><blockquote>
   <p>Expanding scopes of usage of favorite tools</p>
-
+</blockquote>
 
 <p>I <a href="/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
 
-<p>And what can I say after these months? Now it's one</p>]]&gt;</description><link>/2017/05/18/using-pnp-js-core-outside-a-browser-node-js-environment/<guid ispermalink="false">44738222-d385-43c0-af0c-4510859c05e6</guid><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Thu, 18 May 2017 07:01:43 GMT</pubdate><content url="/content/images/2017/05/sp-pnp-node-2.png" medium="image"></content><encoded>
+<p>And what can I say after these months? Now it's one</p></body></html>]]></description><link>/2017/05/18/using-pnp-js-core-outside-a-browser-node-js-environment/</link><guid isPermaLink="false">44738222-d385-43c0-af0c-4510859c05e6</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[PnP]]></category><category><![CDATA[REST]]></category><category><![CDATA[PnP JS Core]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Thu, 18 May 2017 07:01:43 GMT</pubDate><media:content url="/content/images/2017/05/sp-pnp-node-2.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><blockquote>
   <img src="/content/images/2017/05/sp-pnp-node-2.png" alt="Using PnP JS Core outside a browser (Node.js environment)"><p>Expanding scopes of usage of favorite tools</p>
-
+</blockquote>
 
 <p>I <a href="/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
 
@@ -1194,7 +1352,7 @@ let jsomNodeOptions: IJsomNodeSettings = {
 
 <p>Month later, I faced a need to reuse the technique and not just once but for a number of times.</p>
 
-<p>Well, it was a perfect time to wrap fetch client patching code into some reusable way and avoid copy &amp; pasting between the projects. Said and done. I created a library named <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a>, which abstracts away any http request patching experience and allows minify extra code.</p>
+<p>Well, it was a perfect time to wrap fetch client patching code into some reusable way and avoid copy & pasting between the projects. Said and done. I created a library named <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a>, which abstracts away any http request patching experience and allows minify extra code.</p>
 
 <p>One can install dependency with NPM or Yarn:</p>
 
@@ -1215,7 +1373,7 @@ let jsomNodeOptions: IJsomNodeSettings = {
 <pre><code class="language-javascript">import { PnPNode } from 'sp-pnp-node';  
 import { Web } from 'sp-pnp-js';
 
-(new PnPNode()).init().then((settings) =&gt; {
+(new PnPNode()).init().then((settings) => {
 
     // Here goes PnP JS Core code
     let web: Web = new Web(settings.siteUrl);
@@ -1229,7 +1387,7 @@ import { Web } from 'sp-pnp-js';
 <pre><code class="language-javascript">const PnPNode = require('sp-pnp-node').PnPNode;  
 const pnp = require('sp-pnp-js');
 
-(new PnPNode()).init().then((settings) =&gt; {
+(new PnPNode()).init().then((settings) => {
 
     // Here goes PnP JS Core code
     let web = new pnp.Web(settings.siteUrl);
@@ -1248,9 +1406,9 @@ const pnp = require('sp-pnp-js');
 
 <p>Once again, I recommend PnP JS Core for the stuff it was designed for. Nine months of constant usage of the library is a strong argument.</p>
 
-<p>Browser is not the only home for PnP JS Core and with tools like <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a> it can be smoothly executed in Node.js (console apps, timer jobs, microservices, electron apps, all of these are benevolent to it).</p>]]&gt;</encoded></item><item><title></title><description>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).
+<p>Browser is not the only home for PnP JS Core and with tools like <a href="https://github.com/koltyakov/sp-pnp-node">sp-pnp-node</a> it can be smoothly executed in Node.js (console apps, timer jobs, microservices, electron apps, all of these are benevolent to it).</p></body></html>]]></content:encoded></item><item><title><![CDATA[Working with SharePoint UPS in Node.js]]></title><description><![CDATA[<html><head></head><body><p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).</p>
 
-<p>User Profiles services' REST API is much</p>]]&gt;</description><link>/2017/02/16/working-with-sharepoint-ups-in-node-js/<guid ispermalink="false">10e45d85-57b2-4235-aa83-e749998e40b9</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Thu, 16 Feb 2017 13:55:57 GMT</pubdate><content url="/content/images/2017/02/UPS-node.png" medium="image"></content><encoded><p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).</p>
+<p>User Profiles services' REST API is much</p></body></html>]]></description><link>/2017/02/16/working-with-sharepoint-ups-in-node-js/</link><guid isPermaLink="false">10e45d85-57b2-4235-aa83-e749998e40b9</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[API]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[SOAP]]></category><category><![CDATA[JSOM]]></category><category><![CDATA[REST]]></category><category><![CDATA[UPS]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Thu, 16 Feb 2017 13:55:57 GMT</pubDate><media:content url="/content/images/2017/02/UPS-node.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2017/02/UPS-node.png" alt="Working with SharePoint UPS in Node.js"><p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).</p>
 
 <p>User Profiles services' REST API is much richer than MMD's one, at least it exists. UPS's PeopleManager and ProfileLoader covers a lot of <a href="https://msdn.microsoft.com/en-us/library/office/dn790354.aspx">functionality</a>. Unfortunately, not each and every CSOM capability is there at the place. Most methods expose automation connected with a personal profile, most are getters but not the setters.</p>
 
@@ -1266,34 +1424,34 @@ const pnp = require('sp-pnp-js');
 
 <p>Let's dive deeper with ModifyUserPropertyByAccountName method. SOAP package format is:</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;  
-&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+<pre><code class="language-xml"><?xml version="1.0" encoding="utf-8"?>  
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-    &lt;soap:Body&gt;
-        &lt;ModifyUserPropertyByAccountName
-   xmlns="http://microsoft.com/webservices/SharePointPortalServer/UserProfileService"&gt;
-            &lt;accountName&gt;{{ accountName }}&lt;/accountName&gt;
-            &lt;newData&gt;
+   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ModifyUserPropertyByAccountName
+   xmlns="http://microsoft.com/webservices/SharePointPortalServer/UserProfileService">
+            <accountName>{{ accountName }}</accountName>
+            <newData>
                 {{#newData}}
-                &lt;PropertyData&gt;
-                    &lt;IsPrivacyChanged&gt;{{ isPrivacyChanged }}&lt;/IsPrivacyChanged&gt;
-                    &lt;IsValueChanged&gt;{{ isValueChanged }}&lt;/IsValueChanged&gt;
-                    &lt;Name&gt;{{ name }}&lt;/Name&gt;
-                    &lt;Privacy&gt;{{ privacy }}&lt;/Privacy&gt;
-                    &lt;Values&gt;
+                <PropertyData>
+                    <IsPrivacyChanged>{{ isPrivacyChanged }}</IsPrivacyChanged>
+                    <IsValueChanged>{{ isValueChanged }}</IsValueChanged>
+                    <Name>{{ name }}</Name>
+                    <Privacy>{{ privacy }}</Privacy>
+                    <Values>
                         {{#values}}
-                        &lt;ValueData&gt;
-                            &lt;Value xsi:type="xsd:string"&gt;{{ this }}&lt;/Value&gt;
-                        &lt;/ValueData&gt;
+                        <ValueData>
+                            <Value xsi:type="xsd:string">{{ this }}</Value>
+                        </ValueData>
                         {{/values}}
-                    &lt;/Values&gt;
-                &lt;/PropertyData&gt;
+                    </Values>
+                </PropertyData>
                 {{/newData}}
-            &lt;/newData&gt;
-        &lt;/ModifyUserPropertyByAccountName&gt;
-    &lt;/soap:Body&gt;
-&lt;/soap:Envelope&gt;  
+            </newData>
+        </ModifyUserPropertyByAccountName>
+    </soap:Body>
+</soap:Envelope>  
 </code></pre>
 
 <p>The dynamic part is:</p>
@@ -1330,10 +1488,10 @@ let data = {
 };
 
 screw.ups.modifyUserPropertyByAccountName(data)  
-    .then(response =&gt; {
+    .then(response => {
         console.log('Response:', response.body);
     })
-    .catch(err =&gt; console.log('Error:', err.message));
+    .catch(err => console.log('Error:', err.message));
 </code></pre>
 
 <p><a href="https://github.com/koltyakov/sp-screwdriver/blob/master/test/ups-test.js">Open on GitHub</a></p>
@@ -1361,32 +1519,32 @@ peopleManager.setMultiValuedProfileProperty(
 );
 
 clientContext.executeQueryAsync(  
-    () =&gt; console.log('Done'), 
-    (sender, args) =&gt; console.log('Error:', args.get_message())
+    () => console.log('Done'), 
+    (sender, args) => console.log('Error:', args.get_message())
 );
 </code></pre>
 
 <p>After a call with use of fiddler, we're getting our client side object model package:</p>
 
-<pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009" SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" ApplicationName="Javascript Library"&gt;  
-    &lt;Actions&gt;
-        &lt;ObjectPath Id="82" ObjectPathId="81" /&gt;
-        &lt;Method Name="SetMultiValuedProfileProperty" Id="83" ObjectPathId="81"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ accountName }}&lt;/Parameter&gt;
-                &lt;Parameter Type="String"&gt;{{ propertyName }}&lt;/Parameter&gt;
-                &lt;Parameter Type="Array"&gt;
+<pre><code class="language-xml"><Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009" SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" ApplicationName="Javascript Library">  
+    <Actions>
+        <ObjectPath Id="82" ObjectPathId="81" />
+        <Method Name="SetMultiValuedProfileProperty" Id="83" ObjectPathId="81">
+            <Parameters>
+                <Parameter Type="String">{{ accountName }}</Parameter>
+                <Parameter Type="String">{{ propertyName }}</Parameter>
+                <Parameter Type="Array">
                     {{#propertyValues}}
-                    &lt;Object Type="String"&gt;{{ this }}&lt;/Object&gt;
+                    <Object Type="String">{{ this }}</Object>
                     {{/propertyValues}}
-                &lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-    &lt;/Actions&gt;
-    &lt;ObjectPaths&gt;
-        &lt;Constructor Id="81" TypeId="{cf560d69-0fdb-4489-a216-b6b47adf8ef8}" /&gt;
-    &lt;/ObjectPaths&gt;
-&lt;/Request&gt;  
+                </Parameter>
+            </Parameters>
+        </Method>
+    </Actions>
+    <ObjectPaths>
+        <Constructor Id="81" TypeId="{cf560d69-0fdb-4489-a216-b6b47adf8ef8}" />
+    </ObjectPaths>
+</Request>  
 </code></pre>
 
 <p>Where:</p>
@@ -1411,15 +1569,15 @@ let data = {
 };
 
 screw.ups.setMultiValuedProfileProperty(data)  
-    .then(response =&gt; {
+    .then(response => {
         console.log('Response:', JSON.parse(response.body));
     })
-    .catch(err =&gt; console.log('Error:', err.message));
+    .catch(err => console.log('Error:', err.message));
 </code></pre>
 
 <p>setSingleValueProfileProperty is almost identical and even simpler.</p>
 
-<p>Sources with implementation can be found on <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/ups.js">GitHub</a>. It's a part of <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a> library, library, which was published as an example for similar tasks of extending Node.js apps and services to deal with SharePoint's SOAP and CSOM/JSOM APIs as well.</p>]]&gt;</encoded></item><item><title></title><description>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a]]&gt;</description><link>/2017/02/15/working-with-sharepoint-mmd-in-node-js/<guid ispermalink="false">648aa6f7-ebd5-4810-8100-a9f35e6a1ee4</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Wed, 15 Feb 2017 15:15:54 GMT</pubdate><content url="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" medium="image"></content><encoded><p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM will be the most obvious answer probably. But what if you are limited in choice language to use or a runtime environment, in other words, when .Net is not an option?n?</p>
+<p>Sources with implementation can be found on <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/ups.js">GitHub</a>. It's a part of <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a> library, library, which was published as an example for similar tasks of extending Node.js apps and services to deal with SharePoint's SOAP and CSOM/JSOM APIs as well.</p></body></html>]]></content:encoded></item><item><title><![CDATA[Working with SharePoint MMD in Node.js]]></title><description><![CDATA[<html><head></head><body><p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a</p></body></html>]]></description><link>/2017/02/15/working-with-sharepoint-mmd-in-node-js/</link><guid isPermaLink="false">648aa6f7-ebd5-4810-8100-a9f35e6a1ee4</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[API]]></category><category><![CDATA[SOAP]]></category><category><![CDATA[JSOM]]></category><category><![CDATA[MMD]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Wed, 15 Feb 2017 15:15:54 GMT</pubDate><media:content url="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" alt="Working with SharePoint MMD in Node.js"><p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM will be the most obvious answer probably. But what if you are limited in choice language to use or a runtime environment, in other words, when .Net is not an option?n?</p>
 
 <p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to own a basic layer of functionality for manipulating Managed Metadata (Taxonomy), such options as:</p>
 
@@ -1469,10 +1627,10 @@ request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {
   body: soapBody,
   json: false
 })
-  .then(response =&gt; {
+  .then(response => {
     // Proceed the responce object
   })
-  .catch(err =&gt; console.log(err));
+  .catch(err => console.log(err));
 </code></pre>
 
 <p>It can be tricky to figure out with SOAP packages for some methods sometimes, some SOAP operations descriptions are not perfect. Good thing is that any related to SharePoint SOAP services information also is relevant for Node.js use cases.</p>
@@ -1492,36 +1650,36 @@ request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {
 
 <p>For example, request, to set term name, looks like:</p>
 
-<pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009"  
+<pre><code class="language-xml"><Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009"  
       SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" 
-      ApplicationName="Javascript Library"&gt;
-    &lt;Actions&gt;
-        &lt;SetProperty Id="166" ObjectPathId="157" Name="Name"&gt;
-            &lt;Parameter Type="String"&gt;{{ newName }}&lt;/Parameter&gt;
-        &lt;/SetProperty&gt;
-    &lt;/Actions&gt;
-    &lt;ObjectPaths&gt;
-        &lt;StaticMethod Id="146" 
+      ApplicationName="Javascript Library">
+    <Actions>
+        <SetProperty Id="166" ObjectPathId="157" Name="Name">
+            <Parameter Type="String">{{ newName }}</Parameter>
+        </SetProperty>
+    </Actions>
+    <ObjectPaths>
+        <StaticMethod Id="146" 
            Name="GetTaxonomySession" 
-           TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" /&gt;
-        &lt;Property Id="149" ParentId="146" Name="TermStores" /&gt;
-        &lt;Method Id="151" ParentId="149" Name="GetByName"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ serviceName }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-        &lt;Method Id="154" ParentId="151" Name="GetTermSet"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ termSetId }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-        &lt;Method Id="157" ParentId="154" Name="GetTerm"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ termId }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-    &lt;/ObjectPaths&gt;
-&lt;/Request&gt;  
+           TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" />
+        <Property Id="149" ParentId="146" Name="TermStores" />
+        <Method Id="151" ParentId="149" Name="GetByName">
+            <Parameters>
+                <Parameter Type="String">{{ serviceName }}</Parameter>
+            </Parameters>
+        </Method>
+        <Method Id="154" ParentId="151" Name="GetTermSet">
+            <Parameters>
+                <Parameter Type="String">{{ termSetId }}</Parameter>
+            </Parameters>
+        </Method>
+        <Method Id="157" ParentId="154" Name="GetTerm">
+            <Parameters>
+                <Parameter Type="String">{{ termId }}</Parameter>
+            </Parameters>
+        </Method>
+    </ObjectPaths>
+</Request>  
 </code></pre>
 
 <p>Some comments to the format:</p>
@@ -1553,20 +1711,20 @@ let data = {
 };
 
 screw.mmd.getAllTerms(data)  
-    .then(response =&gt; {
+    .then(response => {
         let results = JSON.parse(response.body);
         console.log("Response:", results);
     })
-    .catch(err =&gt; console.log('Error:', err.message));
+    .catch(err => console.log('Error:', err.message));
 </code></pre>
 
 <p>For myself, it was a nice way extending Node.js solutions capabilities to use not only the REST services but CSOM too. The approach was used on a couple of projects with Web Jobs, proceeding information in SharePoint, including MMD.</p>
 
 <p>Also, working with MMD directly within Node.js code was viable in a recent Electron application I got to develop.</p>
 
-<p>The article doesn't try to say that anyone should use Node.js for similar purposes as I do, as the same can be done in .Net, actually it should. But, at the same time, there are cases where it is nice to have an ability of extending server-side JavaScript to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>]]&gt;</encoded></item><item><title></title><description>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.
+<p>The article doesn't try to say that anyone should use Node.js for similar purposes as I do, as the same can be done in .Net, actually it should. But, at the same time, there are cases where it is nice to have an ability of extending server-side JavaScript to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p></body></html>]]></content:encoded></item><item><title><![CDATA[SharePoint client side development with Live Reload]]></title><description><![CDATA[<html><head></head><body><p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
 
-<p>More and more features from the funky front-end development are here at our disposal. Yet, there was</p>]]&gt;</description><link>/2016/11/05/sharepoint-client-side-development-with-live-reload/<guid ispermalink="false">e3276611-dc06-42b9-9a01-5e695e111cd6</guid><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 04 Nov 2016 23:44:19 GMT</pubdate><content url="/content/images/2016/11/SharePointLiveReload.png" medium="image"></content><encoded><p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
+<p>More and more features from the funky front-end development are here at our disposal. Yet, there was</p></body></html>]]></description><link>/2016/11/05/sharepoint-client-side-development-with-live-reload/</link><guid isPermaLink="false">e3276611-dc06-42b9-9a01-5e695e111cd6</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[Gulp]]></category><category><![CDATA[Toolchain]]></category><category><![CDATA[Live Reload]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Fri, 04 Nov 2016 23:44:19 GMT</pubDate><media:content url="/content/images/2016/11/SharePointLiveReload.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2016/11/SharePointLiveReload.png" alt="SharePoint client side development with Live Reload"><p>We're getting used to modern SharePoint (client side) development day by day. It transforms into some sort of a hybrid of Visual Studio Code'ing, Gulp tasks, and Chrome Dev Tools debugging and tweaks.</p>
 
 <p>More and more features from the funky front-end development are here at our disposal. Yet, there was one which has been missed and desired by some engineers. You might have heard about BrowserSync, have you? It is a module which can be injected into the page(s) and watches for changes for instantaneous page reload or scripts reload. A developer saves a file in the editor and sees the result applied right away.</p>
 
@@ -1641,7 +1799,7 @@ The live reload client receives the messages from the server and checks if any r
 
 <p>Live reload works with On-Premises SharePoint installations (2016 and 2013) and SharePoint Online. Yet with SharePoint Online or any running over HTTPS some additional afford is needed to generate SSL certificate and add import it to trusted. But it worth it!</p>
 
-<p><code>sp-live-reload</code> also is integrated into <a href="https://github.com/koltyakov/generator-sppp">generator-sppp</a> so you can use Yeoman generator to check it in action.</p>]]&gt;</encoded></item><item><title></title><description>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a]]&gt;</description><link>/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/<guid ispermalink="false">1f49b68e-5af0-433f-8028-7096a9ff76bc</guid><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Fri, 09 Sep 2016 12:04:00 GMT</pubdate><content url="/content/images/2016/09/PnP-JS-Core_banner-2.png" medium="image"></content><encoded><p>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a couple of times putting PnP-JS-Core aside from learning.</p>
+<p><code>sp-live-reload</code> also is integrated into <a href="https://github.com/koltyakov/generator-sppp">generator-sppp</a> so you can use Yeoman generator to check it in action.</p></body></html>]]></content:encoded></item><item><title><![CDATA[SharePoint PnP JavaScript Core Components – deserve more attention]]></title><description><![CDATA[<html><head></head><body><p>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a</p></body></html>]]></description><link>/2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/</link><guid isPermaLink="false">1f49b68e-5af0-433f-8028-7096a9ff76bc</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Toolchain]]></category><category><![CDATA[REST]]></category><category><![CDATA[API]]></category><category><![CDATA[sp-rest-proxy]]></category><category><![CDATA[PnP]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Fri, 09 Sep 2016 12:04:00 GMT</pubDate><media:content url="/content/images/2016/09/PnP-JS-Core_banner-2.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2016/09/PnP-JS-Core_banner-2.png" alt="SharePoint PnP JavaScript Core Components – deserve more attention"><p>I've been eschewed <a href="http://github.com/OfficeDev/PnP-JS-Core">PnP-JS-Core</a> for a long time and preferred to use JSOM or plain REST calls with the use of jQuery.ajax or SP.RequestExecutor. "Why do I need any wrappers or helpers for the API stuff which can be an additional point of failure?", I asked myself a couple of times putting PnP-JS-Core aside from learning.</p>
 
 <p>But there was an opportunity this week to dive into the library and estimate expediency of its usage on a next project. The first fresh glance at it created a new and rather a positive attitude. First of all, it is made with the toolchain I love, and there are so many familiar faces in its contributors group, I didn’t even know to be related to the project. That was a good sign so I started.</p>
 
@@ -1651,7 +1809,7 @@ The live reload client receives the messages from the server and checks if any r
 
 <p>It is a wrapper over RESTful API and a bit more. PnP JS Core provides a fluent JS API simplifying REST calls to SharePoint API.</p>
 
-<h2 id="stackproject">Stack &amp; Project</h2>
+<h2 id="stackproject">Stack & Project</h2>
 
 <p>Yes, it’s made with the use of all of that shiny technologies we use on the most modern web projects: JavaScript (TypeScript), Gulp, NPM, Typings, Git, Linting, Serve and cool automation. It’s easy to understand the project structure, logic and contribute.</p>
 
@@ -1711,7 +1869,7 @@ $pnp.sp.web.getList('/sites/dev01/lists/custom02').items.inBatch(batch).get().th
     custom02: d 
   });
 });
-for (var i = 0, len = 10; i &lt; len; i += 1) {  
+for (var i = 0, len = 10; i < len; i += 1) {  
   $pnp.sp.web.getList('/sites/dev01/lists/custom03').inBatch(batch).items.add({ 
     Title: 'Item ' + i 
   });
@@ -1737,9 +1895,9 @@ batch.execute().then(function() {
 
 <p><img src="https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAj0AAAAJGVhN2VkMDlmLWY0NDItNDVjYS05MTk5LWE1NjFiZWRiOWZhNg.png" alt="SharePoint PnP JavaScript Core Components – deserve more attention"></p>
 
-<p>* This gonna work for GET calls only for now, due to the way sp-rest-proxy and pnp deal with Request Digest on a page.</p>]]&gt;</encoded></item><item><title></title><description>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.
+<p>* This gonna work for GET calls only for now, due to the way sp-rest-proxy and pnp deal with Request Digest on a page.</p></body></html>]]></content:encoded></item><item><title><![CDATA[SharePoint REST API proxy for local serve in Node.js]]></title><description><![CDATA[<html><head></head><body><p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
 
-<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform</p>]]&gt;</description><link>/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/<guid ispermalink="false">734ab271-1b1e-450a-b1cf-5f4c31604dda</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Sat, 03 Sep 2016 12:01:00 GMT</pubdate><content url="/content/images/2016/09/RestProxyExample-1.png" medium="image"></content><encoded><p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
+<p>As for me this "dive" was not so deep and actually looked more like SharePoint platform</p></body></html>]]></description><link>/2016/09/03/sharepoint-rest-api-proxy-for-local-serve-in-node-js/</link><guid isPermaLink="false">734ab271-1b1e-450a-b1cf-5f4c31604dda</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[Toolchain]]></category><category><![CDATA[REST]]></category><category><![CDATA[Express]]></category><category><![CDATA[API]]></category><category><![CDATA[sp-rest-proxy]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Sat, 03 Sep 2016 12:01:00 GMT</pubDate><media:content url="/content/images/2016/09/RestProxyExample-1.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2016/09/RestProxyExample-1.png" alt="SharePoint REST API proxy for local serve in Node.js"><p>On the recent webcast dedicated to SharePoint Framework hosted by Rencore (SPFx Deep Dive Webinar on Wednesday, 31th of August) and driven by Bill Baer mostly, there were some interesting ideas, recommendations, and thoughts.</p>
 
 <p>As for me this "dive" was not so deep and actually looked more like SharePoint platform history, toolchain overview and some scratching the surface showing a couple of the examples, but it's also a good stuff as timeframes were limited.</p>
 
@@ -1763,11 +1921,11 @@ batch.execute().then(function() {
 
 <p>Of course, such proxy is limited with REST API only. It can be a complicated task to 're-implement' JSOM, for instance. But as far we go, more and more REST significance we see in SharePoint infrastructure as a universal and language agnostic technology.</p>
 
-<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p>]]&gt;</encoded></item><item><title></title><description>This article is a continuation of my previous one (<a href="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">Preparing development machine for client-side SharePoint projects</a>).
+<p>The project I created is just a concept, you can <a href="https://github.com/koltyakov/sp-rest-proxy">check in on GitHub</a>. Will see what kind of power will be in SPFx for live communication with a SharePoint instance during workbench debug.</p></body></html>]]></content:encoded></item><item><title><![CDATA[Front-end SharePoint projects – synced and safe!]]></title><description><![CDATA[<html><head></head><body><p>This article is a continuation of my previous one (<a href="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">Preparing development machine for client-side SharePoint projects</a>).</p>
 
 <p>I had stopped on a development machine with all necessary software installed and ready for coding.</p>
 
-<p>And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it</p>]]&gt;</description><link>/2016/08/30/front-end-sharepoint-projects-synced-and-safe/<guid ispermalink="false">a5af3ee5-f89f-421f-9cfb-620964eefe2a</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Tue, 30 Aug 2016 11:57:00 GMT</pubdate><content url="/content/images/2016/09/YoSppp-1.png" medium="image"></content><encoded><p>This article is a continuation of my previous one (<a href="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">Preparing development machine for client-side SharePoint projects</a>).</p>
+<p>And we’re almost ready, yet, we also desire to skip some scaffolding routines, because somebody did it</p></body></html>]]></description><link>/2016/08/30/front-end-sharepoint-projects-synced-and-safe/</link><guid isPermaLink="false">a5af3ee5-f89f-421f-9cfb-620964eefe2a</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[Gulp]]></category><category><![CDATA[SPSave]]></category><category><![CDATA[SPPull]]></category><category><![CDATA[Yeoman]]></category><category><![CDATA[Toolchain]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Tue, 30 Aug 2016 11:57:00 GMT</pubDate><media:content url="/content/images/2016/09/YoSppp-1.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><img src="/content/images/2016/09/YoSppp-1.png" alt="Front-end SharePoint projects – synced and safe!"><p>This article is a continuation of my previous one (<a href="/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/">Preparing development machine for client-side SharePoint projects</a>).</p>
 
 <p>I had stopped on a development machine with all necessary software installed and ready for coding.</p>
 
@@ -1830,15 +1988,15 @@ batch.execute().then(function() {
 
 <p>This task starts watching ./src folder and on any change uploads corresponding files straight to a destination. The task uses <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> module for Node.js integration with SharePoint.</p>
 
-<p>A project created with the use of sppp yeoman generator could be extended with any other NPM or Bower dependencies and it could be the first step in diving to the new modern way of dealing with SharePoint and transition to SPFx.</p>]]&gt;</encoded></item><item><title></title><description>
+<p>A project created with the use of sppp yeoman generator could be extended with any other NPM or Bower dependencies and it could be the first step in diving to the new modern way of dealing with SharePoint and transition to SPFx.</p></body></html>]]></content:encoded></item><item><title><![CDATA[Preparing development machine for client-side SharePoint projects (Mac and PC)]]></title><description><![CDATA[<html><head></head><body><blockquote>
   <p>This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets</p>
-
+</blockquote>
 
 <p>Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing.</p>
 
-<p>Initial installation is slightly</p>]]&gt;</description><link>/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/<guid ispermalink="false">75433f8a-d597-46b3-b08a-b1979c3ea491</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Thu, 25 Aug 2016 11:35:00 GMT</pubdate><content url="/content/images/2016/09/Environment-1.png" medium="image"></content><encoded>
+<p>Initial installation is slightly</p></body></html>]]></description><link>/2016/08/25/preparing-development-machine-for-client-side-sharepoint-projects-mac-and-pc/</link><guid isPermaLink="false">75433f8a-d597-46b3-b08a-b1979c3ea491</guid><category><![CDATA[SharePoint]]></category><category><![CDATA[Node.js]]></category><category><![CDATA[VSC]]></category><category><![CDATA[Gulp]]></category><category><![CDATA[Toolchain]]></category><category><![CDATA[Yeoman]]></category><category><![CDATA[SPPull]]></category><category><![CDATA[Git]]></category><dc:creator><![CDATA[Andrew Koltyakov]]></dc:creator><pubDate>Thu, 25 Aug 2016 11:35:00 GMT</pubDate><media:content url="/content/images/2016/09/Environment-1.png" medium="image"/><content:encoded><![CDATA[<html><head></head><body><blockquote>
   <img src="/content/images/2016/09/Environment-1.png" alt="Preparing development machine for client-side SharePoint projects (Mac and PC)"><p>This article is created and could be helpful for those who are planning to develop client-side SharePoint solutions using up-to-date tool sets</p>
-
+</blockquote>
 
 <p>Let’s prepare our shiny new and naked development machine from scratch. We’re going to use package managers because they are the thing.</p>
 
@@ -1864,7 +2022,7 @@ batch.execute().then(function() {
 
 <p>Chocolatey installation is as easy as run one-line command in CMD (run as administrator for sure):</p>
 
-<pre><code class="language-bash">@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" &amp;&amp; SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+<pre><code class="language-bash">@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 </code></pre>
 
 <h3 id="packages">Packages</h3>
@@ -1900,7 +2058,7 @@ batch.execute().then(function() {
 
 <p>Now we’re are ready to check the environment by requesting a version for node and its package manager (yeah, one more package manager, this one is used very often) and, of course, Git.</p>
 
-<pre><code class="language-bash">node -v &amp;&amp; npm -v &amp;&amp; git --version  
+<pre><code class="language-bash">node -v && npm -v && git --version  
 </code></pre>
 
 <p>This should return Node.js version, NPM version, then Git version each after another. Commands are combined together and could be split up.</p>
@@ -2010,72 +2168,4 @@ code .  </li></ul></li>
 <li>... and, with VSC and console opened, you are ready to rock-n-roll</li>
 </ol>
 
-<p>Next time there will be a lot of code and config’s, I’ll describe project setup for instant publishing to SharePoint and fetching and merging files back from running instance. Hope all of this makes sense. Stay tuned. And welcome to the comment section below.</p>]]&gt;</encoded></item><item><title></title><description>Intro
-
-<p>A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer</p>]]&gt;</description><link>/2016/08/22/modern-sharepoint-developer-tooling-stack/<guid ispermalink="false">c17fac23-9ee3-4738-8b72-7a90c178ee18</guid><category></category><category></category><category></category><category></category><category></category><category></category><category></category><creator></creator><pubdate>Mon, 22 Aug 2016 11:13:00 GMT</pubdate><content url="/content/images/2016/09/VSC.png" medium="image"></content><encoded>Intro
-
-<img src="/content/images/2016/09/VSC.png" alt="Modern SharePoint Developer tooling stack"><p>A lot of the SharePoint developers, in recent days, are switching from usual dev tools and workflows to something new, more universal and cross-platform. Please recall anything you have seen in modern MS-related video tutorials, how often have you seen OS X on a host’s machine? The answer is likely to be “Very often”.</p>
-
-<p>Soon you might probably forget about using legacy SharePoint Designer and Visual Studio for most cases. Of course, there will be always a place for Visual Studio, especially for code base provisioning and provided-hosted .Net stuff (no one has invented something better than <a href="https://github.com/SubPointSolutions/spmeta2">SPMeta2</a>, for example), but I can’t even recall when did I need to open SPD or VS for my daily development routine.</p>
-
-<p>At the same time, due to my job, I have to write tons of code for SharePoint almost each day. And I prefer to avoid manual routines and automate my work as much as possible. The ideal scenario is “when I press Ctrl+S or Ctrl+B in my editor of choice I want to see changes immediately in a Dev environment”, you could add to this “immediate static code analysis and transpiling” and also “Git-connected-first approach”.</p>
-
-<p>Yeah, I’m talking about front end part mostly. But not all the way, 20-30% is still something that I have to deploy on a server side, but this server side is actually a client side for SharePoint itself. So why don’t use the same Development tools stack for both too? Luckily it’s possible.</p>
-
-<p>Now we’re switching to tooling of my choice.</p>
-
-<h2 id="stacktools">Stack &amp; tools</h2>
-
-<h3 id="languages">Languages</h3>
-
-<p>As most of you have already understood, I’m going to mention JavaScript here. It’s not only ES5. Sometimes it can be ES2015 and Babel or TypeScript as a nice tool to avoid tons of issues, enhance your code and more.</p>
-
-<p>I’m not even mentioning frameworks, it’s out of this topic. Just will say, yes you should definitely take advantage of frameworks that are your friends.</p>
-
-<p>If there is a lot of styling in the project it reasonable to take advantages of stylesheet meta languages, I prefer Sass with Scss syntax.</p>
-
-<h2 id="sourcecontrol">Source control</h2>
-
-<p>I am confident that you all agree with me on this, Git is the best. I used TFVS before and will never go back.</p>
-
-<h3 id="editors">Editors</h3>
-
-<p>When code editors are discussed everyone has his or her own preference. I will strongly recommend taking a look at Visual Studio Code or VSC for short. It is lightning fast, has OOTB Git integration, really cool debugger (for a server-side JS) and with most of the plugins support. Alternatively, ATOM is great, but I use VSC for more than a year in my day to day work. It is awesome and its awesomeness is growing with each release. VSC team evolves their product nicely, I can’t say about some other MS products. ;)</p>
-
-<h3 id="staticcodeanalysis">Static code analysis</h3>
-
-<p>This one is must have for any project and team and… well… any coder in almost any situation. Yeah, really. I can’t bear without ESLint when writing JS (even with a compiler inside the brain, static analysis is the thing!) and TSLint in a case of TypeScript. Also, a good thing is to deploy linting tools globally to all team members. Just remember, it saves time and nervous.</p>
-
-<p>It’s nice to have a linting tool as a plugin in an editor and also as a part of build process step.</p>
-
-<h3 id="automatedtasks">Automated tasks</h3>
-
-<p>I can’t see myself doing any project <code>larger to tiny</code> without the automated tasks in the background and on-demand. Gulp is a great choice for almost any case. Watching, linting, combining, uglifying, automated tests, publishing - all the stuff. If you are not familiar with Gulp and want to minimize your manual work I would recommend taking a look at it.</p>
-
-<p>Some might prefer Webpack or Grunt. No problem they are also the great tools. My choice is Gulp as it is <code>code over config</code> and it has modules to work with SharePoint.</p>
-
-<p>To achieve instant publishing, I use gulp watch and <a href="https://www.npmjs.com/package/gulp-spsave">gulp-spsave</a> module, which allows delivering local project files right to the SharePoint assets library with publish state and feeding the metadata, when needed.</p>
-
-<h3 id="testing">Testing</h3>
-
-<p>I’m not very good in testing but came to the understanding that automated testing is necessary, especially on the long-running projects. Right now I’m trying to implement unit testing on Mocha and the UI testing with use of Nightwatch (which uses Selenium drivers and written in JS) on some projects. Testing is a separate story as it’s not about tooling. One thing, if you have tests they definitely should be a part of your build process as a tool saving your time tremendously.</p>
-
-<h3 id="packagemanagers">Package managers</h3>
-
-<p>NPM for Node.js and Bower for browser libraries. I do not know what to add, they are straightforward and easy. Just use it! And never ever spend your time to go to vendor site to find, download and place a library to your project. Seriously, one line in a console and almost any library is delivered to your project.</p>
-
-<p>Cross library references are also viable here. Especially when you have your private commercial super-duper library inside your private repo. Yet, it’s easy to reference to a library within the package using <code>git+[your_private_git_repo_url]#version</code>.</p>
-
-<h3 id="nodejs">Node.js</h3>
-
-<p>Oh, Node.js, it is outstanding and is a baseline for the tasks automation, package managers, most of the plugins and it’s opening the eyes to the fact that JS lives not only in the browser but also on the server or even a desktop application. Did you know that VSC is made using JS? But this is a completely different story.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>So we came to the end of the article.</p>
-
-<p>Tools are very important. Sometimes how we do something could be at the first place over what we do. Right tools and techniques save our time, help to resolve potential issues.</p>
-
-<p>In the world of SharePoint is also possible to use all that nice and shiny tools which are used in modern JavaScript world. As SharePoint is very close saying that JS is a number one technology for its customization. And we are the part of it.</p>
-
-<p>Let’s combine: Git &lt;---&gt; VSC + Node.js + Gulp --&gt; SharePoint = happy coding!</p>]]&gt;</encoded></item></channel>
+<p>Next time there will be a lot of code and config’s, I’ll describe project setup for instant publishing to SharePoint and fetching and merging files back from running instance. Hope all of this makes sense. Stay tuned. And welcome to the comment section below.</p></body></html>]]></content:encoded></item></channel></rss>

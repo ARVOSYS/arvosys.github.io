@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Modern web parts provisioning in SharePoint Online</title>
+    <meta name="description" content="" />
+
+    <meta name="google-site-verification" content="kj4x9HBApwneuGIIlFZj11VGEQnPG5Mp21U2n_mSCcU" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=a01d612ef9">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=a01d612ef9" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=a01d612ef9" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=a01d612ef9" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="ARVO Systems Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Modern web parts provisioning in SharePoint Online" />
+    <meta property="og:description" content="Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites with modern pages have a number of advantages starting with simplicity for end users who manages the content and finishing with OOTB responsiveness and mobile friendliness. There is a bunch of" />
+    <meta property="og:url" content="/2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/" />
+    <meta property="og:image" content="/content/images/2018/06/modern-webparts-provisioning.png" />
+    <meta property="article:published_time" content="2018-06-28T14:03:51.000Z" />
+    <meta property="article:modified_time" content="2018-06-28T11:50:50.000Z" />
+    <meta property="article:tag" content="SharePoint" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="PnP" />
+    <meta property="article:tag" content="SPO" />
+    <meta property="article:tag" content="Provisioning" />
+    <meta property="article:tag" content="PowerShell" />
+    
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Modern web parts provisioning in SharePoint Online" />
+    <meta name="twitter:description" content="Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites with modern pages have a number of advantages starting with simplicity for end users who manages the content and finishing with OOTB responsiveness and mobile friendliness. There is a bunch of" />
+    <meta name="twitter:url" content="/2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/" />
+    <meta name="twitter:image" content="/content/images/2018/06/modern-webparts-provisioning.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Andrew Koltyakov" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="SharePoint, JavaScript, PnP, SPO, Provisioning, PowerShell" />
+    <meta name="twitter:creator" content="@AndrewKoltyakov" />
+    <meta property="og:image:width" content="1902" />
+    <meta property="og:image:height" content="478" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ARVO Systems Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/content/images/2016/09/arvo_logo_105px.png",
+            "width": 105,
+            "height": 42
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Andrew Koltyakov",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/content/images/2016/09/andrew.koltyakov.jpg",
+            "width": 460,
+            "height": 460
+        },
+        "url": "/author/andrew/",
+        "sameAs": [
+            "http://koltyakov.ru",
+            "https://www.facebook.com/andrew.koltyakov",
+            "https://twitter.com/AndrewKoltyakov"
+        ],
+        "description": "SharePoint Front-End Developer"
+    },
+    "headline": "Modern web parts provisioning in SharePoint Online",
+    "url": "/2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/",
+    "datePublished": "2018-06-28T14:03:51.000Z",
+    "dateModified": "2018-06-28T11:50:50.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/content/images/2018/06/modern-webparts-provisioning.png",
+        "width": 1902,
+        "height": 478
+    },
+    "keywords": "SharePoint, JavaScript, PnP, SPO, Provisioning, PowerShell",
+    "description": "Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites with modern pages have a number of advantages starting with simplicity for end users who manages the content and finishing with OOTB responsiveness and mobile friendliness. There is a bunch of",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://external.arvosys.com:2368"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.10" />
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html" />
+</head>
+<body class="post-template tag-sharepoint tag-javascript tag-pnp tag-spo tag-provisioning tag-powershell nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-blog-home" role="presentation"><a href="../../../../index.html">Blog Home</a></li>
+            <li class="nav-search" role="presentation"><a href="http://www.arvosys.com/search/">Search</a></li>
+            <li class="nav-arvo-systems" role="presentation"><a href="http://www.arvosys.com/">ARVO Systems</a></li>
+            <li class="nav--services" role="presentation"><a href="http://www.arvosys.com/services/">... Services</a></li>
+            <li class="nav--platforms" role="presentation"><a href="http://www.arvosys.com/platforms/">... Platforms</a></li>
+            <li class="nav--contacts" role="presentation"><a href="http://www.arvosys.com/about/contacts/">... Contacts</a></li>
+    </ul>
+        <a class="subscribe-button icon-feed" href="../../../../rss/index.html">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+        <div id="content-wrapper" class="page-content">
+
+            
+
+
+<header class="main-header post-head " style="background-image: url(../../../../content/images/2018/06/modern-webparts-provisioning.png)">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href="../../../../index.html"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog" /></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-sharepoint tag-javascript tag-pnp tag-spo tag-provisioning tag-powershell">
+
+        <header class="post-header">
+            <h1 class="post-title">Modern web parts provisioning in SharePoint Online</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2018-06-28">28 June 2018</time>  on <a href="../../../../tag/sharepoint/index.html">SharePoint</a>, <a href="../../../../tag/javascript/index.html">JavaScript</a>, <a href="../../../../tag/pnp/index.html">PnP</a>, <a href="../../../../tag/spo/index.html">SPO</a>, <a href="../../../../tag/provisioning/index.html">Provisioning</a>, <a href="../../../../tag/powershell/index.html">PowerShell</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites with modern pages have a number of advantages starting with simplicity for end users who manages the content and finishing with OOTB responsiveness and mobile friendliness. There is a bunch of great web parts to use out of the shelf as well as a rich tooling and the framework for rapid development of custom ones. After a while, a question of modern sites managing and automated provisioning appears. In this post, I'm going to reveal and investigate some options for pages and web parts provisioning.</p>
+
+<h2 id="modernpagestructurequickoverview">Modern page structure quick overview</h2>
+
+<p>The modern page is a page in SitePages on a modern SharePoint site which provides a capability of organizing content within the page. A page can be configured with sections (rows), a section can be dynamically divided into columns or declared as a full-width section, then web parts can be added into a column. All of these gives a flexible way of managing the visual representation of information on the page.</p>
+
+<h2 id="modernwebpartquickoverview">Modern web part quick overview</h2>
+
+<p>Only modern web parts can be located on a modern page. Modern web parts can be separated to OOTB provided by Microsoft and custom 3rd party developed using SharePoint Framework (SPFx). OOTB web parts can't be changed, but all the web parts could be configured with properties defined during development time. Sometimes changing properties, one can receive absolutely different experience within the same web part.</p>
+
+<p>Modern web parts are rendered on the pages as canvas controls, so "canvas control" is the second name for modern web parts.</p>
+
+<p>Each web part has its own unique id, alias, version, manifest and data. The simplest way to research web parts' metadata is to add web parts you're interested in on the page, provide settings in the UI, publish the page and then add <code>?maintenancemode=true</code> parameter to the URL. This switches page into maintenance mode showing web parts' service information.</p>
+
+<h2 id="provisioningoptions">Provisioning options</h2>
+
+<p>Any developer in the wild should be equipped with provisioning toolchains. Only microscopic solutions should assume manual actions as a rule. I say this words as a mantra to the team members and customers. Depending on preferences and scenarios different approaches can be used for provisioning, but the process should be automated, point or even exclamation mark.</p>
+
+<h3 id="pnpprovisioning">PnP provisioning</h3>
+
+<p><a href="https://docs.microsoft.com/en-us/sharepoint/dev/solution-guidance/pnp-remote-provisioning">PnP provisioning</a> is a set of tools for .Net and PowerShell, which provides cutting edge feature capabilities when it comes to SharePoint Online.</p>
+
+<p>PnP provisioning assumes two approaches: functional code-base provisioning and declarative schema-based processing. So, for example, one can provisiong an artifact using a specific PowerShell commandlet or .Net method or create an XML template based of a <a href="https://github.com/SharePoint/PnP-Provisioning-Schema/blob/master/ProvisioningSchema-2018-05.md">schema</a> and apply this template to site.</p>
+
+<pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema https://raw.githubusercontent.com/OfficeDev/PnP-Provisioning-Schema/master/OfficeDevPnP.ProvisioningSchema/ProvisioningSchema-2018-05.xsd"&gt;
+  &lt;pnp:Preferences Generator="OfficeDevPnP.Core, Version=2.26.1805.0, Culture=neutral, PublicKeyToken=5e633289e95c321a" /&gt;
+  &lt;pnp:Templates ID="PORTAL-PAGES-TEMPLATE"&gt;
+    &lt;pnp:ProvisioningTemplate ID="PAGES-TEMPLATE" Version="1.0"&gt;
+      &lt;pnp:ClientSidePages&gt;
+        &lt;pnp:ClientSidePage PageName="SamplePage01.aspx" Title="Sample Page 01" Layout="Article" PromoteAsNewsArticle="false" Overwrite="true" EnableComments="true" Publish="true"&gt;
+          &lt;pnp:Sections&gt;
+            &lt;pnp:Section&gt;
+              &lt;pnp:Controls&gt;
+                &lt;pnp:CanvasControl WebPartType="Custom" ControlId="34f46dbd-abbb-4ff9-be98-7483df537309" Order="1" Column="1"&gt;
+                  &lt;pnp:CanvasControlProperties&gt;
+                    &lt;pnp:CanvasControlProperty Key="PropName" Value="PropValue" /&gt;
+                  &lt;/pnp:CanvasControlProperties&gt;
+                &lt;/pnp:CanvasControl&gt;
+              &lt;/pnp:Controls&gt;
+            &lt;/pnp:Section&gt;
+          &lt;/pnp:Sections&gt;
+        &lt;/pnp:ClientSidePage&gt;
+      &lt;/pnp:ClientSidePages&gt;
+    &lt;/pnp:ProvisioningTemplate&gt;
+  &lt;/pnp:Templates&gt;
+&lt;/pnp:Provisioning&gt;
+</code></pre>
+
+<p>This XML sample shows configuration of creation <code>SamplePage01.aspx</code> page with one sections and a custom web part placed to the first and the only column in this case.</p>
+
+<p>Having such a template it can be applyed to a site with a bit of PowerShell:</p>
+
+<pre><code class="language-powershell">$Connection = Connect-PnPOnline -Url $SiteUrl -UseWebLogin -ReturnConnection;
+Apply-PnPProvisioningTemplate -Path $SchemaPath -Connection $Connection;
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+<li><code>$SiteUrl</code> is a URL of SharePoint modern site, </li>
+<li><code>$SchemaPath</code> is path to the XML template.</li>
+</ul>
+
+<p>Declarative style gives an idea how to organize pages, sections and web parts. Let's investigate canvas control in particular.</p>
+
+<pre><code class="language-xml">&lt;!-- Out of the box web part --&gt;
+&lt;pnp:CanvasControl
+  WebPartType="Spacer"
+  JsonControlData="{&amp;quot;autoHide&amp;quot;:true,&amp;quot;height&amp;quot;:56}"
+  Order="1" Column="1"
+/&gt;
+
+&lt;!-- Custom web part --&gt;
+&lt;pnp:CanvasControl
+  WebPartType="Custom"
+  ControlId="4f87b698-f910-451f-b4ea-7848a472af0f"
+  JsonControlData="{&amp;quot;description&amp;quot;:&amp;quot;Seattle&amp;quot;,&amp;quot;timeZoneOffset&amp;quot;:10}"
+  Order="1" Column="2"
+/&gt;
+</code></pre>
+
+<p>The example above shows OOTB web part provisioning definition. For OOTB controls PnP schema has <code>WebPartType</code>s dictionary, no need in providing <code>ControlId</code>s. For a custom types, ControlId is required. It can be easily found in maintanence mode or web part manifest.</p>
+
+<p>The most annoying part is providing properties, i.e., <code>JsonControlData</code> stored escaped version of properties JSON. Yet you can get used dealing with this rather soon, especially, for some simple cases the props can be provided in XML way:</p>
+
+<pre><code class="language-xml">&lt;pnp:CanvasControlProperties&gt;
+  &lt;pnp:CanvasControlProperty Key="PropName" Value="PropValue" /&gt;
+&lt;/pnp:CanvasControlProperties&gt;
+</code></pre>
+
+<p>A good example of web parts provisioning and modern SharePoint solution in general with all moving parts can be found in <a href="https://github.com/SharePoint/sp-starter-kit">SharePoint Starter Kit</a> repository.</p>
+
+<h3 id="pnpjsprovisioning">PnPjs provisioning</h3>
+
+<p><a href="https://github.com/pnp/pnpjs">PnPjs</a>, client side libraries for Microsoft 365, wrapper for SharePoint REST API and much more, also <a href="https://pnp.github.io/pnpjs/sp/client-side-pages.html">provides its mechanisms</a> for dealing with client side pages via REST API.</p>
+
+<p>With REST API, most of the actions with client site pages and modern web parts are in out disposal.</p>
+
+<pre><code class="language-javascript">import { sp, ClientSidePage, ClientSideWebpart, ClientSideText } from '@pnp/sp';
+
+(async () =&gt; {
+
+  const page = await sp.web.addClientSidePage('SamplePage01.aspx', 'Sample Page 01');
+
+  // Getting existing page
+  // const pageFile = sp.web.getFileByServerRelativeUrl(`${webUri}/SitePages/SamplePage01.aspx`);
+  // const page = await ClientSidePage.fromFile(pageFile);
+
+  page.sections = [];
+  const section = page.addSection();
+
+  // Placing all the webparts in one section
+
+  // Standard text control
+  section.addControl(new ClientSideText('HTML content goes here'));
+
+  // Custom 3rd party webpart
+  section.addControl(
+    new ClientSideWebpart('Custom web part', null, {
+      parameter01: 'value 01'
+    }, '34f46dbd-abbb-4ff9-be98-7483df537309')
+  );
+
+  // Image gallery webpart
+  section.addControl(
+    new ClientSideWebpart('ImageGallery', null, {
+      layout: 2,
+      gridSettings: {
+        imageSize: 2,
+        imageCropping: 1,
+        imageAspectRatio: 1,
+        lightbox: false
+      },
+      images: [
+        { url: '/sites/hub/SiteAssets/ImageGallery/88876.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/77559.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/77371.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/36732.jpg' },
+        { url: '/sites/hub/SiteAssets/ImageGallery/97899.jpg' }
+      ]
+    }, 'af8be689-990e-492a-81f7-ba3e4cd3ed9c')
+  );
+
+  await page.save();
+
+})()
+  .then(_ =&gt; console.log('Done'))
+  .catch(console.log);
+</code></pre>
+
+<p>Such scripts can be a part of admin applications within SPFx solution for example, can be executed right in the browser using <a href="https://chrome.google.com/webstore/detail/sp-editor/ecblfcmjnbbgaojblcpmjoamegpbodhd?hl=en">SP Editor</a> extension, or can run in Node.js process.</p>
+
+<h2 id="wrappingup">Wrapping up</h2>
+
+<p>Both PnP Provisioning (.Net, PowerShell) and PnPjs scripts are friendly for automated processes and CI/CD. In my opinion these tools are mandatory and de-facto for modern SharePoint developers and administrators.</p>
+
+<p>The second wrapping idea is that it has been never so easy to provision pages and web parts as it is now with Modern cutting edge SharePoint.</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../../../../author/andrew/index.html" style="background-image: url(../../../../content/images/2016/09/andrew.koltyakov.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../../../../author/andrew/index.html">Andrew Koltyakov</a></h4>
+
+                    <p>SharePoint Front-End Developer</p>
+                <div class="author-meta">
+                    
+                    <span class="author-link icon-link"><a href="http://koltyakov.ru">http://koltyakov.ru</a></span>
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Modern%20web%20parts%20provisioning%20in%20SharePoint%20Online&amp;url=/2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+
+        </footer>
+
+        <!-- Comments -->
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = "arvo-systems-blog-com";
+            (function() {
+                var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+        </script>
+        <!-- Comments -->
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2017/12/vscode_debug_02.png)" href="../../../../2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/index.html">
+        <section class="post">
+            <h2>Contribution to PnP JS Core: Debugging source code changes</h2>
+            <p>While contributing to the Open Source project one should follow blueprints of the community project at the same time&hellip;</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        </div>
+    </div>
+
+    <div id="footer" class="bg-dark fg-white">
+        <div class="container">
+            <div class="brands">
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=a01d612ef9" style="display: none;">
+                <img class="fl" src="/assets/images/o365_nm_ft.png?v=a01d612ef9">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=a01d612ef9" style="display: none;">
+                <img class="fl" src="/assets/images/sp_nm_ft.png?v=a01d612ef9">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=a01d612ef9" style="display: none;">
+                <img class="fl" src="/assets/images/msp_nm_ft.png?v=a01d612ef9">
+                </div>		
+            </div>
+            <div class="copyright">
+                <div class="padding10 footer-element">
+                <img src="/assets/images/arvo_nm_ft.png?v=a01d612ef9">
+                </div>    
+                <div class="padding10 footer-element copy-text">© 2016<br>
+                <small>All rights reserved</small>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=a01d612ef9"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=a01d612ef9"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=a01d612ef9"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(["setDomains", ["*.arvosys.com","*.blog.arvosys.com","*.www.arvosys.com","*.blog.arvosys.com"]]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//piwik.spflow.com/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '9']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+    </script>
+    <noscript><p><img src="http://piwik.spflow.com/piwik.php?idsite=9" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+
+</body>
+</html>

@@ -1,46 +1,47 @@
-
+<!DOCTYPE html>
+<html ⚡>
 <head>
     <meta charset="utf-8">
 
     <title>Working with SharePoint MMD in Node.js</title>
-    <meta name="description" content="">
+    <meta name="description" content="" />
 
-    <meta name="HandheldFriendly" content="True">
+    <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <link rel="shortcut icon" href="../../../../../favicon.ico">
 
-    <link rel="canonical" href="../index.html">
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     
-    <meta property="og:site_name" content="ARVO Systems Blog">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Working with SharePoint MMD in Node.js">
-    <meta property="og:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
-    <meta property="og:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
-    <meta property="og:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
-    <meta property="article:published_time" content="2017-02-15T15:15:54.000Z">
-    <meta property="article:modified_time" content="2017-02-17T14:46:38.000Z">
-    <meta property="article:tag" content="SharePoint">
-    <meta property="article:tag" content="Node.js">
-    <meta property="article:tag" content="API">
-    <meta property="article:tag" content="SOAP">
-    <meta property="article:tag" content="JSOM">
-    <meta property="article:tag" content="MMD">
+    <meta property="og:site_name" content="ARVO Systems Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Working with SharePoint MMD in Node.js" />
+    <meta property="og:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It&#x27;s not an issue when your code lives in a context of a" />
+    <meta property="og:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/" />
+    <meta property="og:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" />
+    <meta property="article:published_time" content="2017-02-15T15:15:54.000Z" />
+    <meta property="article:modified_time" content="2017-02-17T14:46:38.000Z" />
+    <meta property="article:tag" content="SharePoint" />
+    <meta property="article:tag" content="Node.js" />
+    <meta property="article:tag" content="API" />
+    <meta property="article:tag" content="SOAP" />
+    <meta property="article:tag" content="JSOM" />
+    <meta property="article:tag" content="MMD" />
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Working with SharePoint MMD in Node.js">
-    <meta name="twitter:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a">
-    <meta name="twitter:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/">
-    <meta name="twitter:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png">
-    <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="Andrew Koltyakov">
-    <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, Node.js, API, SOAP, JSOM, MMD">
-    <meta name="twitter:creator" content="@AndrewKoltyakov">
-    <meta property="og:image:width" content="1860">
-    <meta property="og:image:height" content="742">
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Working with SharePoint MMD in Node.js" />
+    <meta name="twitter:description" content="SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It&#x27;s not an issue when your code lives in a context of a" />
+    <meta name="twitter:url" content="/2017/02/15/working-with-sharepoint-mmd-in-node-js/" />
+    <meta name="twitter:image" content="/content/images/2017/02/SharePoint-MMD-Screwdriver.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Andrew Koltyakov" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="SharePoint, Node.js, API, SOAP, JSOM, MMD" />
+    <meta name="twitter:creator" content="@AndrewKoltyakov" />
+    <meta property="og:image:width" content="1860" />
+    <meta property="og:image:height" content="742" />
     
     <script type="application/ld+json">
 {
@@ -92,10 +93,10 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10">
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html">
+    <meta name="generator" content="Ghost 0.10" />
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html" />
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
     <style amp-custom>
         /* ==========================================================================
            Table of Contents
@@ -869,7 +870,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../../../../">ARVO Systems Blog</a>
+            <a href="../../../../../index.html">ARVO Systems Blog</a>
         </nav>
     </header>
 
@@ -879,7 +880,7 @@
             <header class="post-header">
                 <h1 class="post-title">Working with SharePoint MMD in Node.js</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
+                    <p class="author">by <a href="../../../../../author/andrew/index.html">Andrew Koltyakov</a></p>
                     <time class="post-date" datetime="2017-02-15">2017-02-15</time>
                 </section>
             </header>
@@ -888,7 +889,7 @@
             </figure>
             <section class="post-content">
 
-                <p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM will be the most obvious answer probably. But what if you are limited in choice language to use or a runtime environment, in other words, when .Net is not an option?n?</p>
+                <html><body><p>SharePoint REST API is nice, powerful and universal to deal with, but sometimes you face barriers and recall that the desired API is absent in REST, yet, at the same time, is a part of CSOM/JSOM. It's not an issue when your code lives in a context of a page, but what if not? C# CSOM will be the most obvious answer probably. But what if you are limited in choice language to use or a runtime environment, in other words, when .Net is not an option?n?</p>
 
 <p>In a context of this story, the limitations are Node.js and JavaScript. And the task is to own a basic layer of functionality for manipulating Managed Metadata (Taxonomy), such options as:</p>
 
@@ -929,7 +930,7 @@ let soapBody = `
 `;
 
 headers['Accept'] = 'application/xml, text/xml, */*; q=0.01';  
-headers['Content-Type'] = 'text/xml;charset=\"UTF-8\"';  
+headers['Content-Type'] = 'text/xml;charset=\&quot;UTF-8\&quot;';  
 headers['X-Requested-With'] = 'XMLHttpRequest';  
 headers['Content-Length'] = soapBody.length;
 
@@ -961,36 +962,32 @@ request.post(baseUrl + '/_vti_bin/TaxonomyClientService.asmx', {
 
 <p>For example, request, to set term name, looks like:</p>
 
-<pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009"  
-      SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" 
-      ApplicationName="Javascript Library"&gt;
-    &lt;Actions&gt;
-        &lt;SetProperty Id="166" ObjectPathId="157" Name="Name"&gt;
-            &lt;Parameter Type="String"&gt;{{ newName }}&lt;/Parameter&gt;
-        &lt;/SetProperty&gt;
-    &lt;/Actions&gt;
-    &lt;ObjectPaths&gt;
-        &lt;StaticMethod Id="146" 
-           Name="GetTaxonomySession" 
-           TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" /&gt;
-        &lt;Property Id="149" ParentId="146" Name="TermStores" /&gt;
-        &lt;Method Id="151" ParentId="149" Name="GetByName"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ serviceName }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-        &lt;Method Id="154" ParentId="151" Name="GetTermSet"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ termSetId }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-        &lt;Method Id="157" ParentId="154" Name="GetTerm"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ termId }}&lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-    &lt;/ObjectPaths&gt;
-&lt;/Request&gt;  
+<pre><code class="language-xml">
+    
+        
+            {{ newName }}
+        
+    
+    
+        
+        
+        
+            
+                {{ serviceName }}
+            
+        
+        
+            
+                {{ termSetId }}
+            
+        
+        
+            
+                {{ termId }}
+            
+        
+    
+  
 </code></pre>
 
 <p>Some comments to the format:</p>
@@ -1024,7 +1021,7 @@ let data = {
 screw.mmd.getAllTerms(data)  
     .then(response =&gt; {
         let results = JSON.parse(response.body);
-        console.log("Response:", results);
+        console.log(&quot;Response:&quot;, results);
     })
     .catch(err =&gt; console.log('Error:', err.message));
 </code></pre>
@@ -1033,14 +1030,15 @@ screw.mmd.getAllTerms(data)
 
 <p>Also, working with MMD directly within Node.js code was viable in a recent Electron application I got to develop.</p>
 
-<p>The article doesn't try to say that anyone should use Node.js for similar purposes as I do, as the same can be done in .Net, actually it should. But, at the same time, there are cases where it is nice to have an ability of extending server-side JavaScript to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p>
+<p>The article doesn't try to say that anyone should use Node.js for similar purposes as I do, as the same can be done in .Net, actually it should. But, at the same time, there are cases where it is nice to have an ability of extending server-side JavaScript to consume not only the REST API, but potentially any CSOM/JSOM functionality. </p></body></html>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../../../../">ARVO Systems Blog</a> © 2017</section>
+        <section class="copyright"><a href="../../../../../index.html">ARVO Systems Blog</a> &copy; 2018</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
+</html>

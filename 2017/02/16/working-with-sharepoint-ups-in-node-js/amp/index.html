@@ -1,47 +1,48 @@
-
+<!DOCTYPE html>
+<html ⚡>
 <head>
     <meta charset="utf-8">
 
     <title>Working with SharePoint UPS in Node.js</title>
-    <meta name="description" content="">
+    <meta name="description" content="" />
 
-    <meta name="HandheldFriendly" content="True">
+    <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <link rel="shortcut icon" href="../../../../../favicon.ico">
 
-    <link rel="canonical" href="../index.html">
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     
-    <meta property="og:site_name" content="ARVO Systems Blog">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Working with SharePoint UPS in Node.js">
-    <meta property="og:description" content="This article is a logical continuation of my previous post where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS). User Profiles services' REST API is much">
-    <meta property="og:url" content="/2017/02/16/working-with-sharepoint-ups-in-node-js/">
-    <meta property="og:image" content="/content/images/2017/02/UPS-node.png">
-    <meta property="article:published_time" content="2017-02-16T13:55:57.000Z">
-    <meta property="article:modified_time" content="2017-02-17T14:41:57.000Z">
-    <meta property="article:tag" content="SharePoint">
-    <meta property="article:tag" content="API">
-    <meta property="article:tag" content="Node.js">
-    <meta property="article:tag" content="SOAP">
-    <meta property="article:tag" content="JSOM">
-    <meta property="article:tag" content="REST">
-    <meta property="article:tag" content="UPS">
+    <meta property="og:site_name" content="ARVO Systems Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Working with SharePoint UPS in Node.js" />
+    <meta property="og:description" content="This article is a logical continuation of my previous post where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS). User Profiles services&#x27; REST API is much" />
+    <meta property="og:url" content="/2017/02/16/working-with-sharepoint-ups-in-node-js/" />
+    <meta property="og:image" content="/content/images/2017/02/UPS-node.png" />
+    <meta property="article:published_time" content="2017-02-16T13:55:57.000Z" />
+    <meta property="article:modified_time" content="2017-02-17T14:41:57.000Z" />
+    <meta property="article:tag" content="SharePoint" />
+    <meta property="article:tag" content="API" />
+    <meta property="article:tag" content="Node.js" />
+    <meta property="article:tag" content="SOAP" />
+    <meta property="article:tag" content="JSOM" />
+    <meta property="article:tag" content="REST" />
+    <meta property="article:tag" content="UPS" />
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Working with SharePoint UPS in Node.js">
-    <meta name="twitter:description" content="This article is a logical continuation of my previous post where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS). User Profiles services' REST API is much">
-    <meta name="twitter:url" content="/2017/02/16/working-with-sharepoint-ups-in-node-js/">
-    <meta name="twitter:image" content="/content/images/2017/02/UPS-node.png">
-    <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="Andrew Koltyakov">
-    <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="SharePoint, API, Node.js, SOAP, JSOM, REST, UPS">
-    <meta name="twitter:creator" content="@AndrewKoltyakov">
-    <meta property="og:image:width" content="1065">
-    <meta property="og:image:height" content="623">
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Working with SharePoint UPS in Node.js" />
+    <meta name="twitter:description" content="This article is a logical continuation of my previous post where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS). User Profiles services&#x27; REST API is much" />
+    <meta name="twitter:url" content="/2017/02/16/working-with-sharepoint-ups-in-node-js/" />
+    <meta name="twitter:image" content="/content/images/2017/02/UPS-node.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Andrew Koltyakov" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="SharePoint, API, Node.js, SOAP, JSOM, REST, UPS" />
+    <meta name="twitter:creator" content="@AndrewKoltyakov" />
+    <meta property="og:image:width" content="1065" />
+    <meta property="og:image:height" content="623" />
     
     <script type="application/ld+json">
 {
@@ -93,10 +94,10 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10">
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html">
+    <meta name="generator" content="Ghost 0.10" />
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html" />
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
     <style amp-custom>
         /* ==========================================================================
            Table of Contents
@@ -870,7 +871,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../../../../">ARVO Systems Blog</a>
+            <a href="../../../../../index.html">ARVO Systems Blog</a>
         </nav>
     </header>
 
@@ -880,7 +881,7 @@
             <header class="post-header">
                 <h1 class="post-title">Working with SharePoint UPS in Node.js</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../../../../author/andrew/">Andrew Koltyakov</a></p>
+                    <p class="author">by <a href="../../../../../author/andrew/index.html">Andrew Koltyakov</a></p>
                     <time class="post-date" datetime="2017-02-16">2017-02-16</time>
                 </section>
             </header>
@@ -889,7 +890,7 @@
             </figure>
             <section class="post-content">
 
-                <p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).</p>
+                <html><body><p>This article is a logical continuation of my <a href="http://blog.arvosys.com/2017/02/15/working-with-sharepoint-mmd-in-node-js/">previous post</a> where I described Node.js way of dealing with Managed Metadata services. This post covers some problems of SharePoint API usage when working with another super popular service the User Profiles Services (UPS).</p>
 
 <p>User Profiles services' REST API is much richer than MMD's one, at least it exists. UPS's PeopleManager and ProfileLoader covers a lot of <a href="https://msdn.microsoft.com/en-us/library/office/dn790354.aspx">functionality</a>. Unfortunately, not each and every CSOM capability is there at the place. Most methods expose automation connected with a personal profile, most are getters but not the setters.</p>
 
@@ -905,34 +906,31 @@
 
 <p>Let's dive deeper with ModifyUserPropertyByAccountName method. SOAP package format is:</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;  
-&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-    &lt;soap:Body&gt;
-        &lt;ModifyUserPropertyByAccountName
-   xmlns="http://microsoft.com/webservices/SharePointPortalServer/UserProfileService"&gt;
-            &lt;accountName&gt;{{ accountName }}&lt;/accountName&gt;
-            &lt;newData&gt;
+<pre><code class="language-xml">  
+
+    
+        
+            {{ accountName }}
+            
                 {{#newData}}
-                &lt;PropertyData&gt;
-                    &lt;IsPrivacyChanged&gt;{{ isPrivacyChanged }}&lt;/IsPrivacyChanged&gt;
-                    &lt;IsValueChanged&gt;{{ isValueChanged }}&lt;/IsValueChanged&gt;
-                    &lt;Name&gt;{{ name }}&lt;/Name&gt;
-                    &lt;Privacy&gt;{{ privacy }}&lt;/Privacy&gt;
-                    &lt;Values&gt;
+                
+                    {{ isPrivacyChanged }}
+                    {{ isValueChanged }}
+                    {{ name }}
+                    {{ privacy }}
+                    
                         {{#values}}
-                        &lt;ValueData&gt;
-                            &lt;Value xsi:type="xsd:string"&gt;{{ this }}&lt;/Value&gt;
-                        &lt;/ValueData&gt;
+                        
+                            {{ this }}
+                        
                         {{/values}}
-                    &lt;/Values&gt;
-                &lt;/PropertyData&gt;
+                    
+                
                 {{/newData}}
-            &lt;/newData&gt;
-        &lt;/ModifyUserPropertyByAccountName&gt;
-    &lt;/soap:Body&gt;
-&lt;/soap:Envelope&gt;  
+            
+        
+    
+  
 </code></pre>
 
 <p>The dynamic part is:</p>
@@ -1007,25 +1005,25 @@ clientContext.executeQueryAsync(
 
 <p>After a call with use of fiddler, we're getting our client side object model package:</p>
 
-<pre><code class="language-xml">&lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009" SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" ApplicationName="Javascript Library"&gt;  
-    &lt;Actions&gt;
-        &lt;ObjectPath Id="82" ObjectPathId="81" /&gt;
-        &lt;Method Name="SetMultiValuedProfileProperty" Id="83" ObjectPathId="81"&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Type="String"&gt;{{ accountName }}&lt;/Parameter&gt;
-                &lt;Parameter Type="String"&gt;{{ propertyName }}&lt;/Parameter&gt;
-                &lt;Parameter Type="Array"&gt;
+<pre><code class="language-xml">  
+    
+        
+        
+            
+                {{ accountName }}
+                {{ propertyName }}
+                
                     {{#propertyValues}}
-                    &lt;Object Type="String"&gt;{{ this }}&lt;/Object&gt;
+                    {{ this }}
                     {{/propertyValues}}
-                &lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-        &lt;/Method&gt;
-    &lt;/Actions&gt;
-    &lt;ObjectPaths&gt;
-        &lt;Constructor Id="81" TypeId="{cf560d69-0fdb-4489-a216-b6b47adf8ef8}" /&gt;
-    &lt;/ObjectPaths&gt;
-&lt;/Request&gt;  
+                
+            
+        
+    
+    
+        
+    
+  
 </code></pre>
 
 <p>Where:</p>
@@ -1058,14 +1056,15 @@ screw.ups.setMultiValuedProfileProperty(data)
 
 <p>setSingleValueProfileProperty is almost identical and even simpler.</p>
 
-<p>Sources with implementation can be found on <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/ups.js">GitHub</a>. It's a part of <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a> library, library, which was published as an example for similar tasks of extending Node.js apps and services to deal with SharePoint's SOAP and CSOM/JSOM APIs as well.</p>
+<p>Sources with implementation can be found on <a href="https://github.com/koltyakov/sp-screwdriver/blob/master/src/api/ups.js">GitHub</a>. It's a part of <a href="https://github.com/koltyakov/sp-screwdriver">sp-screwdriver</a> library, library, which was published as an example for similar tasks of extending Node.js apps and services to deal with SharePoint's SOAP and CSOM/JSOM APIs as well.</p></body></html>
 
             </section>
 
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../../../../">ARVO Systems Blog</a> © 2017</section>
+        <section class="copyright"><a href="../../../../../index.html">ARVO Systems Blog</a> &copy; 2018</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
+</html>

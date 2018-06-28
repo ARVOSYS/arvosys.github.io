@@ -1,57 +1,58 @@
-
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <title>Contribution to PnP JS Core: Debugging source code changes</title>
-    <meta name="description" content="">
+    <meta name="description" content="" />
 
-    <meta name="google-site-verification" content="kj4x9HBApwneuGIIlFZj11VGEQnPG5Mp21U2n_mSCcU">
+    <meta name="google-site-verification" content="kj4x9HBApwneuGIIlFZj11VGEQnPG5Mp21U2n_mSCcU" />
 
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=ca080c17a1">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=a01d612ef9">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=ca080c17a1">
-    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=ca080c17a1">
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=ca080c17a1">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=a01d612ef9" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=a01d612ef9" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=a01d612ef9" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
-    <link rel="canonical" href="index.html">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <link rel="amphtml" href="amp/index.html">
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
     
-    <meta property="og:site_name" content="ARVO Systems Blog">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Contribution to PnP JS Core: Debugging source code changes">
-    <meta property="og:description" content="While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively.  This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript">
-    <meta property="og:url" content="/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/">
-    <meta property="og:image" content="/content/images/2017/12/vscode_debug_02.png">
-    <meta property="article:published_time" content="2017-12-02T11:07:02.000Z">
-    <meta property="article:modified_time" content="2017-12-02T11:44:37.000Z">
-    <meta property="article:tag" content="PnP JS Core">
-    <meta property="article:tag" content="Toolchain">
-    <meta property="article:tag" content="development">
-    <meta property="article:tag" content="Node.js">
-    <meta property="article:tag" content="sp-pnp-node">
-    <meta property="article:tag" content="Debug">
-    <meta property="article:tag" content="TypeScript">
-    <meta property="article:tag" content="VS Code">
+    <meta property="og:site_name" content="ARVO Systems Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Contribution to PnP JS Core: Debugging source code changes" />
+    <meta property="og:description" content="While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively.  This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript" />
+    <meta property="og:url" content="/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/" />
+    <meta property="og:image" content="/content/images/2017/12/vscode_debug_02.png" />
+    <meta property="article:published_time" content="2017-12-02T11:07:02.000Z" />
+    <meta property="article:modified_time" content="2017-12-02T11:44:37.000Z" />
+    <meta property="article:tag" content="PnP JS Core" />
+    <meta property="article:tag" content="Toolchain" />
+    <meta property="article:tag" content="development" />
+    <meta property="article:tag" content="Node.js" />
+    <meta property="article:tag" content="sp-pnp-node" />
+    <meta property="article:tag" content="Debug" />
+    <meta property="article:tag" content="TypeScript" />
+    <meta property="article:tag" content="VS Code" />
     
-    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contribution to PnP JS Core: Debugging source code changes">
-    <meta name="twitter:description" content="While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively.  This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript">
-    <meta name="twitter:url" content="/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/">
-    <meta name="twitter:image" content="/content/images/2017/12/vscode_debug_02.png">
-    <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="Andrew Koltyakov">
-    <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="PnP JS Core, Toolchain, development, Node.js, sp-pnp-node, Debug, TypeScript, VS Code">
-    <meta name="twitter:creator" content="@AndrewKoltyakov">
-    <meta property="og:image:width" content="1022">
-    <meta property="og:image:height" content="839">
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Contribution to PnP JS Core: Debugging source code changes" />
+    <meta name="twitter:description" content="While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively.  This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript" />
+    <meta name="twitter:url" content="/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/" />
+    <meta name="twitter:image" content="/content/images/2017/12/vscode_debug_02.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Andrew Koltyakov" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="PnP JS Core, Toolchain, development, Node.js, sp-pnp-node, Debug, TypeScript, VS Code" />
+    <meta name="twitter:creator" content="@AndrewKoltyakov" />
+    <meta property="og:image:width" content="1022" />
+    <meta property="og:image:height" content="839" />
     
     <script type="application/ld+json">
 {
@@ -103,8 +104,8 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 0.10">
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html">
+    <meta name="generator" content="Ghost 0.10" />
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html" />
 </head>
 <body class="post-template tag-pnp-js-core tag-toolchain tag-development tag-node-js tag-sp-pnp-node tag-debug tag-typescript tag-vs-code nav-closed">
 
@@ -114,14 +115,14 @@
         <span class="hidden">Close</span>
     </a>
     <ul>
-            <li class="nav-blog-home" role="presentation"><a href="../../../../">Blog Home</a></li>
+            <li class="nav-blog-home" role="presentation"><a href="../../../../index.html">Blog Home</a></li>
             <li class="nav-search" role="presentation"><a href="http://www.arvosys.com/search/">Search</a></li>
             <li class="nav-arvo-systems" role="presentation"><a href="http://www.arvosys.com/">ARVO Systems</a></li>
             <li class="nav--services" role="presentation"><a href="http://www.arvosys.com/services/">... Services</a></li>
             <li class="nav--platforms" role="presentation"><a href="http://www.arvosys.com/platforms/">... Platforms</a></li>
             <li class="nav--contacts" role="presentation"><a href="http://www.arvosys.com/about/contacts/">... Contacts</a></li>
     </ul>
-        <a class="subscribe-button icon-feed" href="../../../../rss/index.rss">Subscribe</a>
+        <a class="subscribe-button icon-feed" href="../../../../rss/index.html">Subscribe</a>
 </div>
 <span class="nav-cover"></span>
 
@@ -134,7 +135,7 @@
 
 <header class="main-header post-head " style="background-image: url(../../../../content/images/2017/12/vscode_debug_02.png)">
     <nav class="main-nav overlay clearfix">
-        <a class="blog-logo" href="../../../../"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog"></a>
+        <a class="blog-logo" href="../../../../index.html"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog" /></a>
             <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
     </nav>
 </header>
@@ -145,13 +146,13 @@
         <header class="post-header">
             <h1 class="post-title">Contribution to PnP JS Core: Debugging source code changes</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2017-12-02">02 December 2017</time>  on <a href="../../../../tag/pnp-js-core/">PnP JS Core</a>, <a href="../../../../tag/toolchain/">Toolchain</a>, <a href="../../../../tag/development/">development</a>, <a href="../../../../tag/node-js/">Node.js</a>, <a href="../../../../tag/sp-pnp-node/">sp-pnp-node</a>, <a href="../../../../tag/debug/">Debug</a>, <a href="../../../../tag/typescript/">TypeScript</a>, <a href="../../../../tag/vs-code/">VS Code</a>
+                <time class="post-date" datetime="2017-12-02">02 December 2017</time>  on <a href="../../../../tag/pnp-js-core/index.html">PnP JS Core</a>, <a href="../../../../tag/toolchain/index.html">Toolchain</a>, <a href="../../../../tag/development/index.html">development</a>, <a href="../../../../tag/node-js/index.html">Node.js</a>, <a href="../../../../tag/sp-pnp-node/index.html">sp-pnp-node</a>, <a href="../../../../tag/debug/index.html">Debug</a>, <a href="../../../../tag/typescript/index.html">TypeScript</a>, <a href="../../../../tag/vs-code/index.html">VS Code</a>
             </section>
         </header>
 
         <section class="post-content">
-            <p>While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively. <br>
-This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript project. But as the SharePoint development has its nuances setup is unique in some parts. <br>
+            <p>While contributing to the Open Source project one should follow blueprints of the community project at the same time integrate his development workflow effectively. <br />
+This post is about the way I use to debug library when contributing to PnP JS Core. The same techniques can be applied to any TypeScript project. But as the SharePoint development has its nuances setup is unique in some parts. <br />
 I really hope to inspire you to contribute to Open Source too.</p>
 
 <h2 id="pnpjscoredebug">PnP JS Core Debug</h2>
@@ -193,7 +194,7 @@ git clone https://github.com/[namespace]/PnP-JS-Core-Debug
 
 <p><code>[namespace]</code> stands for you or your company GitHub account.</p>
 
-<p>Separation of the sources makes your commits cleaner automatically, as you only change the actual part of the library. <br>
+<p>Separation of the sources makes your commits cleaner automatically, as you only change the actual part of the library. <br />
 Debug project is linked with source project in such a way, that no ahead of time transpilation is needed, no <code>npm link</code> is needed. Once added or changed the method in the library is immediately effected in debug project (even with IntelliSense). Here is the power of TypeScript.</p>
 
 <h2 id="installdependencies">Install dependencies</h2>
@@ -214,13 +215,13 @@ Debug project is linked with source project in such a way, that no ahead of time
 
 <p>Open both projects in VS Code. Workspaces are the best option here.</p>
 
-<p><img src="../../../../content/images/2017/12/vscode_workspace.png" alt=""></p>
+<p><img src="../../../../content/images/2017/12/vscode_workspace.png" alt="" /></p>
 
 <p>This new workspace feature allows opening multiple folder-projects in one instance of VS Code. It's especially handy in our case of applying changes in the lib's project and another one to running debug stuff. </p>
 
 <h2 id="upstreamforpnpjscore">Upstream for PnP JS Core</h2>
 
-<p>Add upstream for PnP JS Core (a one-time operation). <br>
+<p>Add upstream for PnP JS Core (a one-time operation). <br />
 In <code>PnP JS Core</code>'s folder:</p>
 
 <pre><code class="language-bash">git remote add upstream https://github.com/SharePoint/PnP-JS-Core  
@@ -260,13 +261,13 @@ git checkout -b [name_of_your_new_branch]
 
 <p>You'll be prompted with SharePoint web URL and credentials, just follow the wizard:</p>
 
-<p><img src="../../../../content/images/2017/12/auth_init.png" alt=""></p>
+<p><img src="../../../../content/images/2017/12/auth_init.png" alt="" /></p>
 
 <p>Read <a href="https://github.com/s-KaiNet/node-sp-auth">more</a> about supported auth scenarios.</p>
 
 <h3 id="configurationfiles">Configuration files</h3>
 
-<p>Connection is saved to config files which are better to exclude from a git repository. <br>
+<p>Connection is saved to config files which are better to exclude from a git repository. <br />
 By default config path is <code>./config/private.json</code>. Passwords in configs are stored in an encrypted way.</p>
 
 <p>Config sample:</p>
@@ -281,7 +282,7 @@ By default config path is <code>./config/private.json</code>. Passwords in confi
 
 <h2 id="makingchanges">Making changes</h2>
 
-<p>Now you can apply changes to PnP JS Core project sources (your local copy). <br>
+<p>Now you can apply changes to PnP JS Core project sources (your local copy). <br />
 Follow <a href="https://github.com/SharePoint/PnP-JS-Core/wiki/Getting-Started:-Contribute">Getting Started: Contribute</a> wiki page's instructions.</p>
 
 <h2 id="debuggingwithpnpjscoredebug">Debugging with PnP JS Core Debug</h2>
@@ -302,14 +303,14 @@ init().then(async settings =&gt; {
 }).catch(console.log);
 </code></pre>
 
-<p>Place debug break points in PnP JS Core <code>.ts</code> sources or your custom code. <br>
+<p>Place debug break points in PnP JS Core <code>.ts</code> sources or your custom code. <br />
 Open a runner which executes logic to test and start a debugger for the current file.</p>
 
-<p><img src="../../../../content/images/2017/12/vscode_debug_01.png" alt=""></p>
+<p><img src="../../../../content/images/2017/12/vscode_debug_01.png" alt="" /></p>
 
 <p>Now all the power of VS Code debugger is our oyster!</p>
 
-<p><img src="../../../../content/images/2017/12/vscode_debug_02.png" alt=""></p>
+<p><img src="../../../../content/images/2017/12/vscode_debug_02.png" alt="" /></p>
 
 <p>As usual, feel free ask questions in <a href="https://gitter.im/OfficeDev/PnP-JS-Core">Gitter</a> chat.</p>
         </section>
@@ -318,11 +319,11 @@ Open a runner which executes logic to test and start a debugger for the current 
 
 
             <figure class="author-image">
-                <a class="img" href="../../../../author/andrew/" style="background-image: url(../../../../content/images/2016/09/andrew.koltyakov.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
+                <a class="img" href="../../../../author/andrew/index.html" style="background-image: url(../../../../content/images/2016/09/andrew.koltyakov.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
             </figure>
 
             <section class="author">
-                <h4><a href="../../../../author/andrew/">Andrew Koltyakov</a></h4>
+                <h4><a href="../../../../author/andrew/index.html">Andrew Koltyakov</a></h4>
 
                     <p>SharePoint Front-End Developer</p>
                 <div class="author-meta">
@@ -334,13 +335,16 @@ Open a runner which executes logic to test and start a debugger for the current 
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Contribution%20to%20PnP%20JS%20Core%3A%20Debugging%20source%20code%20changes&amp;url=/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Contribution%20to%20PnP%20JS%20Core%3A%20Debugging%20source%20code%20changes&amp;url=/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2017/12/02/contribution-to-pnp-js-core-debugging-source-changes/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -365,10 +369,16 @@ Open a runner which executes logic to test and start a debugger for the current 
 </main>
 
 <aside class="read-next">
-    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2017/11/spfx-proxy-wide.png)" href="../../../11/27/spfx-workbench-against-real-sharepoint-api/">
+    <a class="read-next-story " style="background-image: url(../../../../content/images/2018/06/modern-webparts-provisioning.png)" href="../../../../2018/06/28/modern-web-parts-provisioning-in-sharepoint-online/index.html">
+        <section class="post">
+            <h2>Modern web parts provisioning in SharePoint Online</h2>
+            <p>Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites&hellip;</p>
+        </section>
+    </a>
+    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2017/11/spfx-proxy-wide.png)" href="../../../11/27/spfx-workbench-against-real-sharepoint-api/index.html">
         <section class="post">
             <h2>Local SPFx Workbench against real SharePoint API</h2>
-            <p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy. By default by…</p>
+            <p>When dealing with SharePoint Framework (SPFx), a developer can choose local or remote runtime debug strategy. By default by&hellip;</p>
         </section>
     </a>
 </aside>
@@ -382,21 +392,21 @@ Open a runner which executes logic to test and start a debugger for the current 
         <div class="container">
             <div class="brands">
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=ca080c17a1" style="display: none;">
-                <img class="fl" src="/assets/images/o365_nm_ft.png?v=ca080c17a1">
+                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=a01d612ef9" style="display: none;">
+                <img class="fl" src="/assets/images/o365_nm_ft.png?v=a01d612ef9">
                 </div>
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=ca080c17a1" style="display: none;">
-                <img class="fl" src="/assets/images/sp_nm_ft.png?v=ca080c17a1">
+                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=a01d612ef9" style="display: none;">
+                <img class="fl" src="/assets/images/sp_nm_ft.png?v=a01d612ef9">
                 </div>
                 <div class="padding10 footer-element">
-                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=ca080c17a1" style="display: none;">
-                <img class="fl" src="/assets/images/msp_nm_ft.png?v=ca080c17a1">
+                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=a01d612ef9" style="display: none;">
+                <img class="fl" src="/assets/images/msp_nm_ft.png?v=a01d612ef9">
                 </div>		
             </div>
             <div class="copyright">
                 <div class="padding10 footer-element">
-                <img src="/assets/images/arvo_nm_ft.png?v=ca080c17a1">
+                <img src="/assets/images/arvo_nm_ft.png?v=a01d612ef9">
                 </div>    
                 <div class="padding10 footer-element copy-text">© 2016<br>
                 <small>All rights reserved</small>
@@ -407,9 +417,9 @@ Open a runner which executes logic to test and start a debugger for the current 
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     
-    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=ca080c17a1"></script>
-    <script type="text/javascript" src="/assets/js/index.js?v=ca080c17a1"></script>
-    <script type="text/javascript" src="/assets/js/prism.js?v=ca080c17a1"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=a01d612ef9"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=a01d612ef9"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=a01d612ef9"></script>
 
     <!-- Piwik -->
     <script type="text/javascript">
@@ -425,7 +435,8 @@ Open a runner which executes logic to test and start a debugger for the current 
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
     })();
     </script>
-    <noscript><p><img src="http://piwik.spflow.com/piwik.php?idsite=9" style="border:0;" alt=""></p></noscript>
+    <noscript><p><img src="http://piwik.spflow.com/piwik.php?idsite=9" style="border:0;" alt="" /></p></noscript>
     <!-- End Piwik Code -->
 
 </body>
+</html>
