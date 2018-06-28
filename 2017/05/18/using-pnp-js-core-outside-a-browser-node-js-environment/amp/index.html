@@ -11,7 +11,7 @@
 
     <link rel="shortcut icon" href="../../../../../favicon.ico">
 
-    <link rel="canonical" href="../index.html" />
+    <link rel="canonical" href=".." />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     
     <meta property="og:site_name" content="ARVO Systems Blog" />
@@ -93,7 +93,7 @@
     </script>
 
     <meta name="generator" content="Ghost 0.10" />
-    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss/index.html" />
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../../rss" />
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
     <style amp-custom>
@@ -869,7 +869,7 @@
 <body class="amp-template">
     <header class="main-header">
         <nav class="blog-title">
-            <a href="../../../../../index.html">ARVO Systems Blog</a>
+            <a href="../../../../..">ARVO Systems Blog</a>
         </nav>
     </header>
 
@@ -879,7 +879,7 @@
             <header class="post-header">
                 <h1 class="post-title">Using PnP JS Core outside a browser (Node.js environment)</h1>
                 <section class="post-meta">
-                    <p class="author">by <a href="../../../../../author/andrew/index.html">Andrew Koltyakov</a></p>
+                    <p class="author">by <a href="../../../../../author/andrew">Andrew Koltyakov</a></p>
                     <time class="post-date" datetime="2017-05-18">2017-05-18</time>
                 </section>
             </header>
@@ -892,9 +892,9 @@
   <p>Expanding scopes of usage of favorite tools</p>
 </blockquote>
 
-<p>I <a href="../../../../../2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention/index.html">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
+<p>I <a href="../../../../../2016/09/09/sharepoint-pnp-javascript-core-components-deserve-more-attention">wrote</a> about <a href="https://github.com/SharePoint/PnP-JS-Core">PnP JS Core</a> 9 month ago. In those post, I shared my experience of first steps with the library and decision to give it a shot on the projects.</p>
 
-<p>And what can I say after these months? Now it's one of the must have dependencies on any new front-end project I scaffold for SharePoint. I almost have forgotten when I needed to grab old fellow JSOM (sp.js) for the reason of communication with SharePoint API within a UI application. It works almost for anything available in REST API. There are some gaps and scenarios in the API when REST have no existing methods implementation (<a href="https://github.com/SharePoint/PnP-JS-Core/issues/415">Manage Metadata</a>, some areas of <a href="../../../../02/16/working-with-sharepoint-ups-in-node-js/index.html">User Profiles Services</a>, <a href="https://github.com/SharePoint/PnP-JS-Core/issues/455">indexed properties</a>, etc.) though it's not something which you need very often in UI application. For the methods, what are there in the REST API, PnP JS Core is an awesome shiny tool.</p>
+<p>And what can I say after these months? Now it's one of the must have dependencies on any new front-end project I scaffold for SharePoint. I almost have forgotten when I needed to grab old fellow JSOM (sp.js) for the reason of communication with SharePoint API within a UI application. It works almost for anything available in REST API. There are some gaps and scenarios in the API when REST have no existing methods implementation (<a href="https://github.com/SharePoint/PnP-JS-Core/issues/415">Manage Metadata</a>, some areas of <a href="../../../../02/16/working-with-sharepoint-ups-in-node-js">User Profiles Services</a>, <a href="https://github.com/SharePoint/PnP-JS-Core/issues/455">indexed properties</a>, etc.) though it's not something which you need very often in UI application. For the methods, what are there in the REST API, PnP JS Core is an awesome shiny tool.</p>
 
 <p>With time, I faced a couple of project needs where I got to fetch some metadata and data within Node.js using REST where hands themselves started writing in PnP JS Core. Yes, I know that it's not a big deal to prepare REST endpoint URIs and some JSON packages for such tasks. But it's a question of reusability and convenience writing code using your favorite API wrapper.</p>
 
@@ -965,7 +965,7 @@ const pnp = require('sp-pnp-js');
         </article>
     </main>
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="../../../../../index.html">ARVO Systems Blog</a> &copy; 2018</section>
+        <section class="copyright"><a href="../../../../..">ARVO Systems Blog</a> &copy; 2018</section>
         <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
     </footer>
 </body>
