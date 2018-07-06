@@ -1,0 +1,435 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>List Items System Update options in SharePoint Online</title>
+    <meta name="description" content="">
+
+    <meta name="google-site-verification" content="kj4x9HBApwneuGIIlFZj11VGEQnPG5Mp21U2n_mSCcU">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=3322e7ab3c">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/arvo-bundle.css?v=3322e7ab3c">
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=3322e7ab3c">
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=3322e7ab3c">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="ARVO Systems Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="List Items System Update options in SharePoint Online">
+    <meta property="og:description" content='In this article, I expose some options for updating SharePoint list items in system modes, aka "System Update". Those who have been in SharePoint grounds for a while and especially who came from On-Premises are familiar with System Update from the server-side object model. SSOM is not touched in the'>
+    <meta property="og:url" content="/2018/07/06/list-items-system-update-options-in-sharepoint-online/">
+    <meta property="og:image" content="/content/images/2018/07/system_update.jpg">
+    <meta property="article:published_time" content="2018-07-06T13:10:20.000Z">
+    <meta property="article:modified_time" content="2018-07-06T12:22:24.000Z">
+    <meta property="article:tag" content="SPFx">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="REST">
+    <meta property="article:tag" content="JSOM">
+    <meta property="article:tag" content="JavaScript">
+    <meta property="article:tag" content="TypeScript">
+    <meta property="article:tag" content="SystemUpdate">
+    <meta property="article:tag" content="MSFlow">
+    
+    <meta property="article:author" content="https://www.facebook.com/andrew.koltyakov">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="List Items System Update options in SharePoint Online">
+    <meta name="twitter:description" content='In this article, I expose some options for updating SharePoint list items in system modes, aka "System Update". Those who have been in SharePoint grounds for a while and especially who came from On-Premises are familiar with System Update from the server-side object model. SSOM is not touched in the'>
+    <meta name="twitter:url" content="/2018/07/06/list-items-system-update-options-in-sharepoint-online/">
+    <meta name="twitter:image" content="/content/images/2018/07/system_update.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrew Koltyakov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="SPFx, SharePoint, REST, JSOM, JavaScript, TypeScript, SystemUpdate, MSFlow">
+    <meta name="twitter:creator" content="@AndrewKoltyakov">
+    <meta property="og:image:width" content="2000">
+    <meta property="og:image:height" content="940">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ARVO Systems Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/content/images/2016/09/arvo_logo_105px.png",
+            "width": 105,
+            "height": 42
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Andrew Koltyakov",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/content/images/2018/06/AndrewKoltyakov_bw_250px.jpg",
+            "width": 250,
+            "height": 250
+        },
+        "url": "/author/andrew/",
+        "sameAs": [
+            "https://github.com/koltyakov",
+            "https://www.facebook.com/andrew.koltyakov",
+            "https://twitter.com/AndrewKoltyakov"
+        ],
+        "description": "SharePoint Developer, Microsoft MVP"
+    },
+    "headline": "List Items System Update options in SharePoint Online",
+    "url": "/2018/07/06/list-items-system-update-options-in-sharepoint-online/",
+    "datePublished": "2018-07-06T13:10:20.000Z",
+    "dateModified": "2018-07-06T12:22:24.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/content/images/2018/07/system_update.jpg",
+        "width": 2000,
+        "height": 940
+    },
+    "keywords": "SPFx, SharePoint, REST, JSOM, JavaScript, TypeScript, SystemUpdate, MSFlow",
+    "description": "In this article, I expose some options for updating SharePoint list items in system modes, aka &quot;System Update&quot;. Those who have been in SharePoint grounds for a while and especially who came from On-Premises are familiar with System Update from the server-side object model. SSOM is not touched in the",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://external.arvosys.com:2368"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.10">
+    <link rel="alternate" type="application/rss+xml" title="ARVO Systems Blog" href="../../../../rss/index.html">
+</head>
+<body class="post-template tag-spfx tag-sharepoint tag-rest tag-jsom tag-javascript tag-typescript tag-systemupdate tag-msflow nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-blog-home" role="presentation"><a href="../../../../">Blog Home</a></li>
+            <li class="nav-search" role="presentation"><a href="http://www.arvosys.com/search/">Search</a></li>
+            <li class="nav-arvo-systems" role="presentation"><a href="http://www.arvosys.com/">ARVO Systems</a></li>
+            <li class="nav--services" role="presentation"><a href="http://www.arvosys.com/services/">... Services</a></li>
+            <li class="nav--platforms" role="presentation"><a href="http://www.arvosys.com/platforms/">... Platforms</a></li>
+            <li class="nav--contacts" role="presentation"><a href="http://www.arvosys.com/about/contacts/">... Contacts</a></li>
+    </ul>
+        <a class="subscribe-button icon-feed" href="../../../../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+        <div id="content-wrapper" class="page-content">
+
+            
+
+
+<header class="main-header post-head " style="background-image: url(../../../../content/images/2018/07/system_update.jpg)">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href="../../../../"><img src="../../../../content/images/2016/09/arvo_logo_105px.png" alt="ARVO Systems Blog"></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-spfx tag-sharepoint tag-rest tag-jsom tag-javascript tag-typescript tag-systemupdate tag-msflow">
+
+        <header class="post-header">
+            <h1 class="post-title">List Items System Update options in SharePoint Online</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2018-07-06">06 July 2018</time>  on <a href="../../../../tag/spfx/">SPFx</a>, <a href="../../../../tag/sharepoint/">SharePoint</a>, <a href="../../../../tag/rest/">REST</a>, <a href="../../../../tag/jsom/">JSOM</a>, <a href="../../../../tag/javascript/">JavaScript</a>, <a href="../../../../tag/typescript/">TypeScript</a>, <a href="../../../../tag/systemupdate/">SystemUpdate</a>, <a href="../../../../tag/msflow/">MSFlow</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>In this article, I expose some options for updating SharePoint list items in system modes, aka "System Update". Those who have been in SharePoint grounds for a while and especially who came from On-Premises are familiar with System Update from the server-side object model. SSOM is not touched in the article and even CSOM .Net will be skipped, the reading is all about JavaScript.</p>
+
+<p>A few words about System Update concept in general. System update provides a way of updating items' metadata skipping new versions creations as well as keeping last modified by authorship and not changing previously modified timestamp. The system update also effects on triggering business logic and changes API results.</p>
+
+<p>The use cases for system update are different scenarios with data migration, business processes and workflows, demo data preparation, mass-update scripts, and others.</p>
+
+<p>The problem at hand is that client-side APIs has some limitations or, as I prefer more, nuances.</p>
+
+<p>As mentioned before, system update has been there for ages in SSOM API, that’s On-Prem and not our case at all. System update was introduced into CSOM .Net API introduced in 16.1.5626.1200 build in August 2016. And not far ago it landed to JSOM library in SharePoint Online too.</p>
+
+<p>Currently, in SPFx and Serverless era it’s not fashionable anymore using JSOM and loading heavy "sp.js" and all that stuff, so we consider other options like raw CSOM requests with crafted XML packages and REST as a default API when possible.</p>
+
+<h2 id="nativejsom">Native JSOM</h2>
+
+<pre><code class="language-javascript">const ctx = SP.ClientContext.get_current();
+
+const list = ctx.get_web().get_lists().getByTitle('My list');
+const item = list.getItemById(1);
+
+item.set_item('Title', `Updated with JSOM request, ${new Date().toISOString()}`);
+// item.update(); // -&gt; creates new version, updates Editor and modified date
+// item.updateOverwriteVersion(); // -&gt; creates no new version, updates Editor and modified date
+item.systemUpdate(); // -&gt; creates no new version, Editor and modified date remains untouched
+
+ctx.executeQuery(success, failure);
+</code></pre>
+
+<p><a href="https://github.com/koltyakov/sp-sig-20180705-demo/blob/master/src/01-jsom/index.ts">Full sample</a></p>
+
+<h2 id="jsomviarawxml">JSOM via raw XML</h2>
+
+<p>Ok, JSOM is good, but it requires <code>sp.js</code> libraries to be loaded. Sometimes we’re in a context when limited with that. Yet, there is an option calling CSOM API without native SP libraries.</p>
+
+<pre><code class="language-javascript">const listRelativeUrl = '/sites/site/Lists/MyList';
+const itemId = 1;
+
+const body = `
+  &lt;Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009" SchemaVersion="15.0.0.0" LibraryVersion="16.0.0.0" ApplicationName="Javascript Library"&gt;
+    &lt;Actions&gt;
+      &lt;Method Name="SetFieldValue" Id="4" ObjectPathId="3"&gt;
+        &lt;Parameters&gt;
+          &lt;Parameter Type="String"&gt;DataField01&lt;/Parameter&gt;
+          &lt;Parameter Type="String"&gt;Updated with raw JSOM XML request, ${new Date().toISOString()}&lt;/Parameter&gt;
+        &lt;/Parameters&gt;
+      &lt;/Method&gt;
+      &lt;Method Name="SystemUpdate" Id="5" ObjectPathId="3" /&gt;
+    &lt;/Actions&gt;
+    &lt;ObjectPaths&gt;
+      &lt;Property Id="1" ParentId="0" Name="Web" /&gt;
+      &lt;Method Id="2" ParentId="1" Name="GetList"&gt;
+        &lt;Parameters&gt;
+          &lt;Parameter Type="String"&gt;${listRelativeUrl}&lt;/Parameter&gt;
+        &lt;/Parameters&gt;
+      &lt;/Method&gt;
+      &lt;Method Id="3" ParentId="2" Name="GetItemById"&gt;
+        &lt;Parameters&gt;
+          &lt;Parameter Type="Number"&gt;${itemId}&lt;/Parameter&gt;
+        &lt;/Parameters&gt;
+      &lt;/Method&gt;
+      &lt;StaticProperty Id="0" TypeId="{3747adcd-a3c3-41b9-bfab-4a64dd2f1e0a}" Name="Current" /&gt;
+    &lt;/ObjectPaths&gt;
+  &lt;/Request&gt;
+`;
+
+const endpoint = `${siteUrl}/_vti_bin/client.svc/ProcessQuery`;
+const client = new SPHttpClient();
+
+client.post(endpoint, {
+  headers: {
+    'Accept': '*/*',
+    'Content-Type': 'text/xml;charset="UTF-8"',
+    'X-Requested-With': 'XMLHttpRequest'
+  },
+  body
+})
+  .then(r =&gt; r.json())
+  .then(r =&gt; {
+    if (r[0].ErrorInfo) {
+      throw new Error(r[0].ErrorInfo.ErrorMessage);
+    }
+    return r;
+  });
+</code></pre>
+
+<p><a href="https://github.com/koltyakov/sp-sig-20180705-demo/blob/master/src/02-clientSvc/helper.ts">Full sample</a></p>
+
+<p>A raw HTTP request to client process "svc" endpoint can be used to send XML packages which are usually prepared with JSOM client library and are sent over the wires on execute query method. It’s not the most pleasant job to craft such XML bodies manually, but it shows the idea and possibility.</p>
+
+<h2 id="systemupdateviarestapi">System update via REST API</h2>
+
+<p>Another option, which sounds much better for my ear is, of course, REST API. There is no "systemUpdate" in REST, at least yet. But, we can do something very close to what we need.</p>
+
+<pre><code class="language-javascript">import { Item, ListItemFormUpdateValue, PermissionKind } from '@pnp/sp';
+import { format } from 'date-fns';
+
+export const dateToFormString = (dateTime: Date | string): string =&gt; {
+  return format(dateTime, 'M/D/YYYY h:m A');
+};
+
+export const loginToFormString = (userName: string): string =&gt; {
+  return JSON.stringify([{ Key: userName }]);
+};
+
+export const systemUpdate = async (item: Item, formUpdateValues: ListItemFormUpdateValue[]) =&gt; {
+
+  const permissions = await item.getCurrentUserEffectivePermissions();
+  if (!item.hasPermissions(permissions, PermissionKind.ManagePermissions)) {
+    throw new Error('403 - Access denied. Full Control permissions level is required for performing this operation.');
+    // Having write permission but not managing, the method will ignore Editor and Modified values and update them with actual data
+  }
+
+  const { Author: { Name }, Created: Modified } = await item.select('Created,Author/Name').expand('Author').get();
+
+  const sysUpdateData = [
+    { FieldName: 'Editor', FieldValue: loginToFormString(Name) },
+    { FieldName: 'Modified', FieldValue: dateToFormString(new Date(Modified)) }
+  ];
+
+  const result = await item.validateUpdateListItem(formUpdateValues.concat(sysUpdateData), true);
+
+  const errors = result.filter(field =&gt; field.ErrorMessage !== null);
+  if (errors.length &gt; 0) {
+    throw new Error(JSON.stringify(errors));
+  }
+
+  return result;
+};
+</code></pre>
+
+<p>This example updates item using nothing else but REST API. REST API "validateUpdateListItem" method creates no version on change. And if provide Editor and Modified fields with previously existed values the result will be close to system update.</p>
+
+<p>Permissions wise, JSOM's system update requires Editor permissions, but you have to have Full Control over the items to do the same in REST. Which is definitely a nuance but we can live with that.</p>
+
+<p>Such scripts can be used in client-side tools for admins, for example as SharePoint Framework web parts or can be consumed as Azure Functions when a team prefers JS over .Net for some reasons. Also, raw XML JSOM and REST are supported in Microsoft Flows and can be used even without Azure hosted code.</p>
+
+<h2 id="fielddatatypesfingerprintsforvalidateupdatelistitem">Field data types fingerprints for validateUpdateListItem</h2>
+
+<p>With "validateUpdateListItem" all major field data types update is supported, yet it can be difficult sometimes to find the correct format. So as a bonus section:</p>
+
+<pre><code class="language-javascript">.validateUpdateListItem([
+  // Text field (single line and note)
+  { FieldName: 'TextField', FieldValue: '123' },
+  // Number field
+  { FieldName: 'NumberField', FieldValue: '123'  },
+  // Yes/No field
+  { FieldName: 'YesNoField', FieldValue: '1' /* Yes, No, 1, 2 */ },
+  // Person or group, single and multiple
+  { FieldName: 'PersonField', FieldValue: JSON.stringify([{ Key: LoginName }]) },
+  // Dates should be in in the following formats
+  { FieldName: 'DateTimeField', FieldValue: '6/23/2018 10:15 PM' },
+  { FieldName: 'DateField', FieldValue: '6/23/2018' },
+  // Choice field (single and multi-valued)
+  { FieldName: 'ChoiceField', FieldValue: 'Choice 1' },
+  { FieldName: 'MultiChoiceField', FieldValue: 'Choice 1;#Choice 2' },
+  // Hyperlink or picture (after URL a description can go after ', ' delimeter)
+  { FieldName: 'HyperlinkField', FieldValue: 'https://arvosys.com, ARVO Systems' },
+  // Lookups fields (single and multi-valued)
+  { FieldName: 'LookupField', FieldValue: '2' /* Item ID as string */ },
+  { FieldName: 'MutliLookupField', FieldValue: [3, 4, 5].map(id =&gt; `${id};#`).join(';#') },
+  // Mamnaged metadata fields (single and multi-valued)
+  { FieldName: 'SingleMMDField', FieldValue: 'Department 2|220a3627-4cd3-453d-ac54-34e71483bb8a;' },
+  { FieldName: 'MultiMMDField', FieldValue: 'Department 2|220a3627-4cd3-453d-ac54-34e71483bb8a;Department 3|700a1bc3-3ef6-41ba-8a10-d3054f58db4b;' }
+]);
+</code></pre>
+
+<p>Happy coding!</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../../../../author/andrew/" style="background-image: url(../../../../content/images/2018/06/AndrewKoltyakov_bw_250px.jpg)"><span class="hidden">Andrew Koltyakov's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../../../../author/andrew/">Andrew Koltyakov</a></h4>
+
+                    <p>SharePoint Developer, Microsoft MVP</p>
+                <div class="author-meta">
+                    
+                    <span class="author-link icon-link"><a href="https://github.com/koltyakov">https://github.com/koltyakov</a></span>
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=List%20Items%20System%20Update%20options%20in%20SharePoint%20Online&amp;url=/2018/07/06/list-items-system-update-options-in-sharepoint-online/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2018/07/06/list-items-system-update-options-in-sharepoint-online/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/2018/07/06/list-items-system-update-options-in-sharepoint-online/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+
+        </footer>
+
+        <!-- Comments -->
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = "arvo-systems-blog-com";
+            (function() {
+                var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+        </script>
+        <!-- Comments -->
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story prev " style="background-image: url(../../../../content/images/2018/06/modern-webparts.png)" href="../../../06/28/modern-web-parts-provisioning-in-sharepoint-online/">
+        <section class="post">
+            <h2>Modern web parts provisioning in SharePoint Online</h2>
+            <p>Office 365 and SharePoint Online in particular rush in the direction of Modern UI and UX. The modern sites…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        </div>
+    </div>
+
+    <div id="footer" class="bg-dark fg-white">
+        <div class="container">
+            <div class="brands">
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/o365_nm_ft_i.png?v=3322e7ab3c" style="display: none;">
+                <img class="fl" src="/assets/images/o365_nm_ft.png?v=3322e7ab3c">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/sp_nm_ft_i.png?v=3322e7ab3c" style="display: none;">
+                <img class="fl" src="/assets/images/sp_nm_ft.png?v=3322e7ab3c">
+                </div>
+                <div class="padding10 footer-element">
+                <img class="sh" src="/assets/images/msp_nm_ft_i.png?v=3322e7ab3c" style="display: none;">
+                <img class="fl" src="/assets/images/msp_nm_ft.png?v=3322e7ab3c">
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="padding10 footer-element">
+                <img src="/assets/images/arvo_nm_ft.png?v=3322e7ab3c">
+                </div>
+                <div class="padding10 footer-element copy-text">© 2016-2018<br>
+                <small>All rights reserved</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=3322e7ab3c"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=3322e7ab3c"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=3322e7ab3c"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(["setDomains", ["*.arvosys.com","*.blog.arvosys.com","*.www.arvosys.com","*.blog.arvosys.com"]]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//piwik.spflow.com/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '9']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+    </script>
+    <noscript><p><img src="http://piwik.spflow.com/piwik.php?idsite=9" style="border:0;" alt=""></p></noscript>
+    <!-- End Piwik Code -->
+
+</body>
